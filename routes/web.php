@@ -16,5 +16,8 @@ Route::get('/', function () {
 });
 
 // Route::get('/',function(){
-// 	return '123';
+// 	return 'zuo';
+// });
+// Route::get('/',function(){
+// 	return 'wangzhixing';
 // });
