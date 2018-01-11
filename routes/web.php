@@ -11,10 +11,8 @@
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
-
-// Route::get('/',function(){
-// 	return '123';
+// Route::get('/', function () {
+//     return view('welcome');
 // });
+
+Route::get('/home/index','Home\IndexController@index');
