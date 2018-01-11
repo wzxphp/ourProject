@@ -15,9 +15,5 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-// Route::get('/',function(){
-// 	return 'zuo';
-// });
-// Route::get('/',function(){
-// 	return 'wangzhixing';
-// });
+
+Route::get('/home/index','Home\IndexController@index');
