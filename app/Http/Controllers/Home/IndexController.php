@@ -13,4 +13,6 @@ class IndexController extends Controller
     	// return '123';
     	return view('Home/Index/index');
     }
+
+
 }
