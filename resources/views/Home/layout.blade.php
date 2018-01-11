@@ -38,9 +38,9 @@
 					<ul>
 						<li><a href="#"><i class="fa fa-user"></i> My Account</a></li>
 						<li><a href="#"><i class="fa fa-heart"></i> Wishlist</a></li>
-						<li><a href="cart.html"><i class="fa fa-user"></i> My Cart</a></li>
-						<li><a href="checkout.html"><i class="fa fa-user"></i> Checkout</a></li>
-						<li><a href="#"><i class="fa fa-user"></i> Login</a></li>
+						<li><a href="cart.html"><i class="fa fa-user"></i> 购物车</a></li>
+						<li><a href="checkout.html"><i class="fa fa-user"></i> </a></li>
+						<li><a href="#"><i class="fa fa-user"></i> 登录</a></li>
 					</ul>
 				</div>
 			</div>
@@ -77,7 +77,7 @@
 		<div class="row">
 			<div class="col-sm-6">
 				<div class="logo">
-					<h1><a href="index.html">e<span>Electronics</span></a></h1>
+					<h1><a href="index.html"><span>Electronics</span></a></h1>
 				</div>
 			</div>
 			
@@ -103,11 +103,11 @@
 			</div> 
 			<div class="navbar-collapse collapse">
 				<ul class="nav navbar-nav">
-					<li class="active"><a href="index.html">Home</a></li>
-					<li><a href="shop.html">Shop page</a></li>
+					<li class="active"><a href="index.html">首页</a></li>
+					<li><a href="{{ url('home/list') }}">奢品</a></li>
 					<li><a href="single-product.html">Single product</a></li>
-					<li><a href="cart.html">Cart</a></li>
-					<li><a href="checkout.html">Checkout</a></li>
+					<li><a href="cart.html">购物车</a></li>
+					<li><a href="checkout.html">订单</a></li>
 					<li><a href="#">Category</a></li>
 					<li><a href="#">Others</a></li>
 					<li><a href="#">Contact</a></li>

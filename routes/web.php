@@ -15,4 +15,8 @@
 //     return view('welcome');
 // });
 
+// 商城首页路由
 Route::get('/home/index','Home\IndexController@index');
+Route::get('/home/list','Home\ListController@list');
+
+
