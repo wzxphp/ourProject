@@ -11,15 +11,15 @@
 <link href='http://fonts.googleapis.com/css?family=Raleway:400,100' rel='stylesheet' type='text/css'>--->
 
 <!-- Bootstrap -->
-<link rel="stylesheet" href="/sh/css/bootstrap.min.css">
+<link rel="stylesheet" href="/home/css/bootstrap.min.css">
 
 <!-- Font Awesome -->
-<link rel="stylesheet" href="/sh/css/font-awesome.min.css">
+<link rel="stylesheet" href="/home/css/font-awesome.min.css">
 
 <!-- Custom CSS -->
-<link rel="stylesheet" href="/sh/css/owl.carousel.css">
-<link rel="stylesheet" href="/sh/style.css">
-<link rel="stylesheet" href="/sh/css/responsive.css">
+<link rel="stylesheet" href="/home/css/owl.carousel.css">
+<link rel="stylesheet" href="/home/style.css">
+<link rel="stylesheet" href="/home/css/responsive.css">
 
 <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
 <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
@@ -39,8 +39,8 @@
 						<li><a href="#"><i class="fa fa-user"></i> My Account</a></li>
 						<li><a href="#"><i class="fa fa-heart"></i> Wishlist</a></li>
 						<li><a href="cart.html"><i class="fa fa-user"></i> 购物车</a></li>
-						<li><a href="checkout.html"><i class="fa fa-user"></i> </a></li>
-						<li><a href="#"><i class="fa fa-user"></i> 登录</a></li>
+						<li><a href="checkout.html"><i class="fa fa-user"></i> 订单</a></li>
+						<li><a href="{{ url('home/login/index') }}"><i class="fa fa-user"></i> 登录</a></li>
 					</ul>
 				</div>
 			</div>
@@ -103,7 +103,7 @@
 			</div> 
 			<div class="navbar-collapse collapse">
 				<ul class="nav navbar-nav">
-					<li class="active"><a href="index.html">首页</a></li>
+					<li class="active"><a href="{{ url('home/index') }}">首页</a></li>
 					<li><a href="{{ url('home/list') }}">奢品</a></li>
 					<li><a href="single-product.html">Single product</a></li>
 					<li><a href="cart.html">购物车</a></li>
@@ -204,19 +204,19 @@
 </div> <!-- End footer bottom area -->
 
 <!-- Latest jQuery form server -->
-<script src="/sh/js/jquery-1.8.3.min.js"></script>
+<script src="/home/js/jquery-1.8.3.min.js"></script>
 
 <!-- Bootstrap JS form CDN -->
-<script src="/sh/js/bootstrap.min.js"></script>
+<script src="/home/js/bootstrap.min.js"></script>
 
 <!-- jQuery sticky menu -->
-<script src="/sh/js/owl.carousel.min.js"></script>
-<script src="/sh/js/jquery.sticky.js"></script>
+<script src="/home/js/owl.carousel.min.js"></script>
+<script src="/home/js/jquery.sticky.js"></script>
 
 <!-- jQuery easing -->
-<script src="/sh/js/jquery.easing.1.3.min.js"></script>
+<script src="/home/js/jquery.easing.1.3.min.js"></script>
 
 <!-- Main Script -->
-<script src="/sh/js/main.js"></script>
+<script src="/home/js/main.js"></script>
 </body>
 </html>

@@ -22,7 +22,7 @@
             <div class="col-md-3 col-sm-6">
                 <div class="single-shop-product">
                     <div class="product-upper">
-                        <img src="/sh/img/product-2.jpg" alt="">
+                        <img src="/home/img/product-2.jpg" alt="">
                     </div>
                     <h2><a href="">Apple new mac book 2015 March :P</a></h2>
                     <div class="product-carousel-price">
@@ -37,7 +37,7 @@
             <div class="col-md-3 col-sm-6">
                 <div class="single-shop-product">
                     <div class="product-upper">
-                        <img src="/sh/img/product-1.jpg" alt="">
+                        <img src="/home/img/product-1.jpg" alt="">
                     </div>
                     <h2><a href="">Apple new mac book 2015 March :P</a></h2>
                     <div class="product-carousel-price">
@@ -52,7 +52,7 @@
             <div class="col-md-3 col-sm-6">
                 <div class="single-shop-product">
                     <div class="product-upper">
-                        <img src="/sh/img/product-3.jpg" alt="">
+                        <img src="/home/img/product-3.jpg" alt="">
                     </div>
                     <h2><a href="">Apple new mac book 2015 March :P</a></h2>
                     <div class="product-carousel-price">
@@ -67,7 +67,7 @@
             <div class="col-md-3 col-sm-6">
                 <div class="single-shop-product">
                     <div class="product-upper">
-                        <img src="/sh/img/product-4.jpg" alt="">
+                        <img src="/home/img/product-4.jpg" alt="">
                     </div>
                     <h2><a href="">Apple new mac book 2015 March :P</a></h2>
                     <div class="product-carousel-price">
@@ -82,7 +82,7 @@
             <div class="col-md-3 col-sm-6">
                 <div class="single-shop-product">
                     <div class="product-upper">
-                        <img src="/sh/img/product-2.jpg" alt="">
+                        <img src="/home/img/product-2.jpg" alt="">
                     </div>
                     <h2><a href="">Apple new mac book 2015 March :P</a></h2>
                     <div class="product-carousel-price">
@@ -97,7 +97,7 @@
             <div class="col-md-3 col-sm-6">
                 <div class="single-shop-product">
                     <div class="product-upper">
-                        <img src="/sh/img/product-1.jpg" alt="">
+                        <img src="/home/img/product-1.jpg" alt="">
                     </div>
                     <h2><a href="">Apple new mac book 2015 March :P</a></h2>
                     <div class="product-carousel-price">
@@ -112,7 +112,7 @@
             <div class="col-md-3 col-sm-6">
                 <div class="single-shop-product">
                     <div class="product-upper">
-                        <img src="/sh/img/product-3.jpg" alt="">
+                        <img src="/home/img/product-3.jpg" alt="">
                     </div>
                     <h2><a href="">Apple new mac book 2015 March :P</a></h2>
                     <div class="product-carousel-price">
@@ -127,7 +127,7 @@
             <div class="col-md-3 col-sm-6">
                 <div class="single-shop-product">
                     <div class="product-upper">
-                        <img src="/sh/img/product-4.jpg" alt="">
+                        <img src="/home/img/product-4.jpg" alt="">
                     </div>
                     <h2><a href="">Apple new mac book 2015 March :P</a></h2>
                     <div class="product-carousel-price">
@@ -142,7 +142,7 @@
             <div class="col-md-3 col-sm-6">
                 <div class="single-shop-product">
                     <div class="product-upper">
-                        <img src="/sh/img/product-2.jpg" alt="">
+                        <img src="/home/img/product-2.jpg" alt="">
                     </div>
                     <h2><a href="">Apple new mac book 2015 March :P</a></h2>
                     <div class="product-carousel-price">
@@ -157,7 +157,7 @@
             <div class="col-md-3 col-sm-6">
                 <div class="single-shop-product">
                     <div class="product-upper">
-                        <img src="/sh/img/product-1.jpg" alt="">
+                        <img src="/home/img/product-1.jpg" alt="">
                     </div>
                     <h2><a href="">Apple new mac book 2015 March :P</a></h2>
                     <div class="product-carousel-price">
@@ -172,7 +172,7 @@
             <div class="col-md-3 col-sm-6">
                 <div class="single-shop-product">
                     <div class="product-upper">
-                        <img src="/sh/img/product-3.jpg" alt="">
+                        <img src="/home/img/product-3.jpg" alt="">
                     </div>
                     <h2><a href="">Apple new mac book 2015 March :P</a></h2>
                     <div class="product-carousel-price">
@@ -187,7 +187,7 @@
             <div class="col-md-3 col-sm-6">
                 <div class="single-shop-product">
                     <div class="product-upper">
-                        <img src="/sh/img/product-4.jpg" alt="">
+                        <img src="/home/img/product-4.jpg" alt="">
                     </div>
                     <h2><a href="">Apple new mac book 2015 March :P</a></h2>
                     <div class="product-carousel-price">
