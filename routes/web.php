@@ -45,7 +45,15 @@ Route::get('admin/login','Admin\LoginController@login');
 Route::get('admin/code','Admin\LoginController@code');
 //登录页面的逻辑验证
 Route::post('admin/dologin','Admin\LoginController@dologin');
+//路由组
+Route::group(['prefix'=>'admin','namespace'=>'Admin','middleware'=>'islogin'],function(){
 //后台首页
-Route::get('admin/index','Admin\LoginController@index');
-//后台管理员用户管理
-Route::resource('admin/admin_user','Admin\Admin_userController');
+    Route::get('index','LoginController@index');
+//退出登录
+    Route::get('logout','LoginController@logout');
+//管理员模块
+    Route::resource('admin_user','Admin_userController');
+    //Route::post('admin_user','Admin_userController@delAll');
+//会员管理模块
+    Route::resource('user','UserController');
+});
