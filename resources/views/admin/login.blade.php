@@ -22,16 +22,16 @@
                 <ul>
                     @if(is_object($errors))
                         @foreach ($errors->all() as $error)
-                            <li style="color:red">{{ $error }}</li>
+                            <li style="color:white">{{ $error }}</li>
                         @endforeach
                     @else
-                        <li style="color:red">{{ $errors }}</li>
+                        <li style="color:white">{{ $errors }}</li>
                     @endif
                 </ul>
             </div>
         @endif
 
-        <form class="layui-form layui-form-pane" action="{{ url('admin/dologin') }}" method="post">
+        <form id="fid" class="layui-form layui-form-pane" action="{{ url('admin/dologin') }}" method="post">
             {{csrf_field()}}
             <h3>登录管理员帐号</h3>
             {{--<label class="login-title" for="username">帐号</label>--}}
@@ -55,7 +55,7 @@
                 <div class="layui-inline">
                     <label class="layui-form-label login-form"><i class="iconfont">&#xe6b2;</i></label>
                     <div class="layui-input-inline" style="width: 100px;">
-                        <input style="width: 120px;" type="text" name="code" lay-verify="required" placeholder="请输入验证码" class="layui-input">
+                        <input style="width: 120px;" type="text" name="code" lay-verify="required" placeholder="请输入验证码" autocomplete="off" class="layui-input">
                     </div>
                     <div class="layui-form-mid " ></div>
                     <div class="layui-form-mid"></div>
@@ -72,21 +72,6 @@
 
         </form>
     </div>
-    {{--<script>--}}
-        {{--$(function  () {--}}
-            {{--layui.use('form', function(){--}}
-                {{--var form = layui.form();--}}
-                {{--//监听提交--}}
-                {{--form.on('submit(login)', function(data){--}}
-                    {{--layer.msg(JSON.stringify(data.field),function(){--}}
-                        {{--location.href='index.blade.html'--}}
-                    {{--});--}}
-                    {{--return false;--}}
-                {{--});--}}
-            {{--});--}}
-        {{--})--}}
-
-    {{--</script>--}}
     <div class="bg-changer">
         <div class="swiper-container changer-list">
             <div class="swiper-wrapper">
@@ -107,5 +92,6 @@
         <div class="bg-out"></div>
         <div id="changer-set"><i class="iconfont">&#xe696;</i></div>
     </div>
+
 </body>
 </html>

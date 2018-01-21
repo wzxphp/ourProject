@@ -21,11 +21,11 @@
     <div class="open-nav"><i class="iconfont">&#xe699;</i></div>
     <ul class="layui-nav right" lay-filter="">
         <li class="layui-nav-item">
-            <a href="javascript:;">admin</a>
+            <a href="javascript:;">管理员：{{session('user')->name}}</a>
             <dl class="layui-nav-child"> <!-- 二级菜单 -->
                 <dd><a href="">个人信息</a></dd>
                 <dd><a href="">切换帐号</a></dd>
-                <dd><a href="./login.html">退出</a></dd>
+                <dd><a href="{{url('admin/logout')}}">退出</a></dd>
             </dl>
         </li>
         <li class="layui-nav-item"><a href="/">前台首页</a></li>
@@ -53,21 +53,15 @@
                     </a>
                     <ul class="sub-menu">
                         <li>
-                            <a href="{{ url('admin/admin_user/create') }}">
-                                <i class="iconfont">&#xe6a7;</i>
-                                管理员添加
-                            </a>
-                        </li>
-                        <li>
-                            <a href="{{ url('admin/admin_user/{1}/edit') }}">
-                                <i class="iconfont">&#xe6a7;</i>
-                                管理员修改
-                            </a>
-                        </li>
-                        <li>
                             <a href="{{ url('admin/admin_user') }}">
                                 <i class="iconfont">&#xe6a7;</i>
                                 管理员列表
+                            </a>
+                        </li>
+                        <li>
+                            <a href="{{ url('admin/admin_user/create') }}">
+                                <i class="iconfont">&#xe6a7;</i>
+                                管理员添加
                             </a>
                         </li>
                     </ul>
@@ -80,13 +74,13 @@
                     </a>
                     <ul class="sub-menu">
                         <li>
-                            <a href="member-list.html">
+                            <a href="{{ url('admin/user') }}">
                                 <i class="iconfont">&#xe6a7;</i>
                                 会员列表
                             </a>
                         </li>
                         <li>
-                            <a href="member-del.html">
+                            <a href="{{ url('admin/user/1') }}">
                                 <i class="iconfont">&#xe6a7;</i>
                                 会员删除
                             </a>

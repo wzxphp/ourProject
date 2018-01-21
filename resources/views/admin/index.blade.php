@@ -72,55 +72,55 @@
                 <tbody>
                     <tr>
                         <th width="30%">服务器计算机名</th>
-                        <td><span id="lbServerName">http://127.0.0.1/</span></td>
+                        <td><span id="lbServerName">{{$_SERVER['HTTP_HOST']}}</span></td>
                     </tr>
                     <tr>
                         <td>服务器IP地址</td>
-                        <td>192.168.1.1</td>
+                        <td>{{$_SERVER['SERVER_ADDR']}}</td>
                     </tr>
                     <tr>
                         <td>服务器域名</td>
-                        <td>x.xuebingsi.com</td>
+                        <td>{{$_SERVER['SERVER_NAME']}}</td>
                     </tr>
                     <tr>
                         <td>服务器端口 </td>
-                        <td>80</td>
+                        <td>{{$_SERVER['SERVER_PORT']}}</td>
                     </tr>
                     <tr>
-                        <td>服务器IIS版本 </td>
-                        <td>Microsoft-IIS/6.0</td>
+                        <td>运行环境 </td>
+                        <td>{{$_SERVER['SERVER_SOFTWARE']}}</td>
                     </tr>
                     <tr>
                         <td>本文件所在文件夹 </td>
-                        <td>D:\WebSite\HanXiPuTai.com\XinYiCMS.Web\</td>
+                        <td>{{$_SERVER['DOCUMENT_ROOT']}}</td>
                     </tr>
                     <tr>
                         <td>服务器操作系统 </td>
-                        <td>Microsoft Windows NT 5.2.3790 Service Pack 2</td>
+                        <td>{{$_SERVER['SERVER_SIGNATURE']}}</td>
                     </tr>
                     <tr>
                         <td>系统所在文件夹 </td>
-                        <td>C:\WINDOWS\system32</td>
+                        <td>{{$_SERVER['CONTEXT_DOCUMENT_ROOT']}}</td>
                     </tr>
                     <tr>
-                        <td>服务器脚本超时时间 </td>
-                        <td>30000秒</td>
+                        <td>上传附件限制</td>
+                        <td><?php echo get_cfg_var("upload_max_filesize")?get_cfg_var("upload_max_filesize"):"不允许上传附件"; ?></td>
                     </tr>
                     <tr>
-                        <td>服务器的语言种类 </td>
-                        <td>Chinese (People's Republic of China)</td>
+                        <td>邮箱名称</td>
+                        <td>{{$_SERVER['MAIL_USERNAME']}}</td>
                     </tr>
                     <tr>
-                        <td>.NET Framework 版本 </td>
-                        <td>2.050727.3655</td>
+                        <td>数据库名字 </td>
+                        <td>{{$_SERVER['DB_DATABASE']}}</td>
                     </tr>
                     <tr>
                         <td>服务器当前时间 </td>
-                        <td>2017-01-01 12:06:23</td>
+                        <td>{{ date('Y-m-d H:i:s') }}</td>
                     </tr>
                     <tr>
-                        <td>服务器IE版本 </td>
-                        <td>6.0000</td>
+                        <td>连接的数据库</td>
+                        <td>{{ $_SERVER['DB_CONNECTION']}}</td>
                     </tr>
                     <tr>
                         <td>服务器上次启动到现在已运行 </td>
