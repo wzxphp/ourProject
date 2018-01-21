@@ -98,13 +98,54 @@
                                 <i class="iconfont">&#xe6a7;</i>
                                 角色列表
                             </a>
-
-                        </li>
                         <li>
                             <a href="{{ url('admin/role/create') }}">
                                 <i class="iconfont">&#xe6a7;</i>
                                 角色添加
                             </a>
+                        </li>
+                        <li>
+                            <a href="{{ url('admin/cate/create') }}">
+                                <i class="iconfont">&#xe6a7;</i>
+                                添加分类
+                            </a>
+                        </li>
+                        <li>
+                            <a href="{{ url('admin/cate/index') }}">
+                                <i class="iconfont">&#xe6a7;</i>
+                                分类列表
+                            </a>
+                        </li>
+                    </ul>
+                </li>
+                <li class="list" >
+                    <a href="javascript:;">
+                        <i class="iconfont">&#xe6a3;</i>
+                        订单管理
+                        <i class="iconfont nav_right">&#xe697;</i>
+                    </a>
+                    <ul class="sub-menu" style="display:none">
+                        <li>
+                            <a href="{{ url('admin/order/index') }}">
+                                <i class="iconfont">&#xe6a7;</i>
+                                订单列表
+                            </a>
+                        </li>
+                    </ul>
+                </li>
+                <li class="list" >
+                    <a href="javascript:;">
+                        <i class="iconfont">&#xe6a3;</i>
+                        轮播管理
+                        <i class="iconfont nav_right">&#xe697;</i>
+                    </a>
+                    <ul class="sub-menu" style="display:none">
+                        <li>
+                            <a href="./banner-list.html">
+                                <i class="iconfont">&#xe6a7;</i>
+                                轮播列表
+                            </a>
+
                         </li>
                     </ul>
                 </li>

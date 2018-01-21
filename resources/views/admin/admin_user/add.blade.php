@@ -1,11 +1,15 @@
 @extends('admin.layout')
+<<<<<<< HEAD
 @section('title','管理员添加')
+=======
+@section('title','分类添加页面')
+>>>>>>> origin/qinyangchun
 @section('content')
     <!-- 右侧主体开始 -->
     <div class="page-content">
         <div class="content">
-
             <!-- 右侧内容框架，更改从这里开始 -->
+
             <blockquote class="layui-elem-quote">
                 <a href="">后台首页</a>/
                 <a href="">后台管理员</a>/
