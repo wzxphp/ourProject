@@ -119,9 +119,30 @@
                     </a>
                     <ul class="sub-menu">
                         <li>
-                            <a href="./category.html">
+                            <a href="{{ url('admin/cate/create') }}">
+                                <i class="iconfont">&#xe6a7;</i>
+                                添加分类
+                            </a>
+                        </li>
+                        <li>
+                            <a href="{{ url('admin/cate/index') }}">
                                 <i class="iconfont">&#xe6a7;</i>
                                 分类列表
+                            </a>
+                        </li>
+                    </ul>
+                </li>
+                <li class="list" >
+                    <a href="javascript:;">
+                        <i class="iconfont">&#xe6a3;</i>
+                        订单管理
+                        <i class="iconfont nav_right">&#xe697;</i>
+                    </a>
+                    <ul class="sub-menu" style="display:none">
+                        <li>
+                            <a href="{{ url('admin/order/index') }}">
+                                <i class="iconfont">&#xe6a7;</i>
+                                订单列表
                             </a>
                         </li>
                     </ul>

@@ -49,3 +49,14 @@ Route::post('admin/dologin','Admin\LoginController@dologin');
 Route::get('admin/index','Admin\LoginController@index');
 //后台管理员用户管理
 Route::resource('admin/admin_user','Admin\Admin_userController');
+//分类模块
+Route::get('admin/cate/create','Admin\CateController@create');
+Route::post('admin/cate/store','Admin\CateController@store');
+Route::get('admin/cate/index','Admin\CateController@index');
+Route::post('admin/cate/changeorder','Admin\CateController@changeOrder');
+Route::get('admin/cate/{id}/edit','Admin\CateController@edit');
+Route::post('admin/cate/update','Admin\CateController@update');
+Route::get('admin/cate/{id}','Admin\CateController@del');
+//订单管理
+Route::get('admin/order/index','Admin\OrderController@index');
+
