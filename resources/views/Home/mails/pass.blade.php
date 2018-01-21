@@ -7,7 +7,7 @@
 <body>
 	<div>
 		{{ $name }}:您好，您正在进行密码修改操作，请确认本人操作
-		<a href="{{ url('Home/forgot/updatepass') }}">点击修改密码</a>
+		<a href="{{ url('home/forgot/updatepass') }}/{{ $data }}">点击修改密码</a>
 	</div>
 </body>
 </html>

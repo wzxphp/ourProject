@@ -11,7 +11,7 @@
 	<form action="{{ url('home/forgot/dopass') }}" method="POST">
 	{{ csrf_field() }}
 		用户名：<input type="text" name="name"><br><br>
-		注册邮箱:<input type="email" name="email"><br><br>
+		邮箱:<input type="email" name="email"><br><br>
 		<button type="submit" >提交</button>
 	</form>
 	</center>
