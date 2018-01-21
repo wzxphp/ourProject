@@ -49,3 +49,15 @@ Route::post('admin/dologin','Admin\LoginController@dologin');
 Route::get('admin/index','Admin\LoginController@index');
 //后台管理员用户管理
 Route::resource('admin/admin_user','Admin\Admin_userController');
+
+//商品管理页面
+Route::get('admin/goods/index','Admin\GoodsController@index');
+// 商品添加页面
+Route::get('admin/goods/create','Admin\GoodsController@create');
+//商品数据接收
+Route::post('admin/goods/upload','Admin\GoodsController@upload');
+//商品修改页面
+Route::get('admin/goods/{id}/edit','Admin\GoodsController@edit');
+Route::post('admin/goods/{id}/xxoo','Admin\GoodsController@xxoo');
+//删除
+Route::get('admin/goods/{id}','Admin\GoodsController@del');
