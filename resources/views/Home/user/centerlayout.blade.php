@@ -45,13 +45,16 @@
 			<div class="col-md-8">
 				<div class="user-menu">
 					<ul>
-					@if ( empty( Session('user') ) )
-						<li><a href="{{ url('home/login/index') }}"><i class="fa fa-user"></i> {{ Session('user')->name }}</a></li>
+					@if ( empty( Session('home_user') ) )
+						<li><a href="{{ url('home/login/index') }}"><i class="fa fa-user"></i> 登录</a></li>
 					@else
 						<li><a href="{{ url('home/loginout') }}"><i class="fa fa-user"></i> 退出</a></li>
-						<li><a href="{{ url('home/center') }}"><i class="fa fa-user"></i> {{ Session('user')->name }}</a></li>
 					@endif
-						<li><a href="{{ url('home/center') }}"><i class="fa fa-user"></i> 个人中心</a></li>
+					@if( !empty(Session('home_user')) )
+						<li><a href="{{ url('home/center') }}"><i class="fa fa-user"></i> {{ Session('home_user')->name }}</a></li>
+					@else
+						<li><a href="{{ url('home/login/index') }}"><i class="fa fa-user"></i> 个人中心</a></li>
+					@endif
 						<li><a href="{{ url('home/cart') }}"><i class="fa fa-user"></i> 购物车</a></li>
 						<li><a href="{{ url('home/order') }}"><i class="fa fa-user"></i> 订单</a></li>
 						<li><a href="#"><i class="fa fa-heart"></i> 许愿树</a></li>

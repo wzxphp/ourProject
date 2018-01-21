@@ -18,7 +18,7 @@
 									<img src="{{url('home/usercenter/images/getAvatar.do.jpg')}}">
 								</a>
 								<div class="m-info">
-									<em class="s-name">{{ Session('user')->name }}</em>
+									<em class="s-name">{{ Session('home_user')->name }}</em>
 									<div class="vip1"><a href="#"><span></span><em>会员专享</em></a></div>
 									<div class="safeText"><a href="safety.html">账户安全:<em style="margin-left:20px ;">60</em>分</a>
 										<div class="progressBar"><span style="left: -95px;" class="progress"></span></div>

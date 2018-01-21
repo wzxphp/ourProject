@@ -78,6 +78,7 @@
   <div class="form sign-in">
   <form action="{{ url('home/login/dologin') }}" method="POST">
     {{ csrf_field() }}
+
     @if(count($errors) > 0)
         <div class="alert alert-danger">
             <ul>
@@ -87,6 +88,7 @@
             </ul>
         </div>
     @endif
+
     @if(session('info'))
       <div class="alert alert-info">
         {{ session('info') }}

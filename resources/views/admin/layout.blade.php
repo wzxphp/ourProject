@@ -24,11 +24,11 @@
             <a href="javascript:;">管理员：{{session('user')->name}}</a>
             <dl class="layui-nav-child"> <!-- 二级菜单 -->
                 <dd><a href="">个人信息</a></dd>
-                <dd><a href="">切换帐号</a></dd>
+                <dd><a href="{{url('admin/login')}}">切换帐号</a></dd>
                 <dd><a href="{{url('admin/logout')}}">退出</a></dd>
             </dl>
         </li>
-        <li class="layui-nav-item"><a href="/">前台首页</a></li>
+        <li class="layui-nav-item"><a href="{{url('/home/index')}}">前台首页</a></li>
     </ul>
 </div>
 <!-- 顶部结束 -->

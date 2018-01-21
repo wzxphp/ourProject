@@ -23,7 +23,7 @@
 					<p class="am-form-help">头像</p>
 
 					<div class="info-m">
-						<div><b>用户名：<i>{{ Session('user')->name }}</i></b></div>
+						<div><b>用户名：<i>{{ Session('home_user')->name }}</i></b></div>
 						<div class="vip">
                               <span></span><a href="#">会员专享</a>
 						</div>
@@ -51,7 +51,7 @@
 						<div class="am-form-group">
 							<label for="user-name2" class="am-form-label">昵称</label>
 							<div class="am-form-content">
-								<input type="text" id="user-name2" name="name" placeholder="nickname" value="{{ Session('user')->name }}">
+								<input type="text" id="user-name2" name="name" placeholder="nickname" value="{{ Session('home_user')->name }}">
                                   <small>昵称长度不能超过40个汉字</small>
 							</div>
 						</div>
@@ -83,7 +83,7 @@
 							<label for="user-birth" class="am-form-label">生日</label>
 							<div class="am-form-content birth">
 								<div class="birth-select">
-									<select data-am-selected name="birthday">
+									<select  id="birthday_y" >
 										<option value="2018">2018</option>
 										<option value="2017">2017</option>
 										<option value="2016">2016</option>
@@ -120,7 +120,7 @@
 									<em>年</em>
 								</div>
 								<div class="birth-select2">
-									<select data-am-selected>
+									<select  id="birthday_m" >
 										<option value="12">12</option>
 										<option value="11">11</option>
 										<option value="10">10</option>
@@ -134,13 +134,45 @@
 										<option value="02">02</option>
 										<option value="01">01</option>
 									</select>
-									<em>月</em></div>
-								<div class="birth-select2">
-									<select data-am-selected>
-										<option value="a">21</option>
-										<option value="b">23</option>
+									<em>月</em>
+								</div>
+								<div class="birth-select2"  >
+									<select  id="birthday_d">
+										<option value="1">1</option>
+										<option value="2">2</option>
+										<option value="3">3</option>
+										<option value="4">4</option>
+										<option value="5">5</option>
+										<option value="6">6</option>
+										<option value="7">7</option>
+										<option value="8">8</option>
+										<option value="9">9</option>
+										<option value="10">10</option>
+										<option value="11">11</option>
+										<option value="12">12</option>
+										<option value="13">13</option>
+										<option value="14">14</option>
+										<option value="15">15</option>
+										<option value="16">16</option>
+										<option value="17">17</option>
+										<option value="18">18</option>
+										<option value="19">19</option>
+										<option value="20">20</option>
+										<option value="21">21</option>
+										<option value="22">22</option>
+										<option value="23">23</option>
+										<option value="24">24</option>
+										<option value="25">25</option>
+										<option value="26">26</option>
+										<option value="27">27</option>
+										<option value="28">28</option>
+										<option value="29">29</option>
+										<option value="30">30</option>
+										<option value="31">31</option>
 									</select>
-									<em>日</em></div>
+									<input type="hidden" id="birthday" name="birthday" value="">
+									<em>日</em>
+								</div>
 							</div>
 					
 						</div>
@@ -148,44 +180,17 @@
 							<label for="user-phone" class="am-form-label">电话</label>
 							<div class="am-form-content">
 								<input id="user-phone" name="tel" placeholder="telephonenumber" type="tel">
-
 							</div>
 						</div>
 						<div class="am-form-group">
 							<label for="user-email" class="am-form-label">电子邮件</label>
 							<div class="am-form-content">
-								<input id="user-email" name="email" placeholder="Email" type="email" value="{{ Session('user')->email }}">
-
+								<input id="user-email" name="email" placeholder="Email" type="email" value="{{ Session('home_user')->email }}">
 							</div>
 						</div>
-						<div class="am-form-group address">
-							<label for="user-address" class="am-form-label">收货地址</label>
-							<div class="am-form-content address">
-								<a href="address.html">
-									<p class="new-mu_l2cw">
-										<span class="province">湖北</span>省
-										<span class="city">武汉</span>市
-										<span class="dist">洪山</span>区
-										<span class="street">雄楚大道666号(中南财经政法大学)</span>
-										<span class="am-icon-angle-right"></span>
-									</p>
-								</a>
 
-							</div>
-						</div>
-						<div class="am-form-group safety">
-							<label for="user-safety" class="am-form-label">账号安全</label>
-							<div class="am-form-content safety">
-								<a href="safety.html">
-
-									<span class="am-icon-angle-right"></span>
-
-								</a>
-
-							</div>
-						</div>
 						<div class="info-btn">
-							<button type="submit" >保存修改</button>
+							<button id="submit" type="submit" >保存修改</button>
 						</div>
 
 					</form>
@@ -194,6 +199,17 @@
 			</div>
 
 		</div>
+		<script type="text/javascript">
+		    var birthday_y = document.getElementById('birthday_y');
+		    var birthday_m = document.getElementById('birthday_m');
+		    var birthday_d = document.getElementById('birthday_d');
+		    var birthday = document.getElementById('birthday');
+		    var submit = document.getElementById('submit');
+		    submit.onclick = function(){
+		    	birthday.value = ""+birthday_y.value+"-"+birthday_m.value+"-"+birthday_d.value;
+		    }
+		    
+		</script>
 		<!--底部-->
 		<div class="footer">
 		</div>

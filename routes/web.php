@@ -37,7 +37,7 @@ Route::get('/home/order','Home\Cartcontroller@index');
 
 // 用户============================================================
 // 用户中心页面
-Route::get('/home/center','Home\UserController@center');
+Route::get('/home/center','Home\UserController@center')->middleware('islogin');
 // 用户信息页面
 Route::get('/home/center/userinfo','Home\UserController@userinfo');
 // 完善用户信息
@@ -45,9 +45,15 @@ Route::post('/home/center/userinfo_create','Home\UserController@userinfo_create'
 // 用户安全设置页面
 Route::get('/home/center/safe','Home\UserController@safe');
 // 用户自主修改密码页面
-Route::get('/home/center/password','Home\UserController@password');
+Route::get('/home/center/password/{email}','Home\UserController@password');
+// 用户自主修改密码
+Route::post('/home/center/dopass','Home\UserController@dopass');
 // 用户地址管理页面
 Route::get('/home/center/address','Home\UserController@address');
+// 城市省市区三级联动
+Route::post('/home/center/ajax','Home\UserController@ajax');
+// 用户添加地址
+Route::post('/home/center/doadd','Home\UserController@doadd');
 
 // 登录============================================================
 // 登录注册

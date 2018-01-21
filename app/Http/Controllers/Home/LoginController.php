@@ -8,7 +8,7 @@ use Mail;
 
 use App\Org\code\Code;
 require_once app_path().'/Org/code/Code.class.php';
-
+// use Illuminate\Support\Facades\Session;
 use Session;
 
 class LoginController extends Controller
@@ -53,7 +53,7 @@ class LoginController extends Controller
     	{
     		return redirect('home/login/index')->with(['info'=>'账号或密码输入有误']);
     	}else{
-    		Session::put('user',$user);
+    		Session::put('home_user',$user);
             return redirect('home/index');
     	}
 
@@ -63,7 +63,8 @@ class LoginController extends Controller
 
     public function loginout()
     {
-        Session()->forget('user');
+        Session()->forget('home_user');
+        
         return view('home/login/index');
 
     }
@@ -168,8 +169,8 @@ class LoginController extends Controller
 
 // 执行修改
     public function update(Request $request)
-    {
-    	// 密码修改逻辑
+    {    
+        // 密码修改逻辑
     	// 验证
     	$this->validate($request,[
     			'password' => 'required|min:6',
