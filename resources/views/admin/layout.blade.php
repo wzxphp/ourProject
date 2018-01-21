@@ -21,10 +21,9 @@
     <div class="open-nav"><i class="iconfont">&#xe699;</i></div>
     <ul class="layui-nav right" lay-filter="">
         <li class="layui-nav-item">
-            <a href="javascript:;">管理员：{{session('user')->name}}</a>
+            <a href="javascript:;">管理员：{{session('adminuser')->name}}</a>
             <dl class="layui-nav-child"> <!-- 二级菜单 -->
-                <dd><a href="">个人信息</a></dd>
-                <dd><a href="">切换帐号</a></dd>
+                <dd><a href="{{url('admin/login')}}">切换帐号</a></dd>
                 <dd><a href="{{url('admin/logout')}}">退出</a></dd>
             </dl>
         </li>
@@ -80,42 +79,31 @@
                             </a>
                         </li>
                         <li>
-                            <a href="{{ url('admin/user/1') }}">
+                            <a href="{{ url('admin/user/deleted') }}">
                                 <i class="iconfont">&#xe6a7;</i>
                                 会员删除
                             </a>
                         </li>
-                        <li>
-                            <a href="member-level.html">
-                                <i class="iconfont">&#xe6a7;</i>
-                                等级管理
-                            </a>
-                        </li>
-                        <li>
-                            <a href="member-kiss.html">
-                                <i class="iconfont">&#xe6a7;</i>
-                                积分管理
-                            </a>
-                        </li>
-                        <li>
-                            <a href="member-view.html">
-                                <i class="iconfont">&#xe6a7;</i>
-                                浏览记录
-                            </a>
-                        </li>
                     </ul>
                 </li>
                 <li class="list" >
                     <a href="javascript:;">
                         <i class="iconfont">&#xe6a3;</i>
-                        分类管理
+                        角色管理
                         <i class="iconfont nav_right">&#xe697;</i>
                     </a>
                     <ul class="sub-menu">
                         <li>
-                            <a href="./category.html">
+                            <a href="{{ url('admin/role') }}">
                                 <i class="iconfont">&#xe6a7;</i>
-                                分类列表
+                                角色列表
+                            </a>
+
+                        </li>
+                        <li>
+                            <a href="{{ url('admin/role/create') }}">
+                                <i class="iconfont">&#xe6a7;</i>
+                                角色添加
                             </a>
                         </li>
                     </ul>
@@ -123,95 +111,21 @@
                 <li class="list" >
                     <a href="javascript:;">
                         <i class="iconfont">&#xe6a3;</i>
-                        轮播管理
+                        权限管理
                         <i class="iconfont nav_right">&#xe697;</i>
                     </a>
-                    <ul class="sub-menu" style="display:none">
+                    <ul class="sub-menu">
                         <li>
-                            <a href="./banner-list.html">
+                            <a href="{{ url('admin/permission') }}">
                                 <i class="iconfont">&#xe6a7;</i>
-                                轮播列表
+                                权限列表
                             </a>
-                        </li>
-                    </ul>
-                </li>
-                <li class="list" >
-                    <a href="javascript:;">
-                        <i class="iconfont">&#xe6a3;</i>
-                        管理员管理
-                        <i class="iconfont nav_right">&#xe697;</i>
-                    </a>
-                    <ul class="sub-menu" style="display:none">
-                        <li>
-                            <a href="./banner-list.html">
-                                <i class="iconfont">&#xe6a7;</i>
-                                轮播列表
-                            </a>
-                        </li>
-                    </ul>
-                </li>
-                <li class="list" >
-                    <a href="javascript:;">
-                        <i class="iconfont">&#xe6a3;</i>
-                        系统统计
-                        <i class="iconfont nav_right">&#xe697;</i>
-                    </a>
-                    <ul class="sub-menu" style="display:none">
-                        <li>
-                            <a href="echarts1.blade.html">
-                                <i class="iconfont">&#xe6a7;</i>
-                                拆线图
-                            </a>
+
                         </li>
                         <li>
-                            <a href="echarts2.blade.html">
+                            <a href="{{ url('admin/permission/create') }}">
                                 <i class="iconfont">&#xe6a7;</i>
-                                柱状图
-                            </a>
-                        </li>
-                        <li>
-                            <a href="echarts3.blade.html">
-                                <i class="iconfont">&#xe6a7;</i>
-                                地图
-                            </a>
-                        </li>
-                        <li>
-                            <a href="echarts4.blade.html">
-                                <i class="iconfont">&#xe6a7;</i>
-                                饼图
-                            </a>
-                        </li>
-                        <li>
-                            <a href="echarts5.blade.html">
-                                <i class="iconfont">&#xe6a7;</i>
-                                k线图
-                            </a>
-                        </li>
-                        <li>
-                            <a href="echarts6.blade.html">
-                                <i class="iconfont">&#xe6a7;</i>
-                                仪表图
-                            </a>
-                        </li>
-                        <li>
-                            <a href="http://echarts.baidu.com/examples.html">
-                                <i class="iconfont">&#xe6a7;</i>
-                                更多案例
-                            </a>
-                        </li>
-                    </ul>
-                </li>
-                <li class="list" >
-                    <a href="javascript:;">
-                        <i class="iconfont">&#xe6a3;</i>
-                        系统设置
-                        <i class="iconfont nav_right">&#xe697;</i>
-                    </a>
-                    <ul class="sub-menu" style="display:none">
-                        <li>
-                            <a href="./banner-list.html">
-                                <i class="iconfont">&#xe6a7;</i>
-                                轮播列表
+                                权限添加
                             </a>
                         </li>
                     </ul>

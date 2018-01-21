@@ -52,8 +52,15 @@ Route::group(['prefix'=>'admin','namespace'=>'Admin','middleware'=>'islogin'],fu
 //退出登录
     Route::get('logout','LoginController@logout');
 //管理员模块
+    Route::post('admin_user_del','Admin_userController@delAll');  //删除多行
+    Route::post('admin_user_statu','Admin_userController@statu');  //修改管理员状态
+    Route::get('admin_user/auth/{id}','Admin_userController@auth');  //管理员授权
     Route::resource('admin_user','Admin_userController');
-    //Route::post('admin_user','Admin_userController@delAll');
 //会员管理模块
+    Route::get('user/deleted','UserController@deleted');       //删除会员页面
     Route::resource('user','UserController');
+//角色管理模块
+    Route::resource('role','RoleController');
+//权限管理模块
+    Route::resource('permission','PermissionController');
 });

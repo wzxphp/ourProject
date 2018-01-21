@@ -39,6 +39,15 @@
                                 </div>
                             </div>
                             <div class="layui-form-item">
+                                <label for="L_email" class="layui-form-label">
+                                    <span class="x-red"></span>邮箱
+                                </label>
+                                <div class="layui-input-inline">
+                                    <input type="email" id="L_email" name="email" required="" lay-verify="email"
+                                           autocomplete="off" class="layui-input">
+                                </div>
+                            </div>
+                            <div class="layui-form-item">
                                 <label for="L_pass" class="layui-form-label">
                                     <span class="x-red"></span>密码
                                 </label>

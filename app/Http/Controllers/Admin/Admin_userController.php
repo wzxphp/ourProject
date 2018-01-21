@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Admin;
 
+use App\Http\Requests;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Crypt;
 use App\Http\Controllers\Controller;
@@ -17,18 +18,25 @@ class Admin_userController extends Controller
      */
     public function index(Request $request)
     {
-//        $data = User::orderBy('id','asc')
-//            ->where(function($query) use($request){
-//                //检测关键字
-//                $username = $request->input('keywords1');
-//                //如果用户名不为空
-//                if(!empty($username)) {
-//                    $query->where('username','like','%'.$username.'%');
-//                }
-//            })
-//            ->paginate($request->input('num', 5));
-        $data = User::get();
-        return view('admin.admin_user.list',['data'=>$data]);
+
+        $allData = User::get();   //获取总共有多少管理员
+        $data =  DB::table('data_admin_users')
+                ->where(function($query) use($request){
+                //检测关键字
+                $username = $request->input('username');
+                $mindate = $request->input('mindate');
+                $maxdate = $request->input('maxdate');
+                //如果用户名不为空
+                if(!empty($username)) {
+                    $query->where('name','like','%'.$username.'%');
+                }
+                //如果日期不为空
+                if(!empty($mindate)) {
+                    $query->whereBetween('created_at',[$mindate,$maxdate]);
+                }
+                })->simplePaginate(10);
+
+        return view('admin.admin_user.list',['data'=>$data,'allData' =>$allData]);
 
     }
 
@@ -56,6 +64,7 @@ class Admin_userController extends Controller
             $user = new User();
             $user->name = $input['username'];
             $user->tel = $input['tel'];
+            $user->email = $input['email'];
             $user->password = Crypt::encrypt($input['pass']);
             $res = $user->save();
         //4. 判断是否添加成功
@@ -101,11 +110,11 @@ class Admin_userController extends Controller
     {
         $input = $request->all();
 
-
         //使用模型修改表记录
         $user = User::find($id);
         $user->name = $input['username'];
         $user->tel = $input['tel'];
+        $user->email = $input['email'];
         if(!empty($input['pass'])){
             if($input['pass'] == Crypt::decrypt($user->password))
             {
@@ -130,20 +139,7 @@ class Admin_userController extends Controller
      */
     public function destroy($id)
     {
-        if(is_array($id))
-        {
-            //删除多行
-            $res =  DB::table('data_admin_users')->whereIn('id', $id)->delete();
-            //如果删除成功
-            if($res){
-                $data = ['status'=>0, 'message'=>'2删除成功'];
-            }else{
-                $data = ['status'=>1, 'message'=>'2删除失败'];
-            }
-//            return $data;
-        }else{
             //删除一行
-//            dd($id);
             $res = User::find($id)->delete();
             //如果删除成功
             if($res){
@@ -152,21 +148,44 @@ class Admin_userController extends Controller
                 $data = ['status'=>1, 'message'=>'1删除失败'];
             }
 
+        return $data;
+    }
+    //删除多行
+    public function delAll(Request $request)
+    {
+
+        $ids = $request->admin_ids;
+        //将穿过来的数据转成数组
+        $ids = json_decode($ids,true);
+        //删除多行
+        $res =  DB::table('data_admin_users')->whereIn('id', $ids)->delete();
+        //如果删除成功
+        if($res){
+            $data = ['status'=>0, 'message'=>'2删除成功'];
+        }else{
+            $data = ['status'=>1, 'message'=>'2删除失败'];
         }
         return $data;
     }
 
-//    public function delAll($data)
-//    {
-//        //删除多行
-//        $res =  DB::table('data_admin_users')->whereIn('id', $data)->delete();
-//        //如果删除成功
-//        if($res){
-//            $data = ['status'=>0, 'message'=>'2删除成功'];
-//        }else{
-//            $data = ['status'=>1, 'message'=>'2删除失败'];
-//        }
-//        return $data;
-//    }
+    //修改管理员状态
+    public function statu(Request $request)
+    {
+        $id = $request -> close;
+        $user =  User::find($id);
+        if($user -> status == '0'){
+            $user -> status = '1';
+        }elseif($user -> status == '1'){
+            $user -> status = '0';
+        }
+        $res = $user -> save();
+        //如果修改成功
+        if($res){
+            $data = ['status'=>0, 'message'=>'修改状态成功'];
+        }else{
+            $data = ['status'=>1, 'message'=>'修改状态失败'];
+        }
+        return $data;
+    }
 
 }

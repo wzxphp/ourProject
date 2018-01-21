@@ -1,5 +1,5 @@
 @extends('admin.layout')
-@section('title','管理员列表')
+@section('title','权限列表')
 @section('content')
     <!-- 右侧主体开始 -->
     <div class="page-content">
@@ -7,8 +7,8 @@
             {{--面包屑导航--}}
             <blockquote class="layui-elem-quote">
                 <a href="{{url('admin/index')}}">后台首页</a>/
-                <a href="">后台管理员</a>/
-                <a href="">管理员列表</a>
+                <a href="">权限管理</a>/
+                <a href="">权限列表</a>
             </blockquote>
             <!-- 右侧内容框架，更改从这里开始 -->
             <!-- 右侧中部开始 -->
@@ -39,47 +39,25 @@
                             </div>
                         </div>
                     </form>
-                    <xblock>
-                            <button class="layui-btn layui-btn-danger" onclick="delAll()"><i class="layui-icon">&#xe640;</i>批量删除</button>
-                            <button id="addbtn" class="layui-btn"><i class="layui-icon">&#xe608;</i><a href="{{ url('admin/admin_user/create') }}">添加</a></button>
-                            <span class="x-right" style="line-height:40px">总共有数据：{{count($allData)}}条</span>
-                    </xblock>
                     <table id="tid" class="layui-table">
                         <thead>
                         <tr>
                             <th><input type="checkbox" onclick="checkBox($(this));" name="" value=""></th>
                             <th> ID </th>
-                            <th> 用户名 </th>
-                            <th> 手机号 </th>
-                            <th> 邮箱 </th>
-                            <th> 加入时间 </th>
-                            <th>状态</th>
+                            <th> 权限名称 </th>
+                            <th> 权限描述 </th>
                             <th>操作</th>
                         </tr>
                         </thead>
                         <tbody>
-                        @foreach($data as $k=>$v)
+                        @foreach($per as $k=>$v)
                         <tr>
                             <td><input type="checkbox" class="mybox" value="1" name=""></td>
                             <td>{{ $v->id }}</td>
-                            <td>
-                                <u style="cursor:pointer" onclick="member_show('张三','member-show.html','10001','360','400')">
-                                    {{ $v->name }}
-                                </u>
-                            </td>
-                            <td>{{ $v->tel }}</td>
-                            <td>{{ $v->email }}</td>
-                            <td>{{ $v->created_at }}</td>
-                            <td class="td-status">
-                                    @if( $v->status == '1' )<span class="layui-btn layui-btn-normal layui-btn-mini">已启用</span>
-                                    @else <span class="layui-btn layui-btn-disabled layui-btn-mini">已停用</span>
-                                    @endif
-                            </td>
+                            <td>{{ $v->permission_name }}</td>
+                            <td>{{ $v->permission_des }}</td>
                             <td class="td-manage">
-                                @if( $v->status == '1' )<a style="text-decoration:none" onclick="member_stop(this,'{{ $v->id }}')" href="javascript:;" title="停用"><i class="layui-icon">&#xe601;</i></a>
-                                @else                   <a style="text-decoration:none" onClick="member_start(this,'{{ $v->id }}')" href="javascript:;" title="启用"><i class="layui-icon">&#xe62f;</i></a>
-                                @endif
-                                <a title="编辑" href="{{ url('admin/admin_user/'.$v->id.'/edit') }}"
+                                <a title="编辑" href="{{ url('admin/permission/'.$v->id.'/edit') }}"
                                    class="ml-5" style="text-decoration:none">
                                     <i class="layui-icon">&#xe642;</i>
                                 </a>
@@ -87,16 +65,15 @@
                                    style="text-decoration:none">
                                     <i class="layui-icon">&#xe640;</i>
                                 </a>
-                                <a href="">授权</a>
                             </td>
                         </tr>
                         @endforeach
                         </tbody>
                     </table>
                     <!-- 右侧内容框架，更改从这里结束 -->
-                    <div class="layui-show">
-                        {!! $data->render() !!}
-                    </div>
+                    {{--<div class="layui-show">--}}
+                        {{--{!! $data->render() !!}--}}
+                    {{--</div>--}}
                 </div>
             </div>
             <!-- 右侧中部结束 -->
@@ -179,42 +156,6 @@
             x_admin_show(title,url,w,h);
         }
 
-        /*用户-停用*/
-        function member_stop(obj,id){
-            layer.confirm('确认要停用吗？',function(index){
-                //发异步把用户状态进行更改
-                $.post('{{ url('admin/admin_user_statu') }}',{'_token':"{{csrf_token()}}",'close':id},function (data) {
-                    if(data.status == 0) {
-                        $(obj).parents("tr").find(".td-manage").prepend('<a style="text-decoration:none" onClick="member_start(this,id)" href="javascript:;" title="启用"><i class="layui-icon">&#xe62f;</i></a>');
-                        $(obj).parents("tr").find(".td-status").html('<span class="layui-btn layui-btn-disabled layui-btn-mini">已停用</span>');
-                        $(obj).remove();
-                        layer.msg(data.message, {icon: 5, time: 1000});
-                    }else{
-//                        alert('停用失败');
-                        layer.msg(data.message, {icon: 1, time: 1000});}
-                });
-
-            });
-        }
-
-        /*用户-启用*/
-        function member_start(obj,id){
-            layer.confirm('确认要启用吗？',function(index){
-                //发异步把用户状态进行更改
-                $.post('{{ url('admin/admin_user_statu') }}',{'_token':"{{csrf_token()}}",'close':id},function (data) {
-                    if(data.status == 0) {
-                        $(obj).parents("tr").find(".td-manage").prepend('<a style="text-decoration:none" onClick="member_stop(obj,id)" href="javascript:;" title="停用"><i class="layui-icon">&#xe601;</i></a>');
-                        $(obj).parents("tr").find(".td-status").html('<span class="layui-btn layui-btn-normal layui-btn-mini">已启用</span>');
-                        $(obj).remove();
-                        layer.msg(data.message, {icon: 6, time: 1000});
-                    }else{
-//                        alert('启用失败');
-                        layer.msg(data.message, {icon: 1, time: 1000});}
-                });
-
-            });
-        }
-
         /*用户-删除*/
         function delUser(obj,id){
             layer.confirm('确认要删除吗？',function(index){
@@ -229,16 +170,5 @@
             });
         }
 
-//        //分页
-//        layui.use('laypage', function(){
-//            var laypage = layui.laypage;
-//
-//            //执行一个laypage实例
-//            laypage.render({
-//                cont: 'page'
-//                ,pages: 100
-//                ,skip: true
-//            });
-//        });
     </script>
 @endsection

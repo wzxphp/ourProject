@@ -6,20 +6,25 @@
       <div class="content">
           {{--面包屑导航--}}
           <blockquote class="layui-elem-quote">
-              <a href="">后台首页</a>/
+              <a href="{{url('admin/index')}}">后台首页</a>/
               <a href="">会员管理</a>/
               <a href="">会员列表</a>
           </blockquote>
+          <div>
+              @if(session('msg'))
+                  <h3>{{session('msg')}}</h3>
+              @endif
+          </div>
           <!-- 右侧内容框架，更改从这里开始 -->
         <form class="layui-form xbs" action="" >
             <div class="layui-form-pane" style="text-align: center;">
               <div class="layui-form-item" style="display: inline-block;">
                 <label class="layui-form-label xbs768">日期范围</label>
                 <div class="layui-input-inline xbs768">
-                  <input class="layui-input" placeholder="开始日" id="LAY_demorange_s">
+                  <input class="layui-input" placeholder="开始日" name="mindate" autocomplete="off" id="LAY_demorange_s">
                 </div>
                 <div class="layui-input-inline xbs768">
-                  <input class="layui-input" placeholder="截止日" id="LAY_demorange_e">
+                  <input class="layui-input" placeholder="截止日" name="maxdate" autocomplete="off" id="LAY_demorange_e">
                 </div>
                 <div class="layui-input-inline">
                   <input type="text" name="username"  placeholder="请输入用户名" autocomplete="off" class="layui-input">
@@ -30,70 +35,49 @@
               </div>
             </div>
         </form>
-        <xblock><button class="layui-btn layui-btn-danger" onclick="delAll()"><i class="layui-icon">&#xe640;</i>批量删除</button><button class="layui-btn" onclick="member_add('添加用户','member-add.html','600','500')"><i class="layui-icon">&#xe608;</i>添加</button><span class="x-right" style="line-height:40px">共有数据：88 条</span></xblock>
+        <xblock>
+            <button class="layui-btn" onclick="delAll()">批量操作</button>
+            <span class="x-right" style="line-height:40px">共有数据：{{count($allData)}} 条</span>
+        </xblock>
         <table class="layui-table">
             <thead>
                 <tr>
                     <th>
-                        <input type="checkbox" name="" value="">
+                        <input type="checkbox" onclick="checkBox($(this));" name="" value="">
                     </th>
-                    <th>
-                        ID
-                    </th>
-                    <th>
-                        用户名
-                    </th>
-                    <th>
-                        性别
-                    </th>
-                    <th>
-                        手机
-                    </th>
-                    <th>
-                        邮箱
-                    </th>
-                    <th>
-                        地址
-                    </th>
-                    <th>
-                        加入时间
-                    </th>
-                    <th>
-                        状态
-                    </th>
-                    <th>
-                        操作
-                    </th>
+                    <th>Uid</th>
+                    <th>用户名</th>
+                    <th>姓名</th>
+                    <th>性别</th>
+                    <th>生日</th>
+                    <th>手机</th>
+                    <th>邮箱</th>
+                    <th>加入时间</th>
+                    <th>状态</th>
+                    <th>操作</th>
                 </tr>
             </thead>
+            @foreach($data as $k=>$v)
             <tbody>
                 <tr>
-                    <td>
-                        <input type="checkbox" value="1" name="">
-                    </td>
-                    <td>
-                        1
-                    </td>
+                    <td><input type="checkbox" class="mybox" value="1" name=""></td>
+                    <td>{{$v->user_id}}</td>
                     <td>
                         <u style="cursor:pointer" onclick="member_show('张三','member-show.html','10001','360','400')">
-                            小明
+                            {{$v->name}}
                         </u>
                     </td>
+                    <td >{{$v->true_name}}</td>
                     <td >
-                        男
+                        @if($v->sex == '0') 保密
+                        @elseif($v->sex == '1') 男
+                        @elseif($v->sex == '2') 女
+                        @endif
                     </td>
-                    <td >
-                        13000000000
-                    </td>
-                    <td >
-                        admin@mail.com
-                    </td>
-                    <td >
-                        北京市 海淀区
-                    </td>
-                    <td>
-                        2017-01-01 11:11:42
-                    </td>
+                    <td >{{$v->birthday}}</td>
+                    <td >{{$v->tel}}</td>
+                    <td >{{$v->email}}</td>
+                    <td>{{$v->created_at}}</td>
                     <td class="td-status">
                         <span class="layui-btn layui-btn-normal layui-btn-mini">
                             已启用
@@ -103,73 +87,18 @@
                         <a style="text-decoration:none" onclick="member_stop(this,'10001')" href="javascript:;" title="停用">
                             <i class="layui-icon">&#xe601;</i>
                         </a>
-                        <a title="编辑" href="javascript:;" onclick="member_edit('编辑','member-edit.html','4','','510')"
-                        class="ml-5" style="text-decoration:none">
+                        <a title="编辑" href="{{ url('admin/user/'.$v->user_id.'/edit') }}" class="ml-5" style="text-decoration:none">
                             <i class="layui-icon">&#xe642;</i>
-                        </a>
-                        <a style="text-decoration:none"  onclick="member_password('修改密码','member-password.html','10001','600','400')"
-                        href="javascript:;" title="修改密码">
-                            <i class="layui-icon">&#xe631;</i>
-                        </a>
-                        <a title="删除" href="javascript:;" onclick="member_del(this,'1')"
-                        style="text-decoration:none">
-                            <i class="layui-icon">&#xe640;</i>
-                        </a>
-                    </td>
-                </tr>
-                <tr>
-                    <td>
-                        <input type="checkbox" value="1" name="">
-                    </td>
-                    <td>
-                        1
-                    </td>
-                    <td>
-                        <u style="cursor:pointer" onclick="member_show('张三','member-show.html','10001','360','400')">
-                            小明
-                        </u>
-                    </td>
-                    <td >
-                        男
-                    </td>
-                    <td >
-                        13000000000
-                    </td>
-                    <td >
-                        admin@mail.com
-                    </td>
-                    <td >
-                        北京市 海淀区
-                    </td>
-                    <td>
-                        2017-01-01 11:11:42
-                    </td>
-                    <td class="td-status">
-                        <span class="layui-btn layui-btn-normal layui-btn-mini">
-                            已启用
-                        </span>
-                    </td>
-                    <td class="td-manage">
-                        <a style="text-decoration:none" onclick="member_stop(this,'10001')" href="javascript:;" title="停用">
-                            <i class="layui-icon">&#xe601;</i>
-                        </a>
-                        <a title="编辑" href="javascript:;" onclick="member_edit('编辑','member-edit.html','4','','510')"
-                        class="ml-5" style="text-decoration:none">
-                            <i class="layui-icon">&#xe642;</i>
-                        </a>
-                        <a style="text-decoration:none"  onclick="member_password('修改密码','member-password.html','10001','600','400')"
-                        href="javascript:;" title="修改密码">
-                            <i class="layui-icon">&#xe631;</i>
-                        </a>
-                        <a title="删除" href="javascript:;" onclick="member_del(this,'1')"
-                        style="text-decoration:none">
-                            <i class="layui-icon">&#xe640;</i>
                         </a>
                     </td>
                 </tr>
             </tbody>
+            @endforeach
         </table>
         <!-- 右侧内容框架，更改从这里结束 -->
+          <div class="layui-show">
+              {!! $data->render() !!}
+          </div>
       </div>
     </div>
     <!-- 右侧主体结束 -->
@@ -182,11 +111,8 @@
 
           //以上模块根据需要引入
           //
-          
-
-          
           var start = {
-            min: laydate.now()
+            min: '2018-01-01 00:00:00'
             ,max: '2099-06-16 23:59:59'
             ,istoday: false
             ,choose: function(datas){
@@ -196,7 +122,7 @@
           };
           
           var end = {
-            min: laydate.now()
+            min:'2018-01-01 00:00:00'
             ,max: '2099-06-16 23:59:59'
             ,istoday: false
             ,choose: function(datas){
@@ -222,10 +148,17 @@
                 layer.msg('删除成功', {icon: 1});
             });
          }
-         /*用户-添加*/
-        function member_add(title,url,w,h){
-            x_admin_show(title,url,w,h);
+
+         //当全选框被选中，单选框全被选中
+        function checkBox(obj) {
+            if (obj.is(":checked")) {
+                $('input.mybox').prop('checked', true);
+            }else{
+                //当全选框被取消，单选框全被取消
+                $('input.mybox').prop('checked', false);
+            }
         }
+
         /*用户-查看*/
         function member_show(title,url,id,w,h){
             x_admin_show(title,url,w,h);
@@ -255,18 +188,6 @@
         // 用户-编辑
         function member_edit (title,url,id,w,h) {
             x_admin_show(title,url,w,h); 
-        }
-        /*密码-修改*/
-        function member_password(title,url,id,w,h){
-            x_admin_show(title,url,w,h);  
-        }
-        /*用户-删除*/
-        function member_del(obj,id){
-            layer.confirm('确认要删除吗？',function(index){
-                //发异步删除数据
-                $(obj).parents("tr").remove();
-                layer.msg('已删除!',{icon:1,time:1000});
-            });
         }
         </script>
 @endsection
