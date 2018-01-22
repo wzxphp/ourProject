@@ -92,12 +92,6 @@ Route::post('admin/dologin','Admin\LoginController@dologin');
 //路由组
 Route::group(['prefix'=>'admin','namespace'=>'Admin','middleware'=>'islogin'],function(){
 //后台首页
-
-
-//后台管理员用户管理
-Route::resource('admin/admin_user','Admin\Admin_userController');
-
-//后台首页
     Route::get('index','LoginController@index');
 //退出登录
     Route::get('logout','LoginController@logout');
@@ -109,13 +103,17 @@ Route::resource('admin/admin_user','Admin\Admin_userController');
 //会员管理模块
     Route::get('user/deleted','UserController@deleted');       //删除会员页面
     Route::resource('user','UserController');
+<<<<<<< HEAD
 
+=======
+>>>>>>> origin/wangzhixing
 //角色管理模块
     Route::resource('role','RoleController');
 //权限管理模块
     Route::resource('permission','PermissionController');
 });
-//分类模块
+
+//分类管理模块=====================================================
 Route::get('admin/cate/create','Admin\CateController@create');
 Route::post('admin/cate/store','Admin\CateController@store');
 Route::get('admin/cate/index','Admin\CateController@index');
@@ -125,9 +123,13 @@ Route::post('admin/cate/update','Admin\CateController@update');
 Route::get('admin/cate/{id}','Admin\CateController@del');
 //订单管理
 Route::get('admin/order/index','Admin\OrderController@index');
+<<<<<<< HEAD
+
+=======
+>>>>>>> origin/wangzhixing
 
 
-//商品管理页面
+//商品管理模块====================================================
 Route::get('admin/goods/index','Admin\GoodsController@index');
 // 商品添加页面
 Route::get('admin/goods/create','Admin\GoodsController@create');

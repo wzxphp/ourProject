@@ -23,10 +23,7 @@
         <li class="layui-nav-item">
             <a href="javascript:;">管理员：{{session('adminuser')->name}}</a>
             <dl class="layui-nav-child"> <!-- 二级菜单 -->
-<<<<<<< HEAD
-                <dd><a href="">个人信息</a></dd>
-=======
->>>>>>> origin/wangzhixing
+
                 <dd><a href="{{url('admin/login')}}">切换帐号</a></dd>
                 <dd><a href="{{url('admin/logout')}}">退出</a></dd>
             </dl>
