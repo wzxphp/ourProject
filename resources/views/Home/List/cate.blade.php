@@ -7,7 +7,7 @@
         <div class="row">
             <div class="col-md-12">
                 <div class="product-bit-title text-center">
-                    <h2>鍏ㄩ儴鍒嗙被</h2>
+                    <h2>全部分类</h2>
                 </div>
             </div>
         </div>

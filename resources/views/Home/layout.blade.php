@@ -36,14 +36,13 @@
 			<div class="col-md-8">
 				<div class="user-menu">
 					<ul>
-					@if ( empty( Session('user') ) )
+					@if ( empty( Session('home_user') ) )
 						<li><a href="{{ url('home/login/index') }}"><i class="fa fa-user"></i> 请登录</a></li>
 					@else
 						<li><a href="{{ url('home/loginout') }}"><i class="fa fa-user"></i> 退出</a></li>
-						<li><a href="{{ url('home/center') }}"><i class="fa fa-user"></i> {{ Session('user')->name }}</a></li>
 					@endif
-					@if( !empty(Session('user')) )
-						<li><a href="{{ url('home/center') }}"><i class="fa fa-user"></i> 个人中心</a></li>
+					@if( !empty(Session('home_user')) )
+						<li><a href="{{ url('home/center') }}"><i class="fa fa-user"></i> {{ Session('home_user')->name }}</a></li>
 					@else
 						<li><a href="{{ url('home/login/index') }}"><i class="fa fa-user"></i> 个人中心</a></li>
 					@endif

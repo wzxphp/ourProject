@@ -22,7 +22,7 @@
 					<p class="am-form-help">头像</p>
 
 					<div class="info-m">
-						<div><b>用户名：<i>{{ Session('user')->name }}</i></b></div>
+						<div><b>用户名：<i>{{ Session('home_user')->name }}</i></b></div>
                         <div class="safeText">
                           	<a href="safety.html">账户安全:<em style="margin-left:20px ;">60</em>分</a>
 							<div class="progressBar"><span style="left: -95px;" class="progress"></span></div>
@@ -39,7 +39,7 @@
 								<div class="fore2"><small>为保证您购物安全，建议您定期更改密码以保护账户安全。</small></div>
 							</div>
 							<div class="fore3">
-								<a href="{{ url('home/center/password') }}">
+								<a href="{{ url('home/center/password') }}/{{ Session('home_user')->email }}">
 									<div class="am-btn am-btn-secondary">修改</div>
 								</a>
 							</div>
