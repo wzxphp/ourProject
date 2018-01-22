@@ -2,11 +2,13 @@
 
 namespace App\Http\Controllers\Admin;
 
-use session;
+use Illuminate\Support\Facades\Crypt;
+use Session;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Org\code\Code;
+use App\Model\User;
 require_once app_path().'/Org/code/Code.class.php';
 
 class Logincontroller extends Controller
@@ -30,7 +32,7 @@ class Logincontroller extends Controller
         //2. 验证数据的有效性
         //Validator::make('要验证的数据','验证规则','提示信息')
             $rule = [
-                'username'=>'required|between:5,18',
+                'username'=>'required|between:2,18',
                 'password'=>'required|between:5,18|alpha_dash',
             ];
             //提示信息
@@ -57,7 +59,7 @@ class Logincontroller extends Controller
             }
         //3. 判断用户名、密码、验证码的有效性
         //$input['username']
-            $user = User::where('user_name',$input['username'])->first();
+        $user = User::where('name',$input['username'])->first();
         //如果没有此用户，返回没有此用户的错误提示
             if (! $user)
             {
@@ -65,24 +67,30 @@ class Logincontroller extends Controller
             }
 
         //密码不正确
-            if(Crypt::decrypt($user->user_pass) != $input['password']){
+            if(Crypt::decrypt($user->password) != $input['password']){
                 return back()->with('errors','密码错误');
             }
 
         //4. 如果有效就登录到后台，验证失败就返回到添加页面
         //将用户的登录状态保存到session
 
-            Session::put('user',$user);
+            Session::put('adminuser',$user);
             return redirect('admin/index');
 
     }
     //后台首页
     public function index()
     {
+//        dd($_ENV);
         return view('admin.index');
     }
 
-
+    //退出登录
+    public function logout()
+    {
+        session()->forget('adminuser');
+        return redirect('admin/login');
+    }
 
 
 }

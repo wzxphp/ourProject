@@ -11,15 +11,15 @@
 <link href='http://fonts.googleapis.com/css?family=Raleway:400,100' rel='stylesheet' type='text/css'>--->
 
 <!-- Bootstrap -->
-<link rel="stylesheet" href="/home/css/bootstrap.min.css">
+<link rel="stylesheet" href="{{asset('/home/css/bootstrap.min.css')}}">
 
 <!-- Font Awesome -->
-<link rel="stylesheet" href="/home/css/font-awesome.min.css">
+<link rel="stylesheet" href="{{asset('/home/css/font-awesome.min.css')}}">
 
 <!-- Custom CSS -->
-<link rel="stylesheet" href="/home/css/owl.carousel.css">
-<link rel="stylesheet" href="/home/style.css">
-<link rel="stylesheet" href="/home/css/responsive.css">
+<link rel="stylesheet" href="{{asset('/home/css/owl.carousel.css')}}">
+<link rel="stylesheet" href="{{asset('/home/style.css')}}">
+<link rel="stylesheet" href="{{asset('/home/css/responsive.css')}}">
 
 <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
 <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
@@ -36,11 +36,19 @@
 			<div class="col-md-8">
 				<div class="user-menu">
 					<ul>
-						<li><a href="#"><i class="fa fa-user"></i> My Account</a></li>
-						<li><a href="#"><i class="fa fa-heart"></i> Wishlist</a></li>
-						<li><a href="cart.html"><i class="fa fa-user"></i> 购物车</a></li>
-						<li><a href="checkout.html"><i class="fa fa-user"></i> 订单</a></li>
-						<li><a href="{{ url('home/login/index') }}"><i class="fa fa-user"></i> 登录</a></li>
+					@if ( empty( Session('home_user') ) )
+						<li><a href="{{ url('home/login/index') }}"><i class="fa fa-user"></i> 请登录</a></li>
+					@else
+						<li><a href="{{ url('home/loginout') }}"><i class="fa fa-user"></i> 退出</a></li>
+					@endif
+					@if( !empty(Session('home_user')) )
+						<li><a href="{{ url('home/center') }}"><i class="fa fa-user"></i> {{ Session('home_user')->name }}</a></li>
+					@else
+						<li><a href="{{ url('home/login/index') }}"><i class="fa fa-user"></i> 个人中心</a></li>
+					@endif
+						<li><a href="{{ url('home/cart') }}"><i class="fa fa-user"></i> 购物车</a></li>
+						<li><a href="{{ url('home/order') }}"><i class="fa fa-user"></i> 订单</a></li>
+						<li><a href="#"><i class="fa fa-heart"></i> 许愿树</a></li>
 					</ul>
 				</div>
 			</div>
@@ -75,15 +83,18 @@
 <div class="site-branding-area">
 	<div class="container">
 		<div class="row">
-			<div class="col-sm-6">
+			<div class="col-sm-5">
 				<div class="logo">
-					<h1><a href="index.html"><span>Electronics</span></a></h1>
+					<h1><a href="{{ url('home/index') }}"><span><img src="{{ url('home/img/logo2.png') }}" alt=""></span></a></h1>
 				</div>
 			</div>
-			
-			<div class="col-sm-6">
+
+			<div class="col-sm-7">
 				<div class="shopping-item">
-					<a href="cart.html">Cart - <span class="cart-amunt">$800</span> <i class="fa fa-shopping-cart"></i> <span class="product-count">5</span></a>
+					<form action="">
+						<input type="text" name="keyword">
+						<button type="submit" name="submit">搜索</button>
+					</form>
 				</div>
 			</div>
 		</div>
@@ -103,14 +114,13 @@
 			</div> 
 			<div class="navbar-collapse collapse">
 				<ul class="nav navbar-nav">
-					<li class="active"><a href="{{ url('home/index') }}">首页</a></li>
-					<li><a href="{{ url('home/list') }}">奢品</a></li>
-					<li><a href="single-product.html">Single product</a></li>
-					<li><a href="cart.html">购物车</a></li>
-					<li><a href="checkout.html">订单</a></li>
-					<li><a href="#">Category</a></li>
-					<li><a href="#">Others</a></li>
-					<li><a href="#">Contact</a></li>
+					<li><a href="{{ url('home/index') }}">首页</a></li>
+					<li><a href="{{ url('home/list') }}">轻奢美妆</a></li>
+					<li><a href="{{ url('home/casual') }}">休闲家居</a></li>
+					<li><a href="{{ url('home/digital') }}">数码馆</a></li>
+					<li><a href="{{ url('home/outdoor') }}">户外</a></li>
+					<li><a href="{{ url('home/cate') }}">全部分类</a></li>
+
 				</ul>
 			</div>  
 		</div>
@@ -172,8 +182,8 @@
 					<p>Sign up to our newsletter and get exclusive deals you wont find anywhere else straight to your inbox!</p>
 					<div class="newsletter-form">
 						<form action="#">
-							<input type="email" placeholder="Type your email">
-							<input type="submit" value="Subscribe">
+							<input type="text" placeholder="热销"><br><br>
+							<input type="submit" value="搜一下">
 						</form>
 					</div>
 				</div>
@@ -204,19 +214,19 @@
 </div> <!-- End footer bottom area -->
 
 <!-- Latest jQuery form server -->
-<script src="/home/js/jquery-1.8.3.min.js"></script>
+<script src="{{asset('/home/js/jquery-1.8.3.min.js')}}"></script>
 
 <!-- Bootstrap JS form CDN -->
-<script src="/home/js/bootstrap.min.js"></script>
+<script src="{{asset('/home/js/bootstrap.min.js')}}"></script>
 
 <!-- jQuery sticky menu -->
-<script src="/home/js/owl.carousel.min.js"></script>
-<script src="/home/js/jquery.sticky.js"></script>
+<script src="{{asset('/home/js/owl.carousel.min.js')}}"></script>
+<script src="{{asset('/home/js/jquery.sticky.js')}}"></script>
 
 <!-- jQuery easing -->
-<script src="/home/js/jquery.easing.1.3.min.js"></script>
+<script src="{{asset('/home/js/jquery.easing.1.3.min.js')}}"></script>
 
 <!-- Main Script -->
-<script src="/home/js/main.js"></script>
+<script src="{{asset('/home/js/main.js')}}"></script>
 </body>
 </html>
