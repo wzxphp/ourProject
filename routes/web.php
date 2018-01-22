@@ -99,7 +99,8 @@ Route::group(['prefix'=>'admin','namespace'=>'Admin','middleware'=>'islogin'],fu
 //权限管理模块
     Route::resource('permission','PermissionController');
 });
-//分类模块
+
+//分类管理模块=====================================================
 Route::get('admin/cate/create','Admin\CateController@create');
 Route::post('admin/cate/store','Admin\CateController@store');
 Route::get('admin/cate/index','Admin\CateController@index');
@@ -109,3 +110,17 @@ Route::post('admin/cate/update','Admin\CateController@update');
 Route::get('admin/cate/{id}','Admin\CateController@del');
 //订单管理
 Route::get('admin/order/index','Admin\OrderController@index');
+
+
+//商品管理模块====================================================
+Route::get('admin/goods/index','Admin\GoodsController@index');
+// 商品添加页面
+Route::get('admin/goods/create','Admin\GoodsController@create');
+//商品数据接收
+Route::post('admin/goods/upload','Admin\GoodsController@upload');
+//商品修改页面
+Route::get('admin/goods/{id}/edit','Admin\GoodsController@edit');
+Route::post('admin/goods/{id}/xxoo','Admin\GoodsController@xxoo');
+//删除
+Route::get('admin/goods/{id}','Admin\GoodsController@del');
+
