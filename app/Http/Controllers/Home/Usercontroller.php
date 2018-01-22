@@ -155,6 +155,11 @@ class Usercontroller extends Controller
         
     }
 
+    public function edit($id)
+    {
+        
+    }
+
     public function del($id)
     {
         $res = \DB::table('data_user_address')->where('id',$id)->delete();

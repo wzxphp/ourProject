@@ -54,6 +54,7 @@ Route::get('/home/center/address','Home\UserController@address');
 Route::post('/home/center/ajax','Home\UserController@ajax');
 // 用户添加地址
 Route::post('/home/center/doadd','Home\UserController@doadd');
+Route::get('/home/center/edit/{id}','Home\UserController@edit');
 // 用户删除地址
 Route::get('/home/center/del/{id}','Home\UserController@del');
 
@@ -91,6 +92,12 @@ Route::post('admin/dologin','Admin\LoginController@dologin');
 //路由组
 Route::group(['prefix'=>'admin','namespace'=>'Admin','middleware'=>'islogin'],function(){
 //后台首页
+
+
+//后台管理员用户管理
+Route::resource('admin/admin_user','Admin\Admin_userController');
+
+//后台首页
     Route::get('index','LoginController@index');
 //退出登录
     Route::get('logout','LoginController@logout');
@@ -102,6 +109,7 @@ Route::group(['prefix'=>'admin','namespace'=>'Admin','middleware'=>'islogin'],fu
 //会员管理模块
     Route::get('user/deleted','UserController@deleted');       //删除会员页面
     Route::resource('user','UserController');
+
 //角色管理模块
     Route::resource('role','RoleController');
 //权限管理模块
@@ -117,3 +125,17 @@ Route::post('admin/cate/update','Admin\CateController@update');
 Route::get('admin/cate/{id}','Admin\CateController@del');
 //订单管理
 Route::get('admin/order/index','Admin\OrderController@index');
+
+
+//商品管理页面
+Route::get('admin/goods/index','Admin\GoodsController@index');
+// 商品添加页面
+Route::get('admin/goods/create','Admin\GoodsController@create');
+//商品数据接收
+Route::post('admin/goods/upload','Admin\GoodsController@upload');
+//商品修改页面
+Route::get('admin/goods/{id}/edit','Admin\GoodsController@edit');
+Route::post('admin/goods/{id}/xxoo','Admin\GoodsController@xxoo');
+//删除
+Route::get('admin/goods/{id}','Admin\GoodsController@del');
+

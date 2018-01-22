@@ -67,7 +67,7 @@
 								<div class="am-form-group">
 									<label for="user-name" class="am-form-label">收货人</label>
 									<div class="am-form-content">
-										<input type="text" name="name" id="user-name" placeholder="收货人" value="{{ Session('home_user')->name }}">
+										<input type="text" name="name" id="user-name" placeholder="收货人" value="{{  }}">
 									</div>
 								</div>
 
