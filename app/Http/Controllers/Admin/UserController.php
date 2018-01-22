@@ -2,19 +2,43 @@
 
 namespace App\Http\Controllers\Admin;
 
+use DB;
+use App\Model\Admin\Buser;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 
 class UserController extends Controller
 {
+
+
+    public function deleted()
+    {
+        return view('admin.user.del');
+    }
     /**
      * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
-        return view('admin.user.list');
+        $allData = Buser::get();   //获取总共有多少会员
+        $data =  DB::table('data_user_message')
+                ->where(function($query) use($request){
+              //检测关键字
+                $username = $request->input('username');
+                $mindate = $request->input('mindate');
+                $maxdate = $request->input('maxdate');
+              //如果用户名不为空
+                if(!empty($username)) {
+                    $query->where('true_name','like','%'.$username.'%');
+                }
+              //如果日期不为空
+                if(!empty($mindate)) {
+                    $query->whereBetween('created_at',[$mindate,$maxdate]);
+                }
+                })->simplePaginate(10);
+        return view('admin.user.list',['data'=>$data,'allData'=>$allData]);
     }
 
     /**
@@ -57,7 +81,8 @@ class UserController extends Controller
      */
     public function edit($id)
     {
-        return view('admin.user.edit');
+        $user = Buser::find($id);
+        return view('admin.user.edit',['user'=>$user]);
     }
 
     /**
@@ -69,7 +94,23 @@ class UserController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $input = $request->all();
+        //使用模型修改表记录
+        $user = Buser::find($id);
+        $user->name = $input['name'];
+        $user->true_name = $input['true_name'];
+        $user->sex = $input['sex'];
+        $user->name = $input['name'];
+        $user->birthday = $input['birthday'];
+        $user->tel = $input['tel'];
+        $user->email = $input['email'];
+
+        $res = $user->save();
+        if($res){
+            return redirect('admin/user')->with('msg','修改成功');
+        }else{
+            return back()->with('msg','修改失败');
+        }
     }
 
     /**
@@ -80,6 +121,8 @@ class UserController extends Controller
      */
     public function destroy($id)
     {
-        return view('admin.user.del');
+
     }
+
+
 }

@@ -54,6 +54,8 @@ Route::get('/home/center/address','Home\UserController@address');
 Route::post('/home/center/ajax','Home\UserController@ajax');
 // 用户添加地址
 Route::post('/home/center/doadd','Home\UserController@doadd');
+// 用户删除地址
+Route::get('/home/center/del/{id}','Home\UserController@del');
 
 // 登录============================================================
 // 登录注册
@@ -93,8 +95,25 @@ Route::group(['prefix'=>'admin','namespace'=>'Admin','middleware'=>'islogin'],fu
 //退出登录
     Route::get('logout','LoginController@logout');
 //管理员模块
+    Route::post('admin_user_del','Admin_userController@delAll');  //删除多行
+    Route::post('admin_user_statu','Admin_userController@statu');  //修改管理员状态
+    Route::get('admin_user/auth/{id}','Admin_userController@auth');  //管理员授权
     Route::resource('admin_user','Admin_userController');
-    //Route::post('admin_user','Admin_userController@delAll');
 //会员管理模块
+    Route::get('user/deleted','UserController@deleted');       //删除会员页面
     Route::resource('user','UserController');
+//角色管理模块
+    Route::resource('role','RoleController');
+//权限管理模块
+    Route::resource('permission','PermissionController');
 });
+//分类模块
+Route::get('admin/cate/create','Admin\CateController@create');
+Route::post('admin/cate/store','Admin\CateController@store');
+Route::get('admin/cate/index','Admin\CateController@index');
+Route::post('admin/cate/changeorder','Admin\CateController@changeOrder');
+Route::get('admin/cate/{id}/edit','Admin\CateController@edit');
+Route::post('admin/cate/update','Admin\CateController@update');
+Route::get('admin/cate/{id}','Admin\CateController@del');
+//订单管理
+Route::get('admin/order/index','Admin\OrderController@index');

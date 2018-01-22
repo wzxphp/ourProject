@@ -6,7 +6,7 @@
         <div class="content">
             {{--面包屑导航--}}
             <blockquote class="layui-elem-quote">
-                <a href="">后台首页</a>/
+                <a href="{{url('admin/index')}}">后台首页</a>/
                 <a href="">后台管理员</a>/
                 <a href="">管理员列表</a>
             </blockquote>
@@ -20,15 +20,15 @@
             <div class="page-content">
                 <div class="content">
                     <!-- 右侧内容框架，更改从这里开始 -->
-                    <form class="layui-form xbs" action="" >
+                    <form class="layui-form xbs" action="{{ url('admin/admin_user') }}" method="get">
                         <div class="layui-form-pane" style="text-align: center;">
                             <div class="layui-form-item" style="display: inline-block;">
                                 <label class="layui-form-label xbs768">日期范围</label>
                                 <div class="layui-input-inline xbs768">
-                                    <input class="layui-input" placeholder="开始日" id="LAY_demorange_s">
+                                    <input class="layui-input" placeholder="开始日" name="mindate" id="begin" autocomplete="off">
                                 </div>
                                 <div class="layui-input-inline xbs768">
-                                    <input class="layui-input" placeholder="截止日" id="LAY_demorange_e">
+                                    <input class="layui-input" placeholder="截止日" name="maxdate" id="over" autocomplete="off">
                                 </div>
                                 <div class="layui-input-inline">
                                     <input type="text" name="username"  placeholder="请输入用户名" autocomplete="off" class="layui-input">
@@ -42,7 +42,7 @@
                     <xblock>
                             <button class="layui-btn layui-btn-danger" onclick="delAll()"><i class="layui-icon">&#xe640;</i>批量删除</button>
                             <button id="addbtn" class="layui-btn"><i class="layui-icon">&#xe608;</i><a href="{{ url('admin/admin_user/create') }}">添加</a></button>
-                            <span class="x-right" style="line-height:40px">共有数据：{{count($data)}}条</span>
+                            <span class="x-right" style="line-height:40px">总共有数据：{{count($allData)}}条</span>
                     </xblock>
                     <table id="tid" class="layui-table">
                         <thead>
@@ -51,6 +51,7 @@
                             <th> ID </th>
                             <th> 用户名 </th>
                             <th> 手机号 </th>
+                            <th> 邮箱 </th>
                             <th> 加入时间 </th>
                             <th>状态</th>
                             <th>操作</th>
@@ -67,16 +68,17 @@
                                 </u>
                             </td>
                             <td>{{ $v->tel }}</td>
+                            <td>{{ $v->email }}</td>
                             <td>{{ $v->created_at }}</td>
                             <td class="td-status">
-                                    <span class="layui-btn layui-btn-normal layui-btn-mini">
-                                        已启用
-                                    </span>
+                                    @if( $v->status == '1' )<span class="layui-btn layui-btn-normal layui-btn-mini">已启用</span>
+                                    @else <span class="layui-btn layui-btn-disabled layui-btn-mini">已停用</span>
+                                    @endif
                             </td>
                             <td class="td-manage">
-                                <a style="text-decoration:none" onclick="member_stop(this,'10001')" href="javascript:;" title="停用">
-                                    <i class="layui-icon">&#xe601;</i>
-                                </a>
+                                @if( $v->status == '1' )<a style="text-decoration:none" onclick="member_stop(this,'{{ $v->id }}')" href="javascript:;" title="停用"><i class="layui-icon">&#xe601;</i></a>
+                                @else                   <a style="text-decoration:none" onClick="member_start(this,'{{ $v->id }}')" href="javascript:;" title="启用"><i class="layui-icon">&#xe62f;</i></a>
+                                @endif
                                 <a title="编辑" href="{{ url('admin/admin_user/'.$v->id.'/edit') }}"
                                    class="ml-5" style="text-decoration:none">
                                     <i class="layui-icon">&#xe642;</i>
@@ -85,12 +87,16 @@
                                    style="text-decoration:none">
                                     <i class="layui-icon">&#xe640;</i>
                                 </a>
+                                <a href="">授权</a>
                             </td>
                         </tr>
                         @endforeach
                         </tbody>
                     </table>
                     <!-- 右侧内容框架，更改从这里结束 -->
+                    <div class="layui-show">
+                        {!! $data->render() !!}
+                    </div>
                 </div>
             </div>
             <!-- 右侧中部结束 -->
@@ -99,14 +105,12 @@
     </div>
     <script>
 
+        //日期插件
         layui.use(['laydate'], function(){
-            laydate = layui.laydate;//日期插件
-
+            laydate = layui.laydate;
             //以上模块根据需要引入
-            //
-
             var start = {
-                min: laydate.now()
+                min: '2018-01-01 00:00:00'
                 ,max: '2099-06-16 23:59:59'
                 ,istoday: false
                 ,choose: function(datas){
@@ -116,7 +120,7 @@
             };
 
             var end = {
-                min: laydate.now()
+                min: '2018-01-01 00:00:00'
                 ,max: '2099-06-16 23:59:59'
                 ,istoday: false
                 ,choose: function(datas){
@@ -124,11 +128,11 @@
                 }
             };
 
-            document.getElementById('LAY_demorange_s').onclick = function(){
+            document.getElementById('begin').onclick = function(){
                 start.elem = this;
                 laydate(start);
             }
-            document.getElementById('LAY_demorange_e').onclick = function(){
+            document.getElementById('over').onclick = function(){
                 end.elem = this
                 laydate(end);
             }
@@ -156,9 +160,10 @@
                     id_array.push(id);
                 });
 
+                var ids = JSON.stringify(id_array);
+
                 //捉到所有被选中的，发异步进行删除
-                {{--$.get("{{ url('admin/admin_user/delAll') }}",{'data':id_array,'_token':"{{csrf_token()}}"},function (data) {--}}
-                $.post('{{ url('admin/admin_user/') }}/'+[id_array],{'_method':'delete','_token':"{{csrf_token()}}"},function (data) {
+                $.post('{{ url('admin/admin_user_del') }}',{'_token':"{{csrf_token()}}",'admin_ids':ids},function (data) {
                         if(data.status == 0) {
                             $("input[type='checkbox']:checked").parents("tr").remove();
                             layer.msg(data.message, {icon: 1, time: 1000});
@@ -178,10 +183,17 @@
         function member_stop(obj,id){
             layer.confirm('确认要停用吗？',function(index){
                 //发异步把用户状态进行更改
-                $(obj).parents("tr").find(".td-manage").prepend('<a style="text-decoration:none" onClick="member_start(this,id)" href="javascript:;" title="启用"><i class="layui-icon">&#xe62f;</i></a>');
-                $(obj).parents("tr").find(".td-status").html('<span class="layui-btn layui-btn-disabled layui-btn-mini">已停用</span>');
-                $(obj).remove();
-                layer.msg('已停用!',{icon: 5,time:1000});
+                $.post('{{ url('admin/admin_user_statu') }}',{'_token':"{{csrf_token()}}",'close':id},function (data) {
+                    if(data.status == 0) {
+                        $(obj).parents("tr").find(".td-manage").prepend('<a style="text-decoration:none" onClick="member_start(this,id)" href="javascript:;" title="启用"><i class="layui-icon">&#xe62f;</i></a>');
+                        $(obj).parents("tr").find(".td-status").html('<span class="layui-btn layui-btn-disabled layui-btn-mini">已停用</span>');
+                        $(obj).remove();
+                        layer.msg(data.message, {icon: 5, time: 1000});
+                    }else{
+//                        alert('停用失败');
+                        layer.msg(data.message, {icon: 1, time: 1000});}
+                });
+
             });
         }
 
@@ -189,10 +201,17 @@
         function member_start(obj,id){
             layer.confirm('确认要启用吗？',function(index){
                 //发异步把用户状态进行更改
-                $(obj).parents("tr").find(".td-manage").prepend('<a style="text-decoration:none" onClick="member_stop(this,id)" href="javascript:;" title="停用"><i class="layui-icon">&#xe601;</i></a>');
-                $(obj).parents("tr").find(".td-status").html('<span class="layui-btn layui-btn-normal layui-btn-mini">已启用</span>');
-                $(obj).remove();
-                layer.msg('已启用!',{icon: 6,time:1000});
+                $.post('{{ url('admin/admin_user_statu') }}',{'_token':"{{csrf_token()}}",'close':id},function (data) {
+                    if(data.status == 0) {
+                        $(obj).parents("tr").find(".td-manage").prepend('<a style="text-decoration:none" onClick="member_stop(obj,id)" href="javascript:;" title="停用"><i class="layui-icon">&#xe601;</i></a>');
+                        $(obj).parents("tr").find(".td-status").html('<span class="layui-btn layui-btn-normal layui-btn-mini">已启用</span>');
+                        $(obj).remove();
+                        layer.msg(data.message, {icon: 6, time: 1000});
+                    }else{
+//                        alert('启用失败');
+                        layer.msg(data.message, {icon: 1, time: 1000});}
+                });
+
             });
         }
 

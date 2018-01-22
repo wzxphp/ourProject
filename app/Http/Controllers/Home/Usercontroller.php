@@ -153,7 +153,16 @@ class Usercontroller extends Controller
             return back()->with(['info'=>'地址添加失败']);
         }
         
-        
-        
+    }
+
+    public function del($id)
+    {
+        $res = \DB::table('data_user_address')->where('id',$id)->delete();
+        if($res)
+        {
+            return back()->with(['msg'=>'删除成功']);
+        }else{
+            return back()->with(['msg'=>'删除失败']);
+        }
     }
 }
