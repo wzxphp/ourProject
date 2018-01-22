@@ -8,7 +8,7 @@ class Order extends Model
 {
     public $table = 'data_orders';
     public $primaryKey = "id";
-    public $guarded=[];
-    public $timestamps = false;
 
+    public $timestamps = false;
+    public $guarded=[];
 }

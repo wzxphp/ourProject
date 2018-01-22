@@ -38,6 +38,10 @@
                     <th> 商品单价 </th>
                     <th> 商品数量 </th>
                     <th> 收货地址 </th>
+                    <th> 商品颜色 </th>
+                    <th> 收货人电话 </th>
+                    <th> 收货人姓名 </th>
+                    <th> 邮编 </th>
                     <th> 支付方式 </th>
                     <th> 支付状态 </th>
                     <th> 总计 </th>
@@ -62,6 +66,10 @@
                     <td >{{ $v->cargo_message_price }}</td>
                     <td >{{ $v->cargo_message_number }}</td>
                     <td >{{ $v->cargo_message_address }}</td>
+                    <td >{{ $v->color }}</td>
+                    <td >{{ $v->tel }}</td>
+                    <td >{{ $v->user_name }}</td>
+                    <td >{{ $v->youbian }}</td>
                     <td >{{ $v->pay_type }}</td>
                     <td >{{ $v->pay_status }}</td>
                     <td >{{ $v->total_amount }}</td>
@@ -69,7 +77,7 @@
 
                     <td>
                     <a href="{{ url('admin/order/'.$v->id.'/edit') }}">修改订单</a>
-                    <a href="javascript:;" onclick="del({{ $v->id }})">删除</a>
+                    {{--<a href="javascript:;" onclick="del({{ $v->id }})">删除</a>--}}
 
                     </td>
 

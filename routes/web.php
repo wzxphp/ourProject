@@ -59,4 +59,5 @@ Route::post('admin/cate/update','Admin\CateController@update');
 Route::get('admin/cate/{id}','Admin\CateController@del');
 //订单管理
 Route::get('admin/order/index','Admin\OrderController@index');
+Route::get('admin/order/{id}/edit','Admin\OrderController@edit');
 

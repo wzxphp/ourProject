@@ -25,6 +25,11 @@
                         {{--</div>--}}
                     {{--</div>--}}
                 {{--</div>--}}
+                <div class="container">
+                    <div class="logo"><a href="{{url('admin/index')}}">后台分类列表</a></div>
+                    <div class="open-nav"><i class="iconfont">&#xe699;</i></div>
+
+                </div>
 
             </form>
             <xblock><button class="layui-btn" onclick="member_add('添加用户','member-add.html','600','500')"><i class="layui-icon">&#xe608;</i><a href="{{ url('admin/cate/create') }}">添加分类</a></button><span class="x-right" style="line-height:40px">共有数据：88 条</span></xblock>
