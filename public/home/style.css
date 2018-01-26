@@ -149,8 +149,19 @@ z-index: 999;}
     padding: 20px;
 }
 
+.thubmnail-recent li {
+    list-style:none;
+    color: #fff;
+    font-size: 20px;
+    font-weight: 50;
+    padding: 10px;
+    float:left;
+}
+
 .mainmenu-area ul.navbar-nav li:hover a, .mainmenu-area ul.navbar-nav li.active a {background: #222}
+.thubmnail-recent li:hover a, .thubmnail-recent li.active a {background: #ccc}
 .mainmenu-area .nav > li > a:focus {color: #000}
+.thubmnail-recent > li > a:focus {color: #000}
 
 .slider-area {clear: both}
 .slider-area, .promo-area, .brands-area, .maincontent-area, .footer-top-area, .product-widget-area, .product-breadcroumb-area, .single-product-area {position: relative;overflow: hidden}

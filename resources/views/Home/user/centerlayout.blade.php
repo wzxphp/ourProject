@@ -27,8 +27,13 @@
 <link href="{{ asset('home/usercenter/css/stepstyle.css')}}" rel="stylesheet" type="text/css">
 <link href="{{ asset('home/usercenter/css/addstyle.css')}}" rel="stylesheet" type="text/css">
 <link href="{{ asset('home/usercenter/css/vipstyle.css')}}" rel="stylesheet" type="text/css">
+<link href="{{ asset('home/usercenter/css/orstyle.css')}}" rel="stylesheet" type="text/css">
+<link href="{{ asset('home/usercenter/css/cartstyle.css')}}" rel="stylesheet" type="text/css" />
+
+<link href="{{ asset('home/usercenter/css/jsstyle.css')}}" rel="stylesheet" type="text/css" />
 <script src="{{ asset('home/usercenter/js/jquery.min.js') }}"></script>
 <script src="{{ asset('home/usercenter/js/amazeui.js') }}"></script>
+<script type="text/javascript" src="{{ asset('home/usercenter/js/address.js') }}"></script>
 <script type="text/javascript" src="{{ asset('home/usercenter/layui/layui.js') }}"></script>
 
 <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
@@ -56,8 +61,16 @@
 					@else
 						<li><a href="{{ url('home/login/index') }}"><i class="fa fa-user"></i> 个人中心</a></li>
 					@endif
+					@if( !empty(Session('home_user')))
 						<li><a href="{{ url('home/cart') }}"><i class="fa fa-user"></i> 购物车</a></li>
+					@else
+						<li><a href="{{ url('home/login/index') }}"><i class="fa fa-user"></i> 购物车</a></li>
+					@endif
+					@if( !empty(Session('home_user')))
 						<li><a href="{{ url('home/order') }}"><i class="fa fa-user"></i> 订单</a></li>
+					@else
+						<li><a href="{{ url('home/login/index') }}"><i class="fa fa-user"></i> 订单</a></li>
+					@endif
 						<li><a href="#"><i class="fa fa-heart"></i> 许愿树</a></li>
 					</ul>
 				</div>
@@ -100,9 +113,10 @@
 			</div>
 			<div class="col-sm-7">
 				<div class="shopping-item">
-					<form action="">
-						<input type="text" name="keyword">
-						<button type="submit" name="submit">搜索</button>
+					<form action="{{ url('home/search') }}" method="POST">
+					{{ csrf_field() }}
+						<input type="text" name="keywords">
+						<button type="submit">搜索</button>
 					</form>
 				</div>
 			</div>
@@ -125,11 +139,11 @@
 			<div class="navbar-collapse collapse">
 				<ul class="nav navbar-nav">
 					<li><a href="{{ url('home/index') }}">首页</a></li>
-					<li><a href="{{ url('home/list') }}">奢品美妆</a></li>
+					<li><a href="{{ url('home/cate') }}">全部分类</a></li>
+					<li><a href="{{ url('home/list') }}">轻奢美妆</a></li>
 					<li><a href="{{ url('home/casual') }}">休闲家居</a></li>
 					<li><a href="{{ url('home/digital') }}">数码馆</a></li>
 					<li><a href="{{ url('home/outdoor') }}">户外</a></li>
-					<li><a href="{{ url('home/cate') }}">全部分类</a></li>
 				</ul>
 			</div>  
 		</div>
@@ -137,7 +151,59 @@
 </div> <!-- End mainmenu area -->
 
 @section('content')
+<aside class="menu">
+	<ul>
+		<li class="person active">
+			<a href="{{ url('home/center') }}"><i class="am-icon-user"></i>个人中心</a>
+		</li>
+		<li class="person">
+			<p><i class="am-icon-newspaper-o"></i>个人资料</p>
+			<ul>
+				<li> <a href="{{ url('home/center/userinfo') }}">个人信息</a></li>
+				<li> <a href="{{ url('home/center/safe') }}">安全设置</a></li>
+				<li> <a href="{{ url('home/center/address') }}">地址管理</a></li>
+				<li> <a href="#">快捷支付</a></li>
+			</ul>
+		</li>
+		<li class="person">
+			<p><i class="am-icon-balance-scale"></i>我的交易</p>
+			<ul>
+				<li><a href="{{ url('/home/center/order') }}">订单管理</a></li>
+				<li> <a href="#">退款售后</a></li>
+				<li> <a href="#">评价商品</a></li>
+			</ul>
+		</li>
+		<li class="person">
+			<p><i class="am-icon-dollar"></i>我的资产</p>
+			<ul>
+				<li> <a href="#">我的积分</a></li>
+				<li> <a href="#">优惠券 </a></li>
+				<li> <a href="#">红包</a></li>
+				<li> <a href="#">账户余额</a></li>
+				<li> <a href="#">账单明细</a></li>
+			</ul>
+		</li>
 
+		<li class="person">
+			<p><i class="am-icon-tags"></i>我的收藏</p>
+			<ul>
+				<li> <a href="#">收藏</a></li>
+				<li> <a href="#">足迹</a></li>														
+			</ul>
+		</li>
+
+		<li class="person">
+			<p><i class="am-icon-qq"></i>在线客服</p>
+			<ul>
+				<li> <a href="#">商品咨询</a></li>
+				<li> <a href="#">意见反馈</a></li>							
+				
+				<li> <a href="#">我的消息</a></li>
+			</ul>
+		</li>
+	</ul>
+
+</aside>
 @show
 <!-- <div class="footer-top-area">
 	<div class="zigzag-bottom"></div>

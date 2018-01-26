@@ -46,8 +46,16 @@
 					@else
 						<li><a href="{{ url('home/login/index') }}"><i class="fa fa-user"></i> 个人中心</a></li>
 					@endif
+					@if( !empty(Session('home_user')))
 						<li><a href="{{ url('home/cart') }}"><i class="fa fa-user"></i> 购物车</a></li>
-						<li><a href="{{ url('home/order') }}"><i class="fa fa-user"></i> 订单</a></li>
+					@else
+						<li><a href="{{ url('home/login/index') }}"><i class="fa fa-user"></i> 购物车</a></li>
+					@endif
+					@if( !empty(Session('home_user')))
+						<li><a href="{{ url('/home/center/order') }}"><i class="fa fa-user"></i> 订单</a></li>
+					@else
+						<li><a href="{{ url('home/login/index') }}"><i class="fa fa-user"></i> 订单</a></li>
+					@endif
 						<li><a href="#"><i class="fa fa-heart"></i> 许愿树</a></li>
 					</ul>
 				</div>
@@ -91,9 +99,10 @@
 
 			<div class="col-sm-7">
 				<div class="shopping-item">
-					<form action="">
-						<input type="text" name="keyword">
-						<button type="submit" name="submit">搜索</button>
+					<form action="{{ url('home/search') }}" method="POST">
+					{{ csrf_field() }}
+						<input type="text" name="keywords">
+						<button type="submit">搜索</button>
 					</form>
 				</div>
 			</div>
@@ -115,12 +124,11 @@
 			<div class="navbar-collapse collapse">
 				<ul class="nav navbar-nav">
 					<li><a href="{{ url('home/index') }}">首页</a></li>
+					<li><a href="{{ url('home/cate') }}">全部分类</a></li>
 					<li><a href="{{ url('home/list') }}">轻奢美妆</a></li>
 					<li><a href="{{ url('home/casual') }}">休闲家居</a></li>
 					<li><a href="{{ url('home/digital') }}">数码馆</a></li>
 					<li><a href="{{ url('home/outdoor') }}">户外</a></li>
-					<li><a href="{{ url('home/cate') }}">全部分类</a></li>
-
 				</ul>
 			</div>  
 		</div>

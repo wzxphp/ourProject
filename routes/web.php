@@ -18,6 +18,8 @@ Route::get('/', function () {
 //前台============================================================
 // 商城首页路由
 Route::get('/home/index','Home\IndexController@index');
+// 关键字所搜
+Route::post('/home/search','Home\SearchController@search');
 // 美妆列表
 Route::get('/home/list','Home\ListController@list');
 // 休闲列表
@@ -27,13 +29,36 @@ Route::get('/home/digital','Home\ListController@digital');
 // 户外列表
 Route::get('/home/outdoor','Home\ListController@outdoor');
 // 全部分类列表
-Route::get('/home/cate','Home\ListController@cate');
+Route::get('/home/cate','Home\CateController@cate');
 // 详情表
-Route::get('/home/details','Home\ListController@details');
+Route::get('/home/details/{id}','Home\ListController@details');
 // 购物车
-Route::get('/home/cart','Home\Cartcontroller@index');
+Route::get('/home/cart','Home\CartController@index');
+	// 添加购物车
+Route::post('/home/cart/{id}','Home\CartController@cart');
+	// 删除购物车中的商品
+Route::get('/home/cart/del/{id}','Home\CartController@del');
 // 订单
-Route::get('/home/order','Home\Cartcontroller@index');
+	// 确认订单
+Route::post('/home/reorder','Home\OrderController@reorder');
+	// 提交订单
+Route::post('/home/order','Home\OrderController@index');
+	// 浏览订单
+Route::get('/home/center/order','Home\OrderController@show');
+	// 订单详情
+Route::get('home/center/orderinfo/{id}','Home\OrderController@orderinfo');
+	// 删除订单
+Route::get('/home/order/del/{id}','Home\OrderController@del');
+	// 取消订单
+Route::get('/home/order/remove/{id}','Home\OrderController@remove');
+// 订单管理
+	// 提醒发货
+Route::get('/home/order/remind/{id}','Home\OrderController@remind');
+	// 确认收货
+Route::get('/home/order/confirm/{id}','Home\OrderController@confirm');
+// 评论
+Route::resource('/home/reviews','Home\ReviewController');
+
 
 // 用户============================================================
 // 用户中心页面
@@ -42,6 +67,8 @@ Route::get('/home/center','Home\UserController@center')->middleware('islogin');
 Route::get('/home/center/userinfo','Home\UserController@userinfo');
 // 完善用户信息
 Route::post('/home/center/userinfo_create','Home\UserController@userinfo_create');
+// 上传头像
+Route::post('/home/center/file','Home\UserController@file');
 // 用户安全设置页面
 Route::get('/home/center/safe','Home\UserController@safe');
 // 用户自主修改密码页面
@@ -55,8 +82,10 @@ Route::post('/home/center/ajax','Home\UserController@ajax');
 // 用户添加地址
 Route::post('/home/center/doadd','Home\UserController@doadd');
 Route::get('/home/center/edit/{id}','Home\UserController@edit');
+Route::post('/home/center/update','Home\UserController@update');
 // 用户删除地址
 Route::get('/home/center/del/{id}','Home\UserController@del');
+
 
 // 登录============================================================
 // 登录注册
@@ -90,7 +119,7 @@ Route::get('admin/code','Admin\LoginController@code');
 //登录页面的逻辑验证
 Route::post('admin/dologin','Admin\LoginController@dologin');
 //路由组
-Route::group(['prefix'=>'admin','namespace'=>'Admin','middleware'=>'islogin'],function(){
+Route::group(['prefix'=>'admin','namespace'=>'Admin','middleware'=>'admin_islogin'],function(){
 //后台首页
     Route::get('index','LoginController@index');
 //退出登录
@@ -103,10 +132,7 @@ Route::group(['prefix'=>'admin','namespace'=>'Admin','middleware'=>'islogin'],fu
 //会员管理模块
     Route::get('user/deleted','UserController@deleted');       //删除会员页面
     Route::resource('user','UserController');
-<<<<<<< HEAD
 
-=======
->>>>>>> origin/wangzhixing
 //角色管理模块
     Route::resource('role','RoleController');
 //权限管理模块
@@ -123,10 +149,7 @@ Route::post('admin/cate/update','Admin\CateController@update');
 Route::get('admin/cate/{id}','Admin\CateController@del');
 //订单管理
 Route::get('admin/order/index','Admin\OrderController@index');
-<<<<<<< HEAD
 
-=======
->>>>>>> origin/wangzhixing
 
 
 //商品管理模块====================================================

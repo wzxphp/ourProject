@@ -29,10 +29,9 @@
 								<div class="row">
 									<div class="col-md-6 col-md-offset-6">
 										<div class="slide-content">
-											<h2></h2>
-											<p></p>
-											<p></p>
-											<a href="" class="readmore"></a>
+											<h2>今晚24点开抢</h2>
+											<p>前一个小时折上有折</p>
+											<a href="" class="readmore">点击开抢</a>
 										</div>
 									</div>
 								</div>
@@ -50,9 +49,9 @@
 								<div class="row">
 									<div class="col-md-6 col-md-offset-6">
 										<div class="slide-content">
-											<h2>We are great</h2>
-											<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Saepe aspernatur, dolorum harum molestias tempora deserunt voluptas possimus quos eveniet, vitae voluptatem accusantium atque deleniti inventore. Enim quam placeat expedita! Quibusdam!</p>
-											<a href="" class="readmore">Learn more</a>
+											<h2>数码特惠</h2>
+											<p>更多折扣  更多优惠</p>
+											<a href="" class="readmore">了解更多</a>
 										</div>
 									</div>
 								</div>
@@ -70,10 +69,9 @@
 								<div class="row">
 									<div class="col-md-6 col-md-offset-6">
 										<div class="slide-content">
-											<h2>We are superb</h2>
-											<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Dolores, eius?</p>
-											<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Deleniti voluptates necessitatibus dicta recusandae quae amet nobis sapiente explicabo voluptatibus rerum nihil quas saepe, tempore error odio quam obcaecati suscipit sequi.</p>
-											<a href="" class="readmore">Learn more</a>
+											<h2>下一个剁手节</h2>
+											<p><h1>美丽动人 买一送一  优惠券提前发放</h1></p>
+											<a href="" class="readmore">点击抢券</a>
 										</div>
 									</div>
 								</div>
@@ -127,6 +125,7 @@
 				<div class="latest-product">
 					<h2 class="section-title">新品热销</h2>
 					<div class="product-carousel">
+					
 						<div class="single-product">
 							<div class="product-f-image">
 								<img src="/home/img/product-1.jpg" alt="">
@@ -142,80 +141,7 @@
 								<ins>$700.00</ins> <del>$800.00</del>
 							</div> 
 						</div>
-						<div class="single-product">
-							<div class="product-f-image">
-								<img src="/home/img/product-2.jpg" alt="">
-								<div class="product-hover">
-									<a href="#" class="add-to-cart-link"><i class="fa fa-shopping-cart"></i> 加入购物车</a>
-									<a href="single-product.html" class="view-details-link"><i class="fa fa-link"></i> 查看详情</a>
-								</div>
-							</div>
-							
-							<h2><a href="single-product.html">Apple new mac book 2015 March :P</a></h2>
-							<div class="product-carousel-price">
-								<ins>$899.00</ins> <del>$999.00</del>
-							</div> 
-						</div>
-						<div class="single-product">
-							<div class="product-f-image">
-								<img src="/home/img/product-3.jpg" alt="">
-								<div class="product-hover">
-									<a href="#" class="add-to-cart-link"><i class="fa fa-shopping-cart"></i> 加入购物车</a>
-									<a href="single-product.html" class="view-details-link"><i class="fa fa-link"></i> 查看详情</a>
-								</div>
-							</div>
-							
-							<h2><a href="single-product.html">Apple new i phone 6</a></h2>
 
-							<div class="product-carousel-price">
-								<ins>$400.00</ins> <del>$425.00</del>
-							</div>                                 
-						</div>
-						<div class="single-product">
-							<div class="product-f-image">
-								<img src="/home/img/product-4.jpg" alt="">
-								<div class="product-hover">
-									<a href="#" class="add-to-cart-link"><i class="fa fa-shopping-cart"></i> 加入购物车</a>
-									<a href="single-product.html" class="view-details-link"><i class="fa fa-link"></i> 查看详情</a>
-								</div>
-							</div>
-							
-							<h2><a href="single-product.html">Sony playstation microsoft</a></h2>
-
-							<div class="product-carousel-price">
-								<ins>$200.00</ins> <del>$225.00</del>
-							</div>                            
-						</div>
-						<div class="single-product">
-							<div class="product-f-image">
-								<img src="/home/img/product-5.jpg" alt="">
-								<div class="product-hover">
-									<a href="#" class="add-to-cart-link"><i class="fa fa-shopping-cart"></i> 加入购物车</a>
-									<a href="single-product.html" class="view-details-link"><i class="fa fa-link"></i> 查看详情</a>
-								</div>
-							</div>
-							
-							<h2><a href="single-product.html">Sony Smart Air Condtion</a></h2>
-
-							<div class="product-carousel-price">
-								<ins>$1200.00</ins> <del>$1355.00</del>
-							</div>                                 
-						</div>
-						<div class="single-product">
-							<div class="product-f-image">
-								<img src="/home/img/product-6.jpg" alt="">
-								<div class="product-hover">
-									<a href="#" class="add-to-cart-link"><i class="fa fa-shopping-cart"></i> 加入购物车</a>
-									<a href="single-product.html" class="view-details-link"><i class="fa fa-link"></i> 查看详情</a>
-								</div>
-							</div>
-							
-							<h2><a href="single-product.html">Samsung gallaxy note 4</a></h2>
-
-							<div class="product-carousel-price">
-								<ins>$400.00</ins>
-							</div>                            
-						</div>
 					</div>
 				</div>
 			</div>
