@@ -1,5 +1,5 @@
 @extends('admin.layout')
-@section('title','权限修改')
+@section('title','配置信息修改')
 @section('content')
     <!-- 右侧主体开始 -->
     <div class="page-content">
@@ -7,9 +7,9 @@
 
             <!-- 右侧内容框架，更改从这里开始 -->
             <blockquote class="layui-elem-quote">
-                <a href="{{url('admin/index')}}">后台首页</a>/
-                <a href="">权限管理</a>/
-                <a href="">权限修改</a>
+                <a href="">后台首页</a>/
+                <a href="">网站配置</a>/
+                <a href="">配置信息修改</a>
             </blockquote>
             <div>
                 @if(session('msg'))
@@ -22,31 +22,45 @@
                 <div class="page-content">
                     <div class="content">
                         <!-- 右侧内容框架，更改从这里开始 -->
-                        <form class="layui-form" action="{{url('admin/permission/'.$per->id)}}" method="post">
+                        <form class="layui-form" action="{{url('admin/config/'.$message->conf_id)}}" method="post">
                             {{csrf_field()}}
                             {{method_field('PUT')}}
                             <div class="layui-form-item">
                                 <label for="L_name" class="layui-form-label">
-                                    权限名称
+                                    排序
                                 </label>
                                 <div class="layui-input-inline">
-                                    <input type="text" id="L_email" name="name" required lay-verify=""
-                                           autocomplete="off" value="{{$per->permission_name}}" class="layui-input">
+                                    <input type="text" id="L_email" name="order" required lay-verify=""
+                                           autocomplete="off" value="{{$message->conf_order}}" class="layui-input">
                                 </div>
                             </div>
                             <div class="layui-form-item">
                                 <label for="L_tel" class="layui-form-label">
-                                    权限路径
+                                    标题
                                 </label>
                                 <div class="layui-input-inline">
-                                    <input type="text" id="L_tel" name="des" required lay-verify=""
-                                           autocomplete="off" value="{{$per->permission_des}}" class="layui-input">
+                                    <input type="text" id="L_tel" name="title" required lay-verify=""
+                                           autocomplete="off" value="{{$message->conf_title}}" class="layui-input">
                                 </div>
                             </div>
-
-
-
-
+                            <div class="layui-form-item">
+                                <label for="L_email" class="layui-form-label">
+                                    名称
+                                </label>
+                                <div class="layui-input-inline">
+                                    <input type="text" id="L_email" name="name" required lay-verify=""
+                                           autocomplete="off" value="{{$message->conf_name}}" class="layui-input">
+                                </div>
+                            </div>
+                            <div class="layui-form-item">
+                                <label for="L_username" class="layui-form-label">
+                                    内容
+                                </label>
+                                <div class="layui-input-inline">
+                                    <input type="text" id="L_pass" name="content"  lay-verify=""
+                                           autocomplete="off" value="{{$message->conf_content}}" class="layui-input">
+                                </div>
+                            </div>
                             <div class="layui-form-item">
                                 <label for="L_sign" class="layui-form-label">
                                 </label>

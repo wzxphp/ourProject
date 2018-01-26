@@ -1,5 +1,5 @@
 @extends('admin.layout')
-@section('title','管理员列表')
+@section('title','评论列表')
 @section('content')
     <!-- 右侧主体开始 -->
     <div class="page-content">
@@ -7,8 +7,8 @@
             {{--面包屑导航--}}
             <blockquote class="layui-elem-quote">
                 <a href="{{url('admin/index')}}">后台首页</a>/
-                <a href="">后台管理员</a>/
-                <a href="">管理员列表</a>
+                <a href="">评论管理</a>/
+                <a href="">评论列表</a>
             </blockquote>
             <!-- 右侧内容框架，更改从这里开始 -->
             <!-- 右侧中部开始 -->
@@ -21,28 +21,8 @@
                 <div class="content">
                     <div style="width: 900px;"></div>
                     <!-- 右侧内容框架，更改从这里开始 -->
-                    <form class="layui-form xbs" action="{{ url('admin/admin_user') }}" method="get">
-                        <div class="layui-form-pane" style="text-align: center;">
-                            <div class="layui-form-item" style="display: inline-block;">
-                                <label class="layui-form-label xbs768">日期范围</label>
-                                <div class="layui-input-inline xbs768">
-                                    <input class="layui-input" placeholder="开始日" name="mindate" id="begin" autocomplete="off">
-                                </div>
-                                <div class="layui-input-inline xbs768">
-                                    <input class="layui-input" placeholder="截止日" name="maxdate" id="over" autocomplete="off">
-                                </div>
-                                <div class="layui-input-inline">
-                                    <input type="text" name="username"  placeholder="请输入用户名" autocomplete="off" class="layui-input">
-                                </div>
-                                <div class="layui-input-inline" style="width:80px">
-                                    <button class="layui-btn"  lay-submit="" lay-filter="sreach"><i class="layui-icon">&#xe615;</i></button>
-                                </div>
-                            </div>
-                        </div>
-                    </form>
                     <xblock>
                             <button class="layui-btn layui-btn-danger" onclick="delAll()"><i class="layui-icon">&#xe640;</i>批量删除</button>
-                            <button id="addbtn" class="layui-btn"><i class="layui-icon">&#xe608;</i><a href="{{ url('admin/admin_user/create') }}">添加</a></button>
                             <span class="x-right" style="line-height:40px">总共有数据：{{count($allData)}}条</span>
                     </xblock>
                     <table id="tid" class="layui-table">
@@ -51,10 +31,9 @@
                             <th><input type="checkbox" onclick="checkBox($(this));" name="" value=""></th>
                             <th> ID </th>
                             <th> 用户名 </th>
-                            <th> 手机号 </th>
-                            <th> 邮箱 </th>
-                            <th> 加入时间 </th>
-                            <th>状态</th>
+                            <th> 商品类名 </th>
+                            <th> 内容 </th>
+                            <th> 评论时间 </th>
                             <th>操作</th>
                         </tr>
                         </thead>
@@ -63,39 +42,25 @@
                         <tr>
                             <td><input type="checkbox" class="mybox" value="1" name=""></td>
                             <td>{{ $v->id }}</td>
-                            <td>{{ $v->name }}</td>
-                            <td>{{ $v->tel }}</td>
-                            <td>{{ $v->email }}</td>
+                            <td>{{ $v->user_id }}</td>
+                            <td>{{ $v->cargo_id }}</td>
+                            <td>{{ $v->comment_info }}</td>
                             <td>{{ $v->created_at }}</td>
-                            <td class="td-status">
-                                    @if( $v->status == '1' )<span class="layui-btn layui-btn-normal layui-btn-mini">已启用</span>
-                                    @else <span class="layui-btn layui-btn-disabled layui-btn-mini">已停用</span>
-                                    @endif
-                            </td>
                             <td class="td-manage">
-                                @if( $v->status == '1' )<a style="text-decoration:none" onclick="member_stop(this,'{{ $v->id }}')" href="javascript:;" title="停用"><i class="layui-icon">&#xe601;</i></a>
-                                @else                   <a style="text-decoration:none" onClick="member_start(this,'{{ $v->id }}')" href="javascript:;" title="启用"><i class="layui-icon">&#xe62f;</i></a>
-                                @endif
-                                <a title="编辑" href="{{ url('admin/admin_user/'.$v->id.'/edit') }}"
-                                   class="ml-5" style="text-decoration:none">
-                                    <i class="layui-icon">&#xe642;</i>
-                                </a>
                                 <a title="删除" href="javascript:;" onclick="delUser(this,'{{ $v->id }}')"
                                    style="text-decoration:none">
                                     <i class="layui-icon">&#xe640;</i>
                                 </a>
-                                <a title="授权" href="{{ url('admin/admin_user/auth/'.$v->id) }}"><i class="layui-icon">&#xe62e;</i></a>
-{{--                                <a title="授权" href="{{ url('admin/admin_user/auth/'.$v->id) }}"><i class="iconfont">&#xe707;</i></a>--}}
                             </td>
                         </tr>
                         @endforeach
                         </tbody>
                     </table>
                     <!-- 右侧内容框架，更改从这里结束 -->
-                    <div style="float:right" id="page" class="layui-page">
+                    {{--<div style="float:right" id="page" class="layui-page">--}}
                         {{--{!! $data->render() !!}--}}
-                        {!! $data->links() !!}
-                    </div>
+                        {{--{!! $data->links() !!}--}}
+                    {{--</div>--}}
                 </div>
             </div>
             <!-- 右侧中部结束 -->
@@ -175,46 +140,6 @@
             });
         }
 
-        /*用户-查看*/
-        function member_show(title,url,id,w,h){
-            x_admin_show(title,url,w,h);
-        }
-
-        /*用户-停用*/
-        function member_stop(obj,id){
-            layer.confirm('确认要停用吗？',function(index){
-                //发异步把用户状态进行更改
-                $.post('{{ url('admin/admin_user_statu') }}',{'_token':"{{csrf_token()}}",'close':id},function (data) {
-                    if(data.status == 0) {
-                        $(obj).parents("tr").find(".td-manage").prepend('<a style="text-decoration:none" onClick="member_start(this,id)" href="javascript:;" title="启用"><i class="layui-icon">&#xe62f;</i></a>');
-                        $(obj).parents("tr").find(".td-status").html('<span class="layui-btn layui-btn-disabled layui-btn-mini">已停用</span>');
-                        $(obj).remove();
-                        layer.msg('已停用', {icon: 5, time: 1000});
-                        setTimeout(function(){location.reload()},900);
-                    }else{
-                        layer.msg(data.message, {icon: 1, time: 1000});}
-                });
-
-            });
-        }
-
-        /*用户-启用*/
-        function member_start(obj,id){
-            layer.confirm('确认要启用吗？',function(index){
-                //发异步把用户状态进行更改
-                $.post('{{ url('admin/admin_user_statu') }}',{'_token':"{{csrf_token()}}",'close':id},function (data) {
-                    if(data.status == 0) {
-                        $(obj).parents("tr").find(".td-manage").prepend('<a style="text-decoration:none" onClick="member_stop(obj,id)" href="javascript:;" title="停用"><i class="layui-icon">&#xe601;</i></a>');
-                        $(obj).parents("tr").find(".td-status").html('<span class="layui-btn layui-btn-normal layui-btn-mini">已启用</span>');
-                        $(obj).remove();
-                        layer.msg('已启用', {icon: 6, time: 1000});
-                        setTimeout(function(){location.reload()},900);
-                    }else{
-                        layer.msg(data.message, {icon: 1, time: 1000});}
-                });
-
-            });
-        }
 
         /*用户-删除*/
         function delUser(obj,id){

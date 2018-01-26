@@ -80,53 +80,83 @@ Route::post('/home/forgot/update','Home\LoginController@update');
 
 
 //后台=============================================================
+//未授权页面
+Route::get('auth','Admin\LoginController@auth');
 //后台登录路由
 Route::get('admin/login','Admin\LoginController@login');
-//登录页面的验证码
-Route::get('admin/code','Admin\LoginController@code');
 //登录页面的逻辑验证
 Route::post('admin/dologin','Admin\LoginController@dologin');
+//忘记密码
+Route::get('admin/forget','Admin\LoginController@forget');
+//忘记密码处理
+Route::post('admin/doforget','Admin\LoginController@doforget');
+//重置密码
+Route::get('admin/reset','Admin\LoginController@reset');
+//重置密码处理
+Route::post('admin/doreset','Admin\LoginController@doreset');
+//退出登录
+Route::get('admin/logout','Admin\LoginController@logout');
+//登录页面的验证码
+Route::get('admin/code','Admin\LoginController@code');
+
 //路由组
-Route::group(['prefix'=>'admin','namespace'=>'Admin','middleware'=>'islogin'],function(){
+//Route::group(['prefix'=>'admin','namespace'=>'Admin','middleware'=>['admin_islogin','hasRole']],function(){
+Route::group(['prefix'=>'admin','namespace'=>'Admin','middleware'=>['admin_islogin']],function(){
 //后台首页
     Route::get('index','LoginController@index');
-//退出登录
-    Route::get('logout','LoginController@logout');
 //管理员模块
     Route::post('admin_user_del','Admin_userController@delAll');  //删除多行
     Route::post('admin_user_statu','Admin_userController@statu');  //修改管理员状态
     Route::get('admin_user/auth/{id}','Admin_userController@auth');  //管理员授权
+    Route::post('admin_user/doauth','Admin_userController@doAuth'); //添加用户授权逻辑
     Route::resource('admin_user','Admin_userController');
 //会员管理模块
     Route::get('user/deleted','UserController@deleted');       //删除会员页面
+    Route::get('user/statu/{id}','UserController@statu');       //删除会员状态
+    Route::get('user/statu2/{id}','UserController@statu2');       //恢复会员状态
+    Route::post('user/showav','UserController@showav');       //查看会员头像
     Route::resource('user','UserController');
 //角色管理模块
+    Route::get('role/auth/{id}','RoleController@auth');  //角色授权
+    Route::post('role/doauth','RoleController@doAuth'); //角色授权执行
     Route::resource('role','RoleController');
 //权限管理模块
     Route::resource('permission','PermissionController');
-});
+//评论管理模块
+    Route::resource('comment','CommentController');
+//网站配置模块
+    Route::get('config/close','ConfigController@close');  //关闭网站
+    Route::post('config/changecontent','ConfigController@changeContent');//批量修改网站配置信息
+    Route::resource('config','ConfigController');
+
+
 
 //分类管理模块=====================================================
-Route::get('admin/cate/create','Admin\CateController@create');
-Route::post('admin/cate/store','Admin\CateController@store');
-Route::get('admin/cate/index','Admin\CateController@index');
-Route::post('admin/cate/changeorder','Admin\CateController@changeOrder');
-Route::get('admin/cate/{id}/edit','Admin\CateController@edit');
-Route::post('admin/cate/update','Admin\CateController@update');
-Route::get('admin/cate/{id}','Admin\CateController@del');
+    Route::get('cate/create','CateController@create');
+    Route::post('cate/store','CateController@store');
+    Route::get('cate/index','CateController@index');
+    Route::post('cate/changeorder','CateController@changeOrder');
+    Route::get('cate/{id}/edit','CateController@edit');
+    Route::post('cate/update','CateController@update');
+    Route::get('cate/{id}','CateController@del');
 //订单管理
-Route::get('admin/order/index','Admin\OrderController@index');
-
+    Route::get('order/index','OrderController@index');
 
 //商品管理模块====================================================
-Route::get('admin/goods/index','Admin\GoodsController@index');
+    Route::get('goods/index','GoodsController@index');
 // 商品添加页面
-Route::get('admin/goods/create','Admin\GoodsController@create');
+    Route::get('goods/create','GoodsController@create');
 //商品数据接收
-Route::post('admin/goods/upload','Admin\GoodsController@upload');
+    Route::post('goods/upload','GoodsController@upload');
 //商品修改页面
-Route::get('admin/goods/{id}/edit','Admin\GoodsController@edit');
-Route::post('admin/goods/{id}/xxoo','Admin\GoodsController@xxoo');
+    Route::get('goods/{id}/edit','GoodsController@edit');
+    Route::post('goods/{id}/xxoo','GoodsController@xxoo');
 //删除
-Route::get('admin/goods/{id}','Admin\GoodsController@del');
+    Route::get('goods/{id}','GoodsController@del');
+
+
+
+});
+
+
 

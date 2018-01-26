@@ -1,5 +1,5 @@
 @extends('admin.layout')
-@section('title','编辑管理员')
+@section('title','编辑分类')
 @section('content')
 
     <!-- 中部开始 -->

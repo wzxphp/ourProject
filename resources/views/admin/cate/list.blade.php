@@ -1,5 +1,5 @@
 @extends('admin.layout')
-@section('title','商品分类列表页')
+@section('title','商品分类列表')
 @section('content')
 
     <!-- 右侧主体开始 -->

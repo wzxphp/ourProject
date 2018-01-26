@@ -1,5 +1,5 @@
 @extends('admin.layout')
-@section('title','权限列表')
+@section('title','网站配置')
 @section('content')
     <!-- 右侧主体开始 -->
     <div class="page-content">
@@ -7,8 +7,8 @@
             {{--面包屑导航--}}
             <blockquote class="layui-elem-quote">
                 <a href="{{url('admin/index')}}">后台首页</a>/
-                <a href="">权限管理</a>/
-                <a href="">权限列表</a>
+                <a href="">网站配置</a>/
+                <a href="">配置信息列表</a>
             </blockquote>
             <!-- 右侧内容框架，更改从这里开始 -->
             <!-- 右侧中部开始 -->
@@ -19,31 +19,42 @@
             </div>
             <div class="page-content">
                 <div class="content">
-                    <!-- 右侧内容框架，更改从这里开始 -->
                     <div style="width: 900px;"></div>
-                    <table id="tid" class="layui-table">
+                    <!-- 右侧内容框架，更改从这里开始 -->
+                    <xblock>
+                            <button id="addbtn" class="layui-btn"><i class="layui-icon">&#xe608;</i><a href="{{ url('admin/config/create') }}">添加</a></button>
+                    </xblock>
+                    <form action="{{ url('admin/config/changecontent') }}" method="post">
+                        <table id="tid" class="layui-table" lay-data="{field:'amount', width:120}">
                         <thead>
+                        {{csrf_field()}}
                         <tr>
-                            <th><input type="checkbox" onclick="checkBox($(this));" name="" value=""></th>
+                            <th> 排序</th>
                             <th> ID </th>
-                            <th> 权限名称 </th>
-                            <th> 权限描述 </th>
-                            <th>操作</th>
+                            <th> 标题 </th>
+                            <th> 名称 </th>
+                            <th> 内容 </th>
+                            <th> 操作</th>
                         </tr>
                         </thead>
                         <tbody>
-                        @foreach($per as $k=>$v)
+                        @foreach($data as $k=>$v)
                         <tr>
-                            <td><input type="checkbox" class="mybox" value="1" name=""></td>
-                            <td>{{ $v->id }}</td>
-                            <td>{{ $v->permission_name }}</td>
-                            <td>{{ $v->permission_des }}</td>
+                            <td><input class="layui-input" style="width: 50px;" type="text" onchange="changeOrder(this,{{ $v->conf_id }})" value="{{ $v->conf_order }}"></td>
+                            <td>{{ $v->conf_id }}</td>
+                            <td>{{ $v->conf_title }}</td>
+                            <td>{{ $v->conf_name }}</td>
+                            <td>
+                                <input class="layui-input" type="hidden" name="conf_id[]" value="{{ $v->conf_id }}">
+                                {!! $v->conf_contents !!}
+{{--                                {{ $v->conf_contents }}--}}
+                            </td>
                             <td class="td-manage">
-                                <a title="编辑" href="{{ url('admin/permission/'.$v->id.'/edit') }}"
+                                <a title="编辑" href="{{ url('admin/config/'.$v->conf_id.'/edit') }}"
                                    class="ml-5" style="text-decoration:none">
                                     <i class="layui-icon">&#xe642;</i>
                                 </a>
-                                <a title="删除" href="javascript:;" onclick="delUser(this,'{{ $v->id }}')"
+                                <a title="删除" href="javascript:;" onclick="delUser(this,'{{ $v->conf_id }}')"
                                    style="text-decoration:none">
                                     <i class="layui-icon">&#xe640;</i>
                                 </a>
@@ -52,6 +63,8 @@
                         @endforeach
                         </tbody>
                     </table>
+                        <button class="layui-btn layui-btn-normal" key="set-mine" lay-filter="save" lay-submit>保存</button>
+                    </form>
                     <!-- 右侧内容框架，更改从这里结束 -->
                     {{--<div class="layui-show">--}}
                         {{--{!! $data->render() !!}--}}
@@ -64,26 +77,11 @@
     </div>
     <script>
 
-        //当全选框被选中，单选框全被选中
-        function checkBox(obj) {
-            if (obj.is(":checked")) {
-                $('input.mybox').prop('checked', true);
-            }else{
-                //当全选框被取消，单选框全被取消
-                $('input.mybox').prop('checked', false);
-            }
-        }
-
-        /*用户-查看*/
-        function member_show(title,url,id,w,h){
-            x_admin_show(title,url,w,h);
-        }
-
         /*用户-删除*/
         function delUser(obj,id){
             layer.confirm('确认要删除吗？',function(index){
                 //发异步删除数据
-                $.post('{{ url('admin/permission/') }}/'+id,{'_method':'delete','_token':"{{csrf_token()}}"},function (data) {
+                $.post('{{ url('admin/config/') }}/'+id,{'_method':'delete','_token':"{{csrf_token()}}"},function (data) {
                     if(data.status == 0) {
                         $(obj).parents("tr").remove();
                         layer.msg(data.message, {icon: 1, time: 1000});

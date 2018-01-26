@@ -19,26 +19,7 @@
             </div>
             <div class="page-content">
                 <div class="content">
-                    <!-- 右侧内容框架，更改从这里开始 -->
-                    <form class="layui-form xbs" action="{{ url('admin/admin_user') }}" method="get">
-                        <div class="layui-form-pane" style="text-align: center;">
-                            <div class="layui-form-item" style="display: inline-block;">
-                                <label class="layui-form-label xbs768">日期范围</label>
-                                <div class="layui-input-inline xbs768">
-                                    <input class="layui-input" placeholder="开始日" name="mindate" id="begin" autocomplete="off">
-                                </div>
-                                <div class="layui-input-inline xbs768">
-                                    <input class="layui-input" placeholder="截止日" name="maxdate" id="over" autocomplete="off">
-                                </div>
-                                <div class="layui-input-inline">
-                                    <input type="text" name="username"  placeholder="请输入用户名" autocomplete="off" class="layui-input">
-                                </div>
-                                <div class="layui-input-inline" style="width:80px">
-                                    <button class="layui-btn"  lay-submit="" lay-filter="sreach"><i class="layui-icon">&#xe615;</i></button>
-                                </div>
-                            </div>
-                        </div>
-                    </form>
+                    <div style="width: 900px;"></div>
                     <table id="tid" class="layui-table">
                         <thead>
                         <tr>
@@ -65,6 +46,7 @@
                                    style="text-decoration:none">
                                     <i class="layui-icon">&#xe640;</i>
                                 </a>
+                                <a title="授权" href="{{ url('admin/role/auth/'.$v->id) }}"><i class="layui-icon">&#xe62e;</i></a>
                             </td>
                         </tr>
                         @endforeach
@@ -81,6 +63,30 @@
         </div>
     </div>
     <script>
+
+        layui.use('table', function(){
+            var table = layui.table;
+            //第一个实例
+            table.render({
+                elem: '#tid'
+                ,height: 315
+//                ,url: '/demo/table/user/' //数据接口
+                ,page: true //开启分页
+                ,cols: [[ //表头
+                    {field: 'id', title: 'ID', width:80, sort: true, fixed: 'left'}
+                    ,{field: 'username', title: '用户名', width:80}
+                    ,{field: 'sex', title: '性别', width:80, sort: true}
+                    ,{field: 'city', title: '城市', width:80}
+                    ,{field: 'sign', title: '签名', width: 177}
+                    ,{field: 'experience', title: '积分', width: 80, sort: true}
+                    ,{field: 'score', title: '评分', width: 80, sort: true}
+                    ,{field: 'classify', title: '职业', width: 80}
+                    ,{field: 'wealth', title: '财富', width: 135, sort: true}
+                ]]
+            });
+
+        });
+
 
         //日期插件
         layui.use(['laydate'], function(){
@@ -160,7 +166,7 @@
         function delUser(obj,id){
             layer.confirm('确认要删除吗？',function(index){
                 //发异步删除数据
-                $.post('{{ url('admin/admin_user/') }}/'+id,{'_method':'delete','_token':"{{csrf_token()}}"},function (data) {
+                $.post('{{ url('admin/role/') }}/'+id,{'_method':'delete','_token':"{{csrf_token()}}"},function (data) {
                     if(data.status == 0) {
                         $(obj).parents("tr").remove();
                         layer.msg(data.message, {icon: 1, time: 1000});

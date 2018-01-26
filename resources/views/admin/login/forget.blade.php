@@ -14,8 +14,8 @@
     <script type="text/javascript" src="{{asset('/admin/js/xadmin.js')}}"></script>
 </head>
 <body>
-    <div class="login-logo"><h1>后台管理</h1></div>
-    <div class="login-box">
+    <div class="login-logo"><h1>忘记密码</h1></div>
+    <div class="login-box" style="height: 250px;">
 
         @if (count($errors) > 0)
             <div class="alert alert-danger">
@@ -30,47 +30,22 @@
                 </ul>
             </div>
         @endif
-        @if(session('msg'))
-            <h6>{{session('msg')}}</h6>
-        @endif
-        <form id="fid" class="layui-form layui-form-pane" action="{{ url('admin/dologin') }}" method="post">
+
+        <form id="fid" class="layui-form layui-form-pane" action="{{ url('admin/doforget') }}" method="post">
             {{csrf_field()}}
-            <h3>登录管理员帐号</h3>
-            {{--<label class="login-title" for="username">帐号</label>--}}
-            <div class="layui-form-item">
-                <label class="layui-form-label login-form"><i class="iconfont">&#xe6b8;</i></label>
-                <div class="layui-input-inline login-inline">
-                    <input type="text" name="username" lay-verify="required" placeholder="请输入你的帐号" autocomplete="off" class="layui-input">
-                </div>
-            </div>
-
-            {{--<label class="login-title" for="password">密码</label>--}}
-            <div class="layui-form-item">
-                <label class="layui-form-label login-form"><i class="iconfont">&#xe82b;</i></label>
-                <div class="layui-input-inline login-inline">
-                    <input type="password" name="password" lay-verify="required" placeholder="请输入你的密码" autocomplete="off" class="layui-input">
-                </div>
-            </div>
-
-            {{--<label class="login-title" for="code">验证码</label>--}}
-            <div class="layui-form-item ">
-                <div class="layui-inline">
-                    <label class="layui-form-label login-form"><i class="iconfont">&#xe6b2;</i></label>
-                    <div class="layui-input-inline" style="width: 100px;">
-                        <input style="width: 120px;" type="text" name="code" lay-verify="required" placeholder="请输入验证码" autocomplete="off" class="layui-input">
-                    </div>
-                    <div class="layui-form-mid " ></div>
-                    <div class="layui-form-mid"></div>
-                    <div class="layui-input-inline" style="aligin:right; width: 100px;">
-                        <img style="border-radius:4px; opacity: 0.4;" src="{{url('admin/code')}}" alt="" onclick="this.src='{{url('admin/code')}}?'+Math.random()">
-                    </div>
-                </div>
-             </div>
             <div style="height: 30px;"></div>
-            <div style="text-align:center;">
-                <button class="btn btn-warning pull-right" lay-submit lay-filter="login"  type="submit">登录</button>
+            <label class="login-title" for="username">邮箱</label>
+            <div class="layui-form-item">
+                <label class="layui-form-label login-form"><i class="iconfont">&#xe69f;</i></label>
+                <div class="layui-input-inline login-inline">
+                    <input type="email" name="email" lay-verify="email" placeholder="请输入你的邮箱" autocomplete="off" class="layui-input">
+                </div>
             </div>
-            <div class="forgot"><a href="{{url('admin/forget')}}" class="forgot">忘记帐号或者密码</a></div>
+
+            <div style="height: 80px;"></div>
+            <div style="text-align:center;">
+                <button class="btn btn-warning pull-right" lay-submit lay-filter=""  type="submit">提交</button>
+            </div>
 
         </form>
     </div>
