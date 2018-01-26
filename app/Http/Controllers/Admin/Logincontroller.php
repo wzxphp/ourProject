@@ -85,7 +85,7 @@ class Logincontroller extends Controller
         return view('admin.index');
     }
 
-    //退出登录
+    // 退出登录
     public function logout()
     {
         session()->forget('adminuser');

@@ -1,9 +1,5 @@
 @extends('admin.layout')
-<<<<<<< HEAD
 @section('title','管理员添加')
-=======
-@section('title','分类添加页面')
->>>>>>> origin/qinyangchun
 @section('content')
     <!-- 右侧主体开始 -->
     <div class="page-content">

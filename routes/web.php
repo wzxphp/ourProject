@@ -1,5 +1,4 @@
 <?php
-
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -87,7 +86,7 @@ Route::get('admin/code','Admin\LoginController@code');
 //登录页面的逻辑验证
 Route::post('admin/dologin','Admin\LoginController@dologin');
 //路由组
-Route::group(['prefix'=>'admin','namespace'=>'Admin','middleware'=>'islogin'],function(){
+Route::group(['prefix'=>'admin','namespace'=>'Admin','middleware'=>'admin_islogin'],function(){
 //后台首页
     Route::get('index','LoginController@index');
 //退出登录
@@ -119,6 +118,7 @@ Route::get('admin/order/index','Admin\OrderController@index');
 
 
 //商品管理模块====================================================
+
 Route::get('admin/goods/index','Admin\GoodsController@index');
 // 商品添加页面
 Route::get('admin/goods/create','Admin\GoodsController@create');
@@ -127,6 +127,21 @@ Route::post('admin/goods/upload','Admin\GoodsController@upload');
 //商品修改页面
 Route::get('admin/goods/{id}/edit','Admin\GoodsController@edit');
 Route::post('admin/goods/{id}/xxoo','Admin\GoodsController@xxoo');
+//商品上下价
+Route::get('admin/goods/goods_sta','Admin\GoodsController@goods_sta');
+//商品推荐位
+Route::get('admin/recom/index','Admin\RecomController@index');
+//添加推荐位
+Route::get('admin/recom/add','Admin\RecomController@add');
+Route::post('admin/recom/upadd','Admin\RecomController@upadd');
+// 删除ID
+Route::get('admin/recom/{id}','Admin\RecomController@dels');
+//修改
+Route::get('admin/recom/{id}/edit','Admin\RecomController@edit');
+Route::post('admin/recom/{id}/doedit','Admin\RecomController@doedit');
+//浏览推荐位
+Route::get('admin/recom/{id}/create','Admin\RecomController@create');
+
 //删除
 Route::get('admin/goods/{id}','Admin\GoodsController@del');
 

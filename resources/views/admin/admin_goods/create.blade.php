@@ -9,6 +9,20 @@
             <!-- 右侧内容框架，更改从这里开始 -->
             <form id="form_upload" method="post" target="iframe1" action="{{ url('admin/goods/upload')  }}" enctype="multipart/form-data">
                 {{ csrf_field()}}
+                
+                <div class="layui-form-item">
+                                <label for="L_username" class="layui-form-label">
+                                    <span class="x-red"></span>父级分类
+                                </label>
+                                <div class="layui-input-inline">
+                                    <select name="pid" id="catid" class="layui-input">
+                                        <option value="0">顶级分类</option>
+                                        @foreach($category as $k=>$v)
+                                        <option value="{{ $v->pid }}">{{ $v->names }}</option>
+                                        @endforeach
+                                     </select>
+                                </div>
+                            </div>
                 <div class="layui-form-item">
                     <label for="L_username" class="layui-form-label">
                         <span class="x-red">*</span>商品图片
@@ -80,18 +94,20 @@
                     <label for="" class="layui-form-label">
                         <span class="x-red">*</span>商品介绍
                     </label>
-                    <div class="layui-input-inline">
-                        <input type="text" id="L_username" name="goods_info" required="" lay-verify="nikename"
-                               autocomplete="off" class="layui-input">
-                    </div>
+                    <textarea id="inventory" placeholder="简单的商品介绍" id="L_sign" name="goods_info" autocomplete="off"
+                              class="layui-textarea" style="height: 80px;"></textarea>
                 </div>
                 <div class="layui-form-item">
                     <label for="" class="layui-form-label">
                         <span class="x-red"></span>
                     </label>
+                    <!-- <button type="submit" id="tijiao" class="btn btn-primary" data-toggle="button" aria-pressed="false" autocomplete="off">
+                      提交
+                    </button> -->
+                    <button type="submit" id="tijiao" class="btn btn-primary" data-toggle="button" aria-pressed="false" autocomplete="off">
+                      &#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;提交&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;
+                    </button>
                     <div class="layui-input-inline">
-                        <input type="submit" id="tijiao"  value="提交" lay-verify="nikename"
-                               autocomplete="off" class="layui-input">
                     </div>
                 </div>
             </form>
@@ -130,7 +146,7 @@
     });
 
     $('#tijiao').submit(function(){
-        alert(22)
+        alert(22);
         return false;
     })
     
