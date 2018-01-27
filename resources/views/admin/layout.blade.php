@@ -175,7 +175,7 @@
                         <li>
                             <a href="{{ url('admin/goods/index') }}">
                                 <i class="iconfont">&#xe6a7;</i>
-                                商品管理
+                                商品浏览
                             </a>
                         </li>
                         <li>

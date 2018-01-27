@@ -1,5 +1,4 @@
 <?php
-
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -149,14 +148,26 @@ Route::group(['prefix'=>'admin','namespace'=>'Admin','middleware'=>['admin_islog
 //商品数据接收
     Route::post('goods/upload','GoodsController@upload');
 //商品修改页面
+
     Route::get('goods/{id}/edit','GoodsController@edit');
     Route::post('goods/{id}/xxoo','GoodsController@xxoo');
 //删除
     Route::get('goods/{id}','GoodsController@del');
-
-
-
 });
+//商品上下价
+Route::get('admin/goods/goods_sta','Admin\GoodsController@goods_sta');
+//商品推荐位
+Route::get('admin/recom/index','Admin\RecomController@index');
+//添加推荐位
+Route::get('admin/recom/add','Admin\RecomController@add');
+Route::post('admin/recom/upadd','Admin\RecomController@upadd');
+// 删除ID
+Route::get('admin/recom/{id}','Admin\RecomController@dels');
+//修改
+Route::get('admin/recom/{id}/edit','Admin\RecomController@edit');
+Route::post('admin/recom/{id}/doedit','Admin\RecomController@doedit');
+//浏览推荐位
+Route::get('admin/recom/{id}/create','Admin\RecomController@create');
 
 
 
