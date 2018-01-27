@@ -6,8 +6,8 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Mail;
 
-use App\Org\code\Code;
-require_once app_path().'/Org/code/Code.class.php';
+// use App\Org\code\Code;
+// require_once app_path().'/Org/code/Code.class.php';
 // use Illuminate\Support\Facades\Session;
 use Session;
 
