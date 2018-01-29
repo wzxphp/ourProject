@@ -26,6 +26,9 @@ class CateController extends Controller
 
         $cate = new Cate();
         $cates = $cate->getCate();
+//        $cates = Cate::all();
+//        $cates = DB::table('data_category')->get();
+//        $cates = DB::table('data_category')->get();
 //        dd($cates);
 
 
@@ -87,6 +90,7 @@ class CateController extends Controller
     }
     public function update(Request $request)
     {
+
         $input = $request->only('id', 'name', 'describe');
 //        return 1111;
 //        dd($input);
@@ -113,12 +117,9 @@ class CateController extends Controller
     }
     public function del($id)
     {
-//        $idd = Cate::find('id');
-//        $pid = Cate::find('pid');
 //        $a = DB::table('data_category')->where('id',$id)->first();
         $a = Cate::find($id);
         if($a->pid == 0){
-
             $data = [
                 'status' => 1,
                 'message' => '顶级分类不能删除，请返回！'
@@ -128,11 +129,6 @@ class CateController extends Controller
             return $data;
         }
 
-
-
-//        $pid = Cate::index();
-//        dd($idd);
-//        return 1111;
         $res = Cate::find($id)->delete();
 //         $a = Cate::find('pid');
 //        if ($a){

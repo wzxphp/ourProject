@@ -11,9 +11,27 @@ class UserController extends Controller
 {
 
 
-    public function deleted()
+    public function deleted(Request $request)
     {
-        return view('admin.user.del');
+        $allData = Buser::get()->where('status','0');
+        $data =  DB::table('data_user_message')
+            ->where(function($query) use($request){
+                //检测关键字
+                $username = $request->input('username');
+                $mindate = $request->input('mindate');
+                $maxdate = $request->input('maxdate');
+                //如果用户名不为空
+                if(!empty($username)) {
+                    $query->where('true_name','like','%'.$username.'%');
+                }
+                //如果日期不为空
+                if(!empty($mindate)){
+                    $query->whereBetween('created_at',[$mindate,$maxdate]);
+                }
+                //过滤掉已删除状态的
+                $query->where('status','0');
+            })->simplePaginate(10);
+        return view('admin.user.del',['data'=>$data,'allData'=>$allData]);
     }
     /**
      * Display a listing of the resource.
@@ -22,7 +40,7 @@ class UserController extends Controller
      */
     public function index(Request $request)
     {
-        $allData = Buser::get();   //获取总共有多少会员
+        $allData = Buser::get()->where('status','1');   //获取总共有多少会员
         $data =  DB::table('data_user_message')
                 ->where(function($query) use($request){
               //检测关键字
@@ -34,9 +52,11 @@ class UserController extends Controller
                     $query->where('true_name','like','%'.$username.'%');
                 }
               //如果日期不为空
-                if(!empty($mindate)) {
+                if(!empty($mindate)){
                     $query->whereBetween('created_at',[$mindate,$maxdate]);
                 }
+              //过滤掉已删除状态的
+                    $query->where('status','1');
                 })->simplePaginate(10);
         return view('admin.user.list',['data'=>$data,'allData'=>$allData]);
     }
@@ -121,8 +141,52 @@ class UserController extends Controller
      */
     public function destroy($id)
     {
+        //删除一行
+        $res = Buser::find($id)->delete();
+        //如果删除成功
+        if($res){
+            $data = ['status'=>0, 'message'=>'删除成功'];
+        }else{
+            $data = ['status'=>1, 'message'=>'删除失败'];
+        }
 
+        return $data;
     }
 
+    //会员删除状态
+    public function statu($id)
+    {
+        $user =  Buser::find($id);
+        $user -> status = '0';
+        $res = $user -> save();
+        //如果修改成功
+        if($res){
+            return redirect('admin/user')->with('msg','删除成功');
+        }else{
+            return back()->with('msg','删除失败');
+        }
+    }
+    //会员恢复状态
+    public function statu2($id)
+    {
+        $user =  Buser::find($id);
+        $user -> status = '1';
+        $res = $user -> save();
+        //如果修改成功
+        if($res){
+            return redirect('admin/user/deleted')->with('msg','恢复成功');
+        }else{
+            return back()->with('msg','恢复失败');
+        }
+    }
+
+    //查看会员头像
+    public function showav(Request $request)
+    {
+        $id = $request->id;
+        $av =  Buser::find($id)->avatar;
+        $str = "<img width='300' height='300' src='".$av."'>";
+        return $str;
+    }
 
 }

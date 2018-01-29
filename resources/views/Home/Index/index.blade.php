@@ -29,10 +29,9 @@
 								<div class="row">
 									<div class="col-md-6 col-md-offset-6">
 										<div class="slide-content">
-											<h2></h2>
-											<p></p>
-											<p></p>
-											<a href="" class="readmore"></a>
+											<h2>今晚24点开抢</h2>
+											<p>前一个小时折上有折</p>
+											<a href="" class="readmore">点击开抢</a>
 										</div>
 									</div>
 								</div>
@@ -50,9 +49,9 @@
 								<div class="row">
 									<div class="col-md-6 col-md-offset-6">
 										<div class="slide-content">
-											<h2>We are great</h2>
-											<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Saepe aspernatur, dolorum harum molestias tempora deserunt voluptas possimus quos eveniet, vitae voluptatem accusantium atque deleniti inventore. Enim quam placeat expedita! Quibusdam!</p>
-											<a href="" class="readmore">Learn more</a>
+											<h2>数码特惠</h2>
+											<p>更多折扣  更多优惠</p>
+											<a href="" class="readmore">了解更多</a>
 										</div>
 									</div>
 								</div>
@@ -70,10 +69,9 @@
 								<div class="row">
 									<div class="col-md-6 col-md-offset-6">
 										<div class="slide-content">
-											<h2>We are superb</h2>
-											<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Dolores, eius?</p>
-											<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Deleniti voluptates necessitatibus dicta recusandae quae amet nobis sapiente explicabo voluptatibus rerum nihil quas saepe, tempore error odio quam obcaecati suscipit sequi.</p>
-											<a href="" class="readmore">Learn more</a>
+											<h2>下一个剁手节</h2>
+											<p><h1>美丽动人 买一送一  优惠券提前发放</h1></p>
+											<a href="" class="readmore">点击抢券</a>
 										</div>
 									</div>
 								</div>

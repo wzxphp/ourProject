@@ -1,0 +1,66 @@
+<style type="text/css">
+
+/*    #product-images
+    {
+        position: relative;
+        width: 800px;
+        height: 1000px;
+        border: 1px solid #ccc;
+        margin: 0 auto;
+    }
+    #product-main-img
+    {
+        position: absolute;
+        left:20px;
+        top: 20px;
+        width: 300px;
+        height: 300px;
+        border: 1px solid #ccc;
+    }*/
+    #big
+    {
+        position: absolute;
+        left:340px;
+        top:20px;
+        width: 300px;
+        height: 300px;
+        border: 1px solid #ccc;
+        overflow: hidden;
+        display: none;
+    }
+    #move
+    {
+        position: absolute;
+        left:0;
+        top:0;
+        background: url(../img/bg.png);
+    }
+    #bigImg
+    {
+        position: absolute;
+    }
+
+    #uid
+    {
+        position: absolute;
+        top:340px;
+        left: 20px;
+        width: 300px;
+        height: 90px;
+        border: 1px solid #ccc;
+    }
+    #uid li
+    {
+        width: 70px;
+        height: 70px;
+        float: left;
+        padding: 10px;
+        margin-left: 5px; 
+    }
+    #uid li img
+    {
+        width: 100%;
+    }
+
+
+</style>

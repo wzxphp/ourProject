@@ -13,6 +13,9 @@ class IndexController extends Controller
     {
         $res = DB::table('data_recommend')->get();
     	return view('Home/Index/index',compact('res'));
+
+    	// $recommend = 推荐位表::get();
+//    	return view('Home/Index/index',compact('recommend'));
     }
 
 

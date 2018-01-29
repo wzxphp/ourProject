@@ -26,9 +26,9 @@
 								<span class="street">{{ $v->detail_address }}</span></p>
 						</div>
 						<div class="new-addr-btn">
-							<a href="#"><i class="am-icon-edit"></i>编辑</a>
+							<a href="{{ url('/home/center/edit') }}/{{ $v->id }}"><i class="am-icon-edit"></i>编辑</a>
 							<span class="new-addr-bar">|</span>
-							<a href="javascript:void(0);" onclick="delClick(this);"><i class="am-icon-trash"></i>删除</a>
+							<a href="{{ url('/home/center/del') }}/{{ $v->id }}" onclick="delClick(this);"><i class="am-icon-trash"></i>删除</a>
 						</div>
 					</li>
 					@endforeach
@@ -111,7 +111,7 @@
 
 										<!-- <a class="am-btn am-btn-danger">保存</a>
 										<a href="javascript: void(0)" class="am-close am-btn am-btn-danger" data-am-modal-close>取消</a> -->
-										<button id="submit" type="submit">保存修改</button>
+										<button id="submit" type="submit">保存</button>
 
 								</div>
 							</form>
@@ -204,59 +204,7 @@
 		</div>
 	</div>
 
+@parent
 
-	<aside class="menu">
-		<ul>
-			<li class="person active">
-				<a href="{{ url('home/center') }}"><i class="am-icon-user"></i>个人中心</a>
-			</li>
-			<li class="person">
-				<p><i class="am-icon-newspaper-o"></i>个人资料</p>
-				<ul>
-					<li> <a href="{{ url('home/center/userinfo') }}">个人信息</a></li>
-					<li> <a href="{{ url('home/center/safe') }}">安全设置</a></li>
-					<li> <a href="{{ url('home/center/address') }}">地址管理</a></li>
-					<li> <a href="cardlist.html">快捷支付</a></li>
-				</ul>
-			</li>
-			<li class="person">
-				<p><i class="am-icon-balance-scale"></i>我的交易</p>
-				<ul>
-					<li><a href="order.html">订单管理</a></li>
-					<li> <a href="change.html">退款售后</a></li>
-					<li> <a href="comment.html">评价商品</a></li>
-				</ul>
-			</li>
-			<li class="person">
-				<p><i class="am-icon-dollar"></i>我的资产</p>
-				<ul>
-					<li> <a href="points.html">我的积分</a></li>
-					<li> <a href="coupon.html">优惠券 </a></li>
-					<li> <a href="bonus.html">红包</a></li>
-					<li> <a href="walletlist.html">账户余额</a></li>
-					<li> <a href="bill.html">账单明细</a></li>
-				</ul>
-			</li>
-
-			<li class="person">
-				<p><i class="am-icon-tags"></i>我的收藏</p>
-				<ul>
-					<li> <a href="collection.html">收藏</a></li>
-					<li> <a href="foot.html">足迹</a></li>														
-				</ul>
-			</li>
-
-			<li class="person">
-				<p><i class="am-icon-qq"></i>在线客服</p>
-				<ul>
-					<li> <a href="consultation.html">商品咨询</a></li>
-					<li> <a href="suggest.html">意见反馈</a></li>							
-					
-					<li> <a href="news.html">我的消息</a></li>
-				</ul>
-			</li>
-		</ul>
-
-	</aside>
 </div>
 @stop

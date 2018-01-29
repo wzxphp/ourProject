@@ -103,11 +103,8 @@ class Code{
 		for ($i = 0; $i < $this->codeLen; $i++) {
 			$code .= $this->codeStr [mt_rand(0, strlen($this->codeStr) - 1)];
 		}
-		$this->code = strtolower($code);
-		// dd($this->code);
+		$this->code = $code;
 		Session::put('code',$this->code);
-        // session(['code' => $this->code]);
-//		$_SESSION['code'] = $this->code;
 	}
 
 	//建画布

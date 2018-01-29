@@ -16,9 +16,9 @@ class Role extends Model
     public $timestamps = false;
 
 
-    //查找当前用户的角色  多对多
+    //查找当前角色的权限  多对多
     public function permission()
     {
-        return $this->belongsToMany('App\Model\Permission','role_permission','role_id','permission_id');
+        return $this->belongsToMany('App\Model\Admin\Permission','data_role_permission','role_id','permission_id');
     }
 }
