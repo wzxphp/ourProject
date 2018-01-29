@@ -10,9 +10,10 @@
     <link rel="stylesheet" href="https://cdn.bootcss.com/Swiper/3.4.2/css/swiper.min.css">
     <script type="text/javascript" src="https://cdn.bootcss.com/jquery/3.2.1/jquery.min.js"></script>
     <script type="text/javascript" src="https://cdn.bootcss.com/Swiper/3.4.2/js/swiper.jquery.min.js"></script>
+{{--    <script src="{{asset('/admin/lib/layui/css/layui.css')}}" charset="utf-8"></script>--}}
     <script src="{{asset('/admin/lib/layui/layui.js')}}" charset="utf-8"></script>
     <script type="text/javascript" src="{{asset('/admin/js/xadmin.js')}}"></script>
-
+    {{--<script type="text/javascript" src="{{asset('/admin/js/layer.js')}}"></script>--}}
 </head>
 <body>
 <!-- 顶部开始 -->
@@ -23,6 +24,7 @@
         <li class="layui-nav-item">
             <a href="javascript:;">管理员：{{session('adminuser')->name}}</a>
             <dl class="layui-nav-child"> <!-- 二级菜单 -->
+
                 <dd><a href="{{url('admin/login')}}">切换帐号</a></dd>
                 <dd><a href="{{url('admin/logout')}}">退出</a></dd>
             </dl>
@@ -36,7 +38,7 @@
     <!-- 左侧菜单开始 -->
     <div class="left-nav">
         <div id="side-nav">
-            <ul id="nav">
+            <ul id="nav" >
                 <li class="list" current>
                     <a href="{{url('admin/index')}}">
                         <i class="iconfont">&#xe761;</i>
@@ -46,7 +48,7 @@
                 </li>
                 <li class="list">
                     <a href="javascript:;">
-                        <i class="iconfont">&#xe705;</i>
+                        <i class="iconfont">&#xe726;</i>
                         后台管理员
                         <i class="iconfont nav_right">&#xe697;</i>
                     </a>
@@ -67,7 +69,7 @@
                 </li>
                 <li class="list" >
                     <a href="javascript:;">
-                        <i class="iconfont">&#xe6a3;</i>
+                        <i class="iconfont">&#xe70b;</i>
                         角色管理
                         <i class="iconfont nav_right">&#xe697;</i>
                     </a>
@@ -87,7 +89,7 @@
                 </li>
                 <li class="list" >
                     <a href="javascript:;">
-                        <i class="iconfont">&#xe6a3;</i>
+                        <i class="iconfont">&#xe753;</i>
                         权限管理
                         <i class="iconfont nav_right">&#xe697;</i>
                     </a>
@@ -109,7 +111,7 @@
                 </li>
                 <li class="list">
                     <a href="javascript:;">
-                        <i class="iconfont">&#xe70b;</i>
+                        <i class="iconfont">&#xe6af;</i>
                         会员管理
                         <i class="iconfont nav_right">&#xe697;</i>
                     </a>
@@ -130,7 +132,7 @@
                 </li>
                 <li class="list">
                     <a href="javascript:;">
-                        <i class="iconfont">&#xe70b;</i>
+                        <i class="iconfont">&#xe705;</i>
                         分类管理
                         <i class="iconfont nav_right">&#xe697;</i>
                     </a>
@@ -151,7 +153,7 @@
                 </li>
                 <li class="list" >
                     <a href="javascript:;">
-                        <i class="iconfont">&#xe6a3;</i>
+                        <i class="iconfont">&#xe724;</i>
                         订单管理
                         <i class="iconfont nav_right">&#xe697;</i>
                     </a>
@@ -164,10 +166,9 @@
                         </li>
                     </ul>
                 </li>
-                <!--商品列表-->
                 <li class="list">
                     <a href="javascript:;">
-                        <i class="iconfont">&#xe6a3;</i>
+                        <i class="iconfont">&#xe83b;</i>
                         商品管理
                         <i class="iconfont nav_right">&#xe697;</i>
                     </a>
@@ -175,13 +176,28 @@
                         <li>
                             <a href="{{ url('admin/goods/index') }}">
                                 <i class="iconfont">&#xe6a7;</i>
-                                商品管理
+                                商品浏览
                             </a>
                         </li>
                         <li>
                             <a href="{{ url('admin/goods/create') }}">
                                 <i class="iconfont">&#xe6a7;</i>
                                 添加商品
+                            </a>
+                        </li>
+                    </ul>
+                </li>
+                <li class="list">
+                    <a href="javascript:;">
+                        <i class="iconfont">&#xe6b4;</i>
+                        评论管理
+                        <i class="iconfont nav_right">&#xe697;</i>
+                    </a>
+                    <ul class="sub-menu">
+                        <li>
+                            <a href="{{ url('admin/comment') }}">
+                                <i class="iconfont">&#xe6a7;</i>
+                                评论列表
                             </a>
                         </li>
                     </ul>
@@ -216,7 +232,52 @@
                         </li>
                     </ul>
                 </li>
-                <!--商品结束-->
+                <li class="list">
+                    <a href="javascript:;">
+                        <i class="iconfont">&#xe6a3;</i>
+                        推荐管理
+                        <i class="iconfont nav_right">&#xe697;</i>
+                    </a>
+                    <ul class="sub-menu">
+                        <li>
+                            <a href="{{url('admin/recom/index')}}">
+                                <i class="iconfont">&#xe6a7;</i>
+                                推荐浏览
+                            </a>
+                            <a href="{{url('admin/recom/add')}}">
+                                <i class="iconfont">&#xe6a7;</i>
+                                添加商品
+                            </a>
+                        </li>
+                    </ul>
+                </li>
+                <li class="list">
+                    <a href="javascript:;">
+                        <i class="iconfont">&#xe6ae;</i>
+                        网站配置
+                        <i class="iconfont nav_right">&#xe697;</i>
+                    </a>
+                    <ul class="sub-menu">
+                        <li>
+                            <a href="{{ url('admin/config') }}">
+                                <i class="iconfont">&#xe6a7;</i>
+                                配置列表
+                            </a>
+                        </li>
+                        <li>
+                            <a href="{{ url('admin/config/create') }}">
+                                <i class="iconfont">&#xe6a7;</i>
+                                添加配置
+                            </a>
+                        </li>
+                        <li>
+                            <a href="{{ url('admin/config/close') }}">
+                                <i class="iconfont">&#xe6a7;</i>
+                                关闭网站
+                            </a>
+                        </li>
+                    </ul>
+                </li>
             </ul>
         </div>
     </div>

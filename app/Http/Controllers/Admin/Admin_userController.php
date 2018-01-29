@@ -7,10 +7,60 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Crypt;
 use App\Http\Controllers\Controller;
 use App\Model\User;
+use App\Model\Admin\Role;
 use DB;
 
 class Admin_userController extends Controller
 {
+    //授权
+    public function auth($id)
+    {
+        //根据id找到相关的用户U
+        $user = User::find($id);
+
+        //获取角色列表
+        $roles = Role::get();
+
+        //获取当前用户已经拥有的角色列表
+        $own_roles = $user->roles;
+        //存放当前用户拥有的角色的id
+        $own = [];
+        foreach ($own_roles as $v){
+            $own[] = $v->id;
+        }
+        return view('admin.admin_user.auth',compact('user','roles','own'));
+    }
+
+    //处理用户授权操作
+
+    public function doAuth(Request $request)
+    {
+        //1. 获取传过来的参数（要授权的用户的ID，要授予的角色的ID）
+        $input = $request->except('_token');
+
+        //2. 提交到user_role这个关联表中
+        //开启事务
+        DB::beginTransaction();
+        try{
+            //删除当前用户的所有权限
+            DB::table('data_adminuser_role')->where('admin_user_id', $input['admin_user_id'])->delete();
+
+            if(!empty($input['role_id'])){
+                //关联表中记录（给用户授权）前，应该检查一下，当前用户是否已经拥有了此角色，如果没有再添加
+                foreach ($input['role_id'] as $v){
+                    DB::table('data_adminuser_role')->insert(
+                        ['admin_user_id' => $input['admin_user_id'], 'role_id' => $v]);
+                }
+            }
+            DB::commit();
+            return redirect('admin/admin_user/auth/'.$input['admin_user_id'])->with('msg','添加成功');
+        }catch(Exception $e){
+            DB::rollBack();
+            return redirect()->back()
+                    ->withErrors(['error' => $e->getMessage()]);
+        }
+    }
+
     /**
      * Display a listing of the resource.
      *
@@ -25,10 +75,10 @@ class Admin_userController extends Controller
                 //检测关键字
                 $username = $request->input('username');
                 $mindate = $request->input('mindate');
-                $maxdate = $request->input('maxdate');
+                $maxdate = $request->get('maxdate');
                 //如果用户名不为空
                 if(!empty($username)) {
-                    $query->where('name','like','%'.$username.'%');
+                    $query->where('name','like','%'.$username.'');
                 }
                 //如果日期不为空
                 if(!empty($mindate)) {
@@ -143,9 +193,9 @@ class Admin_userController extends Controller
             $res = User::find($id)->delete();
             //如果删除成功
             if($res){
-                $data = ['status'=>0, 'message'=>'1删除成功'];
+                $data = ['status'=>0, 'message'=>'删除成功'];
             }else{
-                $data = ['status'=>1, 'message'=>'1删除失败'];
+                $data = ['status'=>1, 'message'=>'删除失败'];
             }
 
         return $data;
@@ -161,9 +211,9 @@ class Admin_userController extends Controller
         $res =  DB::table('data_admin_users')->whereIn('id', $ids)->delete();
         //如果删除成功
         if($res){
-            $data = ['status'=>0, 'message'=>'2删除成功'];
+            $data = ['status'=>0, 'message'=>'删除成功'];
         }else{
-            $data = ['status'=>1, 'message'=>'2删除失败'];
+            $data = ['status'=>1, 'message'=>'删除失败'];
         }
         return $data;
     }
@@ -175,7 +225,7 @@ class Admin_userController extends Controller
         $user =  User::find($id);
         if($user -> status == '0'){
             $user -> status = '1';
-        }elseif($user -> status == '1'){
+        }else{
             $user -> status = '0';
         }
         $res = $user -> save();

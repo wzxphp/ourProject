@@ -45,7 +45,7 @@
                             </div>
                             <div class="layui-form-item">
                                 <label for="L_username" class="layui-form-label">
-                                    <span class="x-red"></span>商品关键词
+                                    <span class="x-red"></span>分类关键词
                                 </label>
                                 <div class="layui-input-inline">
                                     <input type="text" id="L_username" name="describe" required="" lay-verify="nikename" autocomplete="off" class="layui-input">

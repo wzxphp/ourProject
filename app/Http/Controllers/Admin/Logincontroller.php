@@ -3,7 +3,9 @@
 namespace App\Http\Controllers\Admin;
 
 use Illuminate\Support\Facades\Crypt;
+use Illuminate\Support\Facades\DB;
 use Session;
+use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
@@ -53,7 +55,7 @@ class Logincontroller extends Controller
                     ->withInput();
             }
         //验证码
-            if($input['code'] != session('code'))
+            if(strtolower($input['code']) != strtolower(session('code')))
             {
                 return back()->with('errors','验证码错误');
             }
@@ -65,7 +67,11 @@ class Logincontroller extends Controller
             {
                 return back()->with('errors','无此用户');
             }
-
+        //账户被禁用
+            if ($user->status == 0)
+            {
+                return back()->with('errors','账户被禁用');
+            }
         //密码不正确
             if(Crypt::decrypt($user->password) != $input['password']){
                 return back()->with('errors','密码错误');
@@ -78,19 +84,84 @@ class Logincontroller extends Controller
             return redirect('admin/index');
 
     }
+
+    //忘记密码
+    public function forget(Request $request)
+    {
+        return view('admin.login.forget');
+    }
+    //忘记密码执行
+    public function doforget(Request $request)
+    {
+        //1. 获取用户需要找回密码的账号
+        $email = $request->email;
+
+        $user = User::where('email',$email)->first();
+//        dd($user);
+
+//        2. 验证账号的安全性（通过向此账号发送邮件来确认此邮箱是用户的真实邮箱）
+        if($user){
+            Mail::send('admin.emails.forget', ['user' => $user], function ($m) use ($user) {
+
+                $m->to($user->email, $user->name)->subject('找回密码!');
+            });
+
+            return '重置密码的邮件已经发送，请前往邮箱查看，重置您的账号密码';
+        }
+    }
+    //重置密码
+    public function reset(Request $request)
+    {
+        // 检测请求的有效性
+        $user = User::find($request->id);
+
+        if($user->token != $request->token){
+            return '请通过您的邮箱中的重置链接来重置您的密码';
+        }
+        //返回密码重置页面
+
+        return view('admin.login.reset',compact('user'));
+    }
+    //重置密码执行
+    public function doreset(Request $request)
+    {
+        //1. 接受需要重置的账号、密码
+        $name = $request->name;
+//        dd($pass);
+//        $user = User::where('name',$name)->first();
+//        $users = $user->password;
+//        dd($users);
+        $pass = Crypt::encrypt($request->newpass);
+
+
+//        2. 找到要修改密码的账号，执行修改操作
+
+//        $res = $user->update(['password'=>$pass]);
+        $res = DB::table('data_admin_users')->where('name',$name)->update(['password' => $pass]);
+
+        if($res){
+            return redirect('admin/login')->with('msg','密码重置成功');
+        }else{
+            return '密码重置失败，请重新设置密码';
+        }
+    }
+
     //后台首页
     public function index()
     {
-//        dd($_ENV);
         return view('admin.index');
     }
 
-    //退出登录
+    // 退出登录
     public function logout()
     {
         session()->forget('adminuser');
         return redirect('admin/login');
     }
 
-
+    //未授权页面
+    public function auth()
+    {
+        return view('admin.errors.auth');
+    }
 }

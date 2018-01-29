@@ -45,6 +45,50 @@ class Usercontroller extends Controller
        
     }
 
+// 上传头像
+    public function file()
+    {
+        // 传值方法是否是post
+        if(Request::isMethod('POST'))
+        {
+            // 是否有文件上传
+            if(Request::hasFile('file'))
+            {
+                $myfile = Request::file('file');
+                // 文件上传是否成功
+                if($myfile -> isValid())
+                {
+                  // 获取上传文件名称
+                  // $picname=$myfile->getClientOriginalName();
+                  // 获取上传文件后缀名
+                  $ext=$myfile->getClientOriginalExtension();
+                  // 设置随机文件名
+                  $filename=time().rand(1000,9999).'.'.$ext;
+                  // 移动
+                  $myfile->move('./myuploads',$filename);
+
+                  $img = Image::make("./myuploads/".$filename)->resize(100,100);
+                  $img->save("./myuploads/s_".$filename); //另存为
+                  // return $img->response("jpg"); //输出
+        
+                  //执行等比缩放
+                  $img->resize(null, 400, function ($constraint) {
+                            $constraint->aspectRatio();
+                            $constraint->upsize();
+                  });
+
+                  return redirect('home/center/userinfo')->with(['info'=>'上传成功']);
+                }else{
+                    return back()->with(['info'=>'头像上传失败']);
+                }
+
+            }else{
+                return back()->with(['info'=>'没有文件上传']);;
+            }
+        }
+        return '123';
+    }
+
     public function safe()
     {
     	return view('Home/user/safe');
@@ -127,7 +171,7 @@ class Usercontroller extends Controller
     {
         $this -> validate($request,[
                 'name' => 'required|',
-                'tel' => 'required',
+                'tel' => 'required|size:11',
                 'address' => 'required',
                 'detail_address' => 'required'
             ],[
@@ -153,7 +197,60 @@ class Usercontroller extends Controller
             return back()->with(['info'=>'地址添加失败']);
         }
         
-        
-        
+    }
+
+    public function edit($id)
+    {
+        $addr = \DB::table('data_user_address')->get();
+
+        $pro = \DB::table('data_pro_city')->where('LevelType','1')->get();
+
+        $city = \DB::table('data_pro_city')->where('LevelType','2')->get();
+
+        $town = \DB::table('data_pro_city')->where('LevelType','3')->get();
+
+        $data = \DB::table('data_user_address')->where('id',$id)->first();
+        // $data = \DB::table('data_user_address')->find($id);
+        // dd($data);
+        return view('/Home/user/edit',compact('addr','pro','city','town','data'));
+    }
+
+    public function update(Request $request)
+    {
+        $id = $request->input('id');
+
+        $this -> validate($request,[
+            'name' => 'required|',
+            'tel' => 'required|size:11',
+            'address' => 'required',
+            'detail_address' => 'required'
+        ],[
+            'name.required' => '请填入收货人名称',
+            'tel.required' => '请填入电话',
+            'tel.size' => '请正确填入电话',
+            'address.required' => ' 请填入地址',
+            'detail_address.required' => '请填入详细地址',
+        ]);
+        $data = $request->except('_token');
+
+        $res = \DB::table('data_user_address')->where('id',$id)->update($data);
+
+        if($res)
+        {
+            return redirect('/home/center/address')->with(['info'=>'修改成功']);
+        }else{
+            return back()->with(['info'=>'修改失败']);
+        }
+    }
+
+    public function del($id)
+    {
+        $res = \DB::table('data_user_address')->where('id',$id)->delete();
+        if($res)
+        {
+            return back()->with(['msg'=>'删除成功']);
+        }else{
+            return back()->with(['msg'=>'删除失败']);
+        }
     }
 }
