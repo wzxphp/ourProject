@@ -68,7 +68,7 @@ Route::get('/home/center/userinfo','Home\UserController@userinfo');
 // 完善用户信息
 Route::post('/home/center/userinfo_create','Home\UserController@userinfo_create');
 // 上传头像
-Route::post('/home/center/file','Home\UserController@file');
+Route::post('/home/center/upload','Home\UserController@upload');
 // 用户安全设置页面
 Route::get('/home/center/safe','Home\UserController@safe');
 // 用户自主修改密码页面

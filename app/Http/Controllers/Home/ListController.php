@@ -7,6 +7,7 @@ use App\Http\Controllers\Controller;
 
 use App\Model\Home\Good;
 use App\Model\Home\Comm;
+use App\Model\Home\User;
 
 
 class ListController extends Controller
@@ -43,7 +44,15 @@ class ListController extends Controller
         $data = Good::where('goods_id',$id)->get();
 
         $review = Comm::where('goods_id',$id)->get();
-        // dd($review);
-    	return view('Home/details/details',compact('data','review'));
+
+        $user = [];
+        foreach($review as $k=>$v)
+        {
+            $user['user_id'] = $v->user_id;
+        }
+
+        $revuser = User::where('user_id',$user['user_id'])->get();
+        
+    	return view('Home/details/details',compact('data','review','revuser'));
     }
 }

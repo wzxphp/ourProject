@@ -4,7 +4,8 @@ namespace App\Http\Controllers\Home;
 
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
-
+// use Request;
+use Intervention\Image\ImageManagerStatic as Image;
 use App\Model\Home\Pro;
 use Session;
 
@@ -22,6 +23,8 @@ class Usercontroller extends Controller
 
     public function userinfo_create(Request $request)
     {
+        $input = $request->all();
+        dd($input);
         $this->validate($request,[
                 'name' => 'required',
                 'true_name' => 'required',
@@ -33,7 +36,46 @@ class Usercontroller extends Controller
                 'email.email' => '请正确填写邮箱'
             ]);
         $userdata = $request->except('_token');
+dd($userdata);
+        // 传值方法是否是post
+        if($request->isMethod('POST'))
+        {
+            // 是否有文件上传
+            if($request->hasFile('avatar'))
+            {
+                $myfile = $request0->file('avatar');
+                // 文件上传是否成功
+                if($myfile -> isValid())
+                {
+                  // 获取上传文件名称
+                  // $picname=$myfile->getClientOriginalName();
+                  // 获取上传文件后缀名
+                  $ext=$myfile->getClientOriginalExtension();
+                  // 设置随机文件名
+                  $filename=time().rand(1000,9999).'.'.$ext;
+                  // 移动
+                  $myfile->move('./myuploads',$filename);
 
+                  $img = Image::make("./myuploads/".$filename)->resize(100,100);
+                  $img->save("./myuploads/s_".$filename); //另存为
+                  // return $img->response("jpg"); //输出
+        
+                  //执行等比缩放
+                  $img->resize(null, 400, function ($constraint) {
+                            $constraint->aspectRatio();
+                            $constraint->upsize();
+                  });
+
+                  return redirect('home/center/userinfo')->with(['info'=>'上传成功']);
+                }else{
+                    return back()->with(['info'=>'头像上传失败']);
+                }
+
+            }else{
+                return back()->with(['info'=>'没有文件上传']);;
+            }
+        }
+        return '123';
         $res = \DB::table('data_user_message')->where('email',$userdata['email'])->update($userdata);
 
         if($res)

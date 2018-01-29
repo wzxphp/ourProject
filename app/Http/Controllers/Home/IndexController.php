@@ -11,8 +11,7 @@ class IndexController extends Controller
     public function index()
     {
     	//
-    	// $recommend = 推荐位表::get();
-    	return view('Home/Index/index',compact('recommend'));
+    	return view('Home/Index/index');
     }
 
 

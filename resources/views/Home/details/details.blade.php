@@ -91,7 +91,9 @@
                                                     @if($n->comment_type == 0)
                                                         <span>匿名评价</span>
                                                     @elseif($n->comment_type == 1)
-                                                        <span>{{ Session('home_user')->name }}</span>
+                                                        @foreach($revuser as $i=>$j)
+                                                        <span>{{ $j->name }}</span>
+                                                        @endforeach
                                                     @endif
                                                     @if($n->star == 1)
                                                         <span>
