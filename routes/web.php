@@ -131,12 +131,8 @@ Route::get('admin/logout','Admin\LoginController@logout');
 Route::get('admin/code','Admin\LoginController@code');
 
 //路由组
-<<<<<<< HEAD
 //Route::group(['prefix'=>'admin','namespace'=>'Admin','middleware'=>['admin_islogin','hasRole']],function(){
 Route::group(['prefix'=>'admin','namespace'=>'Admin','middleware'=>['admin_islogin']],function(){
-=======
-Route::group(['prefix'=>'admin','namespace'=>'Admin','middleware'=>'admin_islogin'],function(){
->>>>>>> origin/zuo
 //后台首页
     Route::get('index','LoginController@index');
 //管理员模块

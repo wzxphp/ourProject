@@ -74,10 +74,10 @@ class Admin_userController extends Controller
                 //检测关键字
                 $username = $request->input('username');
                 $mindate = $request->input('mindate');
-                $maxdate = $request->input('maxdate');
+                $maxdate = $request->get('maxdate');
                 //如果用户名不为空
                 if(!empty($username)) {
-                    $query->where('name','like','%'.$username.'%');
+                    $query->where('name','like','%'.$username.'');
                 }
                 //如果日期不为空
                 if(!empty($mindate)) {
