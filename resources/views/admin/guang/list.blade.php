@@ -113,25 +113,25 @@
             });
             {{--//排序--}}
 
-                function changeOrder(obj,id){
+            function changeOrder(obj,id){
 //            获取当前文本框的值
-                    var v = $(obj).val();
+                var v = $(obj).val();
 //            $.post('路由','参数','执行后的返回结果')
-                    $.post('{{ url('/admin/show/changeorder') }}',{'_token':"{{ csrf_token() }}",'id':id,'cate_order':v},function(data){
+                $.post('{{ url('/admin/guang/changeorder') }}',{'_token':"{{ csrf_token() }}",'id':id,'cate_order':v},function(data){
 //                console.log(data);
-                        if(data.status == 0){
+                    if(data.status == 0){
 //                    如果修改成功，给用户一个修改成功的提示，然后刷新页面
-                            layer.msg(data.msg);
-                            // console.log(241);
+                        layer.msg(data.msg);
+                        // console.log(241);
 
-                            setTimeout(function(){
-                                window.location.href = location.href;
-                            },1000);
-                        }else{
-                            layer.msg(data.msg);
-                        }
-                    })
-                }
+                        setTimeout(function(){
+                            window.location.href = location.href;
+                        },1000);
+                    }else{
+                        layer.msg(data.msg);
+                    }
+                })
+            }
 
 
            /*添加*/

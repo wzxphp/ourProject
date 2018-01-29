@@ -150,5 +150,6 @@ Route::post('admin/guang/delete/{id}','Admin\GuangController@delete');//删除
 Route::get('admin/guang/edit/{id}','Admin\GuangController@edit');  //修改页面
 Route::post('admin/guang/update','Admin\GuangController@update'); //修改
 Route::post('admin/guang/changeorder','Admin\GuangController@changeorder'); //排序
+Route::post('admin/guang/update','Admin\GuangController@update'); //修改轮播图
 
 

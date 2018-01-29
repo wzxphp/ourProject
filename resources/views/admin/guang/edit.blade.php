@@ -16,10 +16,19 @@
 
                     <tr>
                         <td><label for="desc" class="layui-form-label">
+                                <span class="x-red">*</span>ID
+                            </label>
+
+                            <input type="text" name="id" readonly="readonly" value="{{ $data->id }}" style="width:200px" class="layui-input" />
+                            <span class="x-red">*</span>注：ID不可更改
+                            {{--<img src="/uploads/{{ $data->img }}" width="100" />--}}
+                        </td>
+                        <td><label for="desc" class="layui-form-label">
                                 <span class="x-red">*</span>广告图
                             </label>
 
                             <input type="file" name="img" value="{{ $data->img }}" style="width:200px" class="layui-input" />
+                            <span class="x-red">*</span>
                             {{--<img src="/uploads/{{ $data->img }}" width="100" />--}}
                         </td>
 

@@ -52,7 +52,7 @@
                             <span class="x-red"></span>收货人地址
                         </label>
                         <div class="layui-input-inline">
-                            <input  type="text" id="L_username" style="width:600px" value="{{ $cate->cargo_message_address }}" name="cargo_message_address" required="" lay-verify="nikename" autocomplete="off" class="layui-input">
+                            <input  type="text" id="L_username" style="" value="{{ $cate->cargo_message_address }}" name="cargo_message_address" required="" lay-verify="nikename" autocomplete="off" class="layui-input">
                         </div>
                     </div>
 
