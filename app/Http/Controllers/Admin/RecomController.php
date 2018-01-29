@@ -22,7 +22,7 @@ class RecomController extends Controller
                 if(!empty($recommend_name)) {
                     $query->where('recommend_name','like','%'.$recommend_name.'%');
                 }
-            })->simplePaginate(2);
+            })->simplePaginate(5);
 
 
         return view('admin.admin_remo.add',['date'=>$date]);

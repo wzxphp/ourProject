@@ -17,7 +17,7 @@ class GoodsController extends Controller
 //        $ls = DB::table('data_goods')->leftJoin('data_category','data_goods.category_id','=','data_category.id')->orderBy('data_goods.goods_id','asc')->get();
 //      $cate =  Cate::get(['name','id']);
         $cate = (new Cate)->getCate();
-        $cates = array_column($cate,'name','id');
+        $cates = array_column($cate,'name','pid');
 //      dd($cate);
         // 搜索
       $goods = DB::table('data_goods')

@@ -4,11 +4,11 @@ namespace App\Model;
 
 use Illuminate\Database\Eloquent\Model;
 
-class Order extends Model
+class Show extends Model
 {
-    public $table = 'data_orders';
+    public $table = 'rotation';
     public $primaryKey = "id";
-
-    public $timestamps = false;
     public $guarded=[];
+    public $timestamps = false;
+
 }

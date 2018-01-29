@@ -108,7 +108,10 @@
                 @endforeach
                 </tbody>
             </table>
-          {!! $date->render() !!}
+          <div style="float: right;">
+              {!! $date->render() !!}
+          </div>
+
             <!-- 右侧内容框架，更改从这里结束 -->
           </div>
         </div>
