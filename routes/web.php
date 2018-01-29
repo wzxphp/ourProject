@@ -87,7 +87,7 @@ Route::get('admin/code','Admin\LoginController@code');
 //登录页面的逻辑验证
 Route::post('admin/dologin','Admin\LoginController@dologin');
 //路由组
-Route::group(['prefix'=>'admin','namespace'=>'Admin','middleware'=>'islogin'],function(){
+Route::group(['prefix'=>'admin','namespace'=>'Admin','middleware'=>'admin_islogin'],function(){
 //后台首页
     Route::get('index','LoginController@index');
 //退出登录
@@ -117,7 +117,12 @@ Route::get('admin/cate/{id}','Admin\CateController@del');
 //订单管理
 Route::get('admin/order/index','Admin\OrderController@index');
 Route::get('admin/order/{id}/edit','Admin\OrderController@edit');
-
+Route::post('admin/order/update','Admin\OrderController@update');
+//订单状态修改
+Route::get('admin/order/up/{id}','Admin\OrderController@up');   //发货
+Route::get('admin/order/down/{id}','Admin\OrderController@down'); //未发货
+Route::get('admin/order/yes/{id}','Admin\OrderController@yes'); //已收货
+Route::get('admin/order/dis/{id}','Admin\OrderController@dis'); //取消订单
 
 //商品管理模块====================================================
 Route::get('admin/goods/index','Admin\GoodsController@index');
@@ -130,4 +135,20 @@ Route::get('admin/goods/{id}/edit','Admin\GoodsController@edit');
 Route::post('admin/goods/{id}/xxoo','Admin\GoodsController@xxoo');
 //删除
 Route::get('admin/goods/{id}','Admin\GoodsController@del');
+//轮播图
+Route::get('admin/show/index','Admin\ShowController@index'); //页面
+Route::post('admin/show/insert','Admin\ShowController@insert');  //添加提交
+Route::post('admin/show/changeorder','Admin\ShowController@changeorder'); //排序
+Route::get('admin/show/delete/{id}','Admin\ShowController@delete');  //删除轮播图
+Route::get('admin/show/edit/{id}','Admin\ShowController@edit');  //轮播图页面
+Route::post('admin/show/update','Admin\ShowController@update'); //修改轮播图
+//广告位
+Route::get('admin/guang/index','Admin\GuangController@index'); //页面
+Route::get('admin/guang/add','Admin\GuangController@add'); //添加页面
+Route::post('admin/guang/insert','Admin\GuangController@insert'); //添加
+Route::post('admin/guang/delete/{id}','Admin\GuangController@delete');//删除
+Route::get('admin/guang/edit/{id}','Admin\GuangController@edit');  //修改页面
+Route::post('admin/guang/update','Admin\GuangController@update'); //修改
+Route::post('admin/guang/changeorder','Admin\GuangController@changeorder'); //排序
+
 

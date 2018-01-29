@@ -32,7 +32,7 @@
                 </div>
 
             </form>
-            <xblock><button class="layui-btn" onclick="member_add('添加用户','member-add.html','600','500')"><i class="layui-icon">&#xe608;</i><a href="{{ url('admin/cate/create') }}">添加分类</a></button><span class="x-right" style="line-height:40px">共有数据：88 条</span></xblock>
+            <xblock><button class="layui-btn" onclick="member_add('添加用户','member-add.html','600','500')"><i class="layui-icon">&#xe608;</i><a href="{{ url('admin/cate/create') }}">添加分类</a></button><span class="x-right" style="line-height:40px">共有数据：{{count($cates)}} 条数据</span></xblock>
             <table class="layui-table">
                 <thead>
                 <tr>
@@ -68,6 +68,9 @@
                 </tbody>
             </table>
 
+            {{--<div>--}}
+                {{--{!! $cates->render() !!}--}}
+            {{--</div>--}}
             <!-- 右侧内容框架，更改从这里结束 -->
         </div>
     </div>

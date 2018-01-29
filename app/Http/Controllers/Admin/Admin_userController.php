@@ -18,8 +18,8 @@ class Admin_userController extends Controller
      */
     public function index(Request $request)
     {
-
         $allData = User::get();   //获取总共有多少管理员
+
         $data =  DB::table('data_admin_users')
                 ->where(function($query) use($request){
                 //检测关键字

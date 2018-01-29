@@ -186,6 +186,36 @@
                         </li>
                     </ul>
                 </li>
+                <li class="list" >
+                    <a href="javascript:;">
+                        <i class="iconfont">&#xe6a3;</i>
+                        轮播图
+                        <i class="iconfont nav_right">&#xe697;</i>
+                    </a>
+                    <ul class="sub-menu" style="display:none">
+                        <li>
+                            <a href="{{ url('admin/show/index') }}">
+                                <i class="iconfont">&#xe6a7;</i>
+                                轮播图管理
+                            </a>
+                        </li>
+                    </ul>
+                </li>
+                <li class="list" >
+                    <a href="javascript:;">
+                        <i class="iconfont">&#xe6a3;</i>
+                        广告位
+                        <i class="iconfont nav_right">&#xe697;</i>
+                    </a>
+                    <ul class="sub-menu" style="display:none">
+                        <li>
+                            <a href="{{ url('admin/guang/index') }}">
+                                <i class="iconfont">&#xe6a7;</i>
+                                广告位管理
+                            </a>
+                        </li>
+                    </ul>
+                </li>
                 <!--商品结束-->
             </ul>
         </div>
