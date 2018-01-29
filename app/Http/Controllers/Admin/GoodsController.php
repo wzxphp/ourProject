@@ -17,7 +17,7 @@ class GoodsController extends Controller
 //        $ls = DB::table('data_goods')->leftJoin('data_category','data_goods.category_id','=','data_category.id')->orderBy('data_goods.goods_id','asc')->get();
 //      $cate =  Cate::get(['name','id']);
         $cate = (new Cate)->getCate();
-        $cates = array_column($cate,'name','id');
+        $cates = array_column($cate,'name','pid');
 //      dd($cate);
         // 搜索
       $goods = DB::table('data_goods')
@@ -33,7 +33,7 @@ class GoodsController extends Controller
                 if(!empty($goods_price)) {
                     $query->where('goods_price','like','%'.$goods_price.'%');
                 }
-                })->simplePaginate(10);
+                })->paginate(2);
 
 
         return view('admin.admin_goods.index',['goods'=>$goods,'cates'=>$cates]);
@@ -55,8 +55,8 @@ class GoodsController extends Controller
 
         // 获取传过来的参数
         $data = $request->except('_token');
-            // 请求中是否携带上传图片
-       if($request->file('goods_original')){
+        if(!$data['pid'] == "0"){
+          if($request->file('goods_original')){
 //            获取上传图片文件
            $file = $request->file('goods_original');
             // 判断上传文件的有效性
@@ -87,6 +87,11 @@ class GoodsController extends Controller
 
             }
         }
+      }else {
+             // 请求中是否携带上传图片
+       
+        return back()->with('msg','修改失败');
+      }
 
     }
 
