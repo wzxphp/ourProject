@@ -50,7 +50,6 @@ class GoodsController extends Controller
     // 添加商品
     public function upload(Request $request)
     {
-
         // 获取传过来的参数
         $data = $request->except('_token');
         // if(!$data['pid'] == "0"){

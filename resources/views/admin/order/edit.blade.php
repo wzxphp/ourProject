@@ -21,22 +21,14 @@
                                 <input type="text" id="L_username" readonly="readonly" value="{{ $cate->id }}" name="id" required="" lay-verify="nikename" autocomplete="off" class="layui-input">（*注：ID不允许修改）
                             </div>
                         </div>
-                    <div class="layui-form-item">
 
-                        <label for="L_username" class="layui-form-label">
-                            <span class="x-red"></span>商品颜色
-                        </label>
-                        <div class="layui-input-inline">
-                            <input type="text" id="L_username"  value="{{ $cate->color }}" name="color" required="" lay-verify="nikename" autocomplete="off" class="layui-input">
-                        </div>
-                    </div>
 
                     <div class="layui-form-item">
                         <label for="L_username" class="layui-form-label">
                             <span class="x-red"></span>收货人姓名
                         </label>
                         <div class="layui-input-inline">
-                            <input type="text" id="L_username" value="{{ $cate->user_name }}" name="user_name" =required"" lay-verify="nikename" autocomplete="off" class="layui-input">
+                            <input type="text" id="L_username" value="{{ $cate->name }}" name="name" =required"" lay-verify="nikename" autocomplete="off" class="layui-input">
                         </div>
                     </div>
                     <div class="layui-form-item">
@@ -44,7 +36,7 @@
                             <span class="x-red"></span>收货人电话
                         </label>
                         <div class="layui-input-inline">
-                            <input type="text" id="L_username" value="{{ $cate->tel }}" name="tel" required="" lay-verify="nikename" autocomplete="off" class="layui-input">
+                            <input type="text" id="L_username" value="{{ $cate->cargo_message_number }}" name="cargo_message_number" required="" lay-verify="nikename" autocomplete="off" class="layui-input">
                         </div>
                     </div>
                     <div class="layui-form-item">
@@ -52,7 +44,7 @@
                             <span class="x-red"></span>收货人地址
                         </label>
                         <div class="layui-input-inline">
-                            <input  type="text" id="L_username" style="width:600px" value="{{ $cate->cargo_message_address }}" name="cargo_message_address" required="" lay-verify="nikename" autocomplete="off" class="layui-input">
+                            <input  type="text" id="L_username" style="" value="{{ $cate->cargo_message_address }}" name="cargo_message_address" required="" lay-verify="nikename" autocomplete="off" class="layui-input">
                         </div>
                     </div>
 

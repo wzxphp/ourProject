@@ -204,7 +204,7 @@
                 </li>
                 <li class="list" >
                     <a href="javascript:;">
-                        <i class="iconfont">&#xe6a3;</i>
+                        <i class="iconfont">&#xe6a8;</i>
                         轮播图
                         <i class="iconfont nav_right">&#xe697;</i>
                     </a>
@@ -219,7 +219,7 @@
                 </li>
                 <li class="list" >
                     <a href="javascript:;">
-                        <i class="iconfont">&#xe6a3;</i>
+                        <i class="iconfont">&#xe6b3;</i>
                         广告位
                         <i class="iconfont nav_right">&#xe697;</i>
                     </a>
@@ -234,7 +234,7 @@
                 </li>
                 <li class="list">
                     <a href="javascript:;">
-                        <i class="iconfont">&#xe6a3;</i>
+                        <i class="iconfont">&#xe82a;</i>
                         推荐管理
                         <i class="iconfont nav_right">&#xe697;</i>
                     </a>

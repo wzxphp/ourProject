@@ -66,9 +66,6 @@ class LoginController extends Controller
         }else{
             return redirect('home/login/index')->with(['info'=>'账号或密码输入有误']);
         }
-
-    	
-
     }
 
     public function loginout()

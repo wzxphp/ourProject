@@ -167,10 +167,9 @@ Route::group(['prefix'=>'admin','namespace'=>'Admin','middleware'=>['admin_islog
     Route::resource('comment','CommentController');
 //网站配置模块
     Route::get('config/close','ConfigController@close');  //关闭网站
+    Route::post('config/change','ConfigController@change');  //修改状态
     Route::post('config/changecontent','ConfigController@changeContent');//批量修改网站配置信息
     Route::resource('config','ConfigController');
-
-
 
 //分类管理模块====================================================qin
     Route::get('cate/create','CateController@create');
@@ -189,6 +188,7 @@ Route::group(['prefix'=>'admin','namespace'=>'Admin','middleware'=>['admin_islog
     Route::get('order/down/{id}','OrderController@down'); //未发货
     Route::get('order/yes/{id}','OrderController@yes'); //已收货
     Route::get('order/dis/{id}','OrderController@dis'); //取消订单
+    Route::get('order/lun/{id}','OrderController@lun'); //取消订单
 
 //商品管理模块====================================================zhang
     Route::get('goods/index','GoodsController@index');
@@ -205,7 +205,6 @@ Route::group(['prefix'=>'admin','namespace'=>'Admin','middleware'=>['admin_islog
 //商品上下价
 Route::get('admin/goods/goods_sta','Admin\GoodsController@goods_sta');
 
-
 //==============================================================================推荐位
 //推荐位新出
 // 首页
@@ -214,9 +213,6 @@ Route::get('admin/xiugai/brow','Admin\XuigaiController@create');
 Route::get('admin/xiugai/{id}/index','Admin\XuigaiController@index');
 // 删除
 Route::get('admin/xiugai/{id}','Admin\XuigaiController@del');
-
-
-
 //轮播图======================================================================qin
 Route::get('admin/show/index','Admin\ShowController@index'); //页面
 Route::post('admin/show/insert','Admin\ShowController@insert');  //添加提交
@@ -232,5 +228,12 @@ Route::post('admin/guang/delete/{id}','Admin\GuangController@delete');//删除
 Route::get('admin/guang/edit/{id}','Admin\GuangController@edit');  //修改页面
 Route::post('admin/guang/update','Admin\GuangController@update'); //修改
 Route::post('admin/guang/changeorder','Admin\GuangController@changeorder'); //排序
+Route::post('admin/guang/update','Admin\GuangController@update'); //修改广告位
+Route::get('admin/guang/up/{id}','Admin\GuangController@up');   //上架
+Route::get('admin/guang/down/{id}','Admin\GuangController@down'); //下架
+//图片上传公用方法
+Route::post('admin/file/upload','Admin\FileController@upload');
+
+
 
 

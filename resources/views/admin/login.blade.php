@@ -70,7 +70,7 @@
             <div style="text-align:center;">
                 <button class="btn btn-warning pull-right" lay-submit lay-filter="login"  type="submit">登录</button>
             </div>
-            <div class="forgot"><a href="{{url('admin/forget')}}" class="forgot">忘记帐号或者密码</a></div>
+            <div class="forgot"><a href="{{url('admin/forget')}}" class="forgot">忘记密码</a></div>
 
         </form>
     </div>

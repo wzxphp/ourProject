@@ -18,7 +18,7 @@
                             <input class="layui-input" placeholder="截止日" name="maxdate" id="over" autocomplete="off">
                         </div>
                         <div class="layui-input-inline">
-                            <input type="text" name="user_name"  placeholder="请输入用户名" autocomplete="off" class="layui-input">
+                            <input type="text" name="name"  placeholder="请输入用户名" autocomplete="off" class="layui-input">
                         </div>
                         <div class="layui-input-inline" style="width:80px">
                             <button class="layui-btn"  lay-submit="" lay-filter="sreach"><i class="layui-icon">&#xe615;</i></button>
@@ -34,16 +34,16 @@
             <table class="layui-table">
                 <tr>
                     <th> 编号 </th>
-                    <th> 商品编号 </th>
+                    <th> 商品图 </th>
                     <th> 用户ID </th>
                     <th> 下单商品 </th>
                     <th> 商品单价 </th>
                     <th> 商品数量 </th>
                     <th> 收货地址 </th>
-                    <th> 商品颜色 </th>
+                    {{--<th> 商品颜色 </th>--}}
                     <th> 收货人电话 </th>
                     <th> 收货人姓名 </th>
-                    <th> 邮编 </th>
+                    {{--<th> 邮编 </th>--}}
                     <th> 支付方式 </th>
                     <th> 总计 </th>
                     <th> 加入时间 </th>
@@ -60,45 +60,53 @@
                 @foreach($data as $k=>$v)
                 <tr>
                     <td style="width:20px">{{ $v->id }}</td>
-                    <td >{{ $v->guid }}</td>
-                    <td>{{$v->user_id}}</td>
+                    <td> <img src="{{$v->cargo_message_original}}" alt="" id="file_upload_img" style="max-width: 80px; max-height:50px;"></td>
+                    <td >{{ $v->id }}</td>
                     <td >{{ $v->cargo_message_id }}</td>
                     <td >{{ $v->cargo_message_price }}</td>
                     <td >{{ $v->cargo_message_number }}</td>
                     <td style="width:200px">{{ $v->cargo_message_address }}</td>
-                    <td >{{ $v->color }}</td>
-                    <td >{{ $v->tel }}</td>
-                    <td >{{ $v->user_name }}</td>
-                    <td >{{ $v->youbian }}</td>
+{{--                    <td >{{ $v->color }}</td>--}}
+                    <td >{{ $v->cargo_message_tel }}</td>
+                    <td >{{ $v->name }}</td>
+{{--                    <td >{{ $v->youbian }}</td>--}}
                     <td >{{ $v->pay_type }}</td>
                     <td >{{ $v->total_amount }}</td>
                     <td >{{ $v->created_at }}</td>
                 {{--</tr>--}}
                     <td >
                         @if($v->status==0)
-                            交易关闭
+                            <span class="layui-btn layui-btn-disabled layui-btn-mini">交易关闭</span>
                         @elseif($v->status==1)
-                            待发货
+                            <span class="layui-btn layui-btn-normal layui-btn-mini">待发货</span>
                         @elseif($v->status==2)
-                            已发货
+                            <span class="layui-btn layui-btn-normal layui-btn-mini">已发货</span>
                         @elseif($v->status==3)
-                            成交！
-                        @endif</td>
+                            <span class="layui-btn layui-btn-normal layui-btn-mini">成交！</span>
+                        @elseif($v->status==4)
+                            <span class="layui-btn layui-btn-normal layui-btn-mini">用户已评价！</span>
+                        @endif
+
+                    </td>
 
                     <td class=" ">
-                        <a href="{{url('admin/order/up').'/'.$v->id}}">
+{{--                        <a href="{{url('admin/order/up').'/'.$v->id}}">--}}
                             @if($v->status==0)
                                 <a href="{{url('admin/order/up').'/'.$v->id}}">
                                     点击开启订单
                                     @elseif($v->status==1)
                                         <a href="{{url('admin/order/yes').'/'.$v->id}}">
-                                            点击已收货
+                                            点击发货
                                             @elseif($v->status==2)
                                                 <a href="{{url('admin/order/dis').'/'.$v->id}}">
                                                     点击成交
                                                     @elseif($v->status==3)
-                                                        <a href="{{url('admin/order/down').'/'.$v->id}}">
-                                                            点击关闭订单
+                                                        <a href="{{url('admin/order/lun').'/'.$v->id}}">
+                                                            点击完成评论
+                                                            @elseif($v->status==4)
+                                                                <a href="{{url('admin/order/down').'/'.$v->id}}">
+                                                                    点击关闭订单
+
                                             @endif
 
                                         </a>

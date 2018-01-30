@@ -15,7 +15,7 @@
 							</a>
 							<div class="m-baseinfo">
 								<a class="m-pic" href="information.html">
-									<img src="{{url('home/usercenter/images/getAvatar.do.jpg')}}">
+									<img src="{{ Session('home_user')->avatar  }}">
 								</a>
 								<div class="m-info">
 									<em class="s-name">{{ Session('home_user')->name }}</em>

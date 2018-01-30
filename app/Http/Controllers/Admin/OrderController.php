@@ -17,12 +17,12 @@ class OrderController extends Controller
         $data =  DB::table('data_orders')
             ->where(function($query) use($request){
                 //检测关键字
-                $username = $request->input('user_name');
+                $username = $request->input('name');
                 $mindate = $request->input('mindate');
                 $maxdate = $request->input('maxdate');
                 //如果用户名不为空
                 if(!empty($username)) {
-                    $query->where('user_name','like','%'.$username.'%');
+                    $query->where('name','like','%'.$username.'%');
                 }
                 //如果日期不为空
                 if(!empty($mindate)) {
@@ -121,6 +121,12 @@ class OrderController extends Controller
             order::where('id', $id)->update(['status' => $status]);
             return redirect('/admin/order/index');
         }
+    //代发货
+    public function lun($id,$status=4)
+    {
+        order::where('id', $id)->update(['status' => $status]);
+        return redirect('/admin/order/index');
+    }
 
 
 

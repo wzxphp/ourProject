@@ -12,15 +12,15 @@ class CollController extends Controller
 	public function index()
 	{
 		$colldata = Coll::get();
-		// dd($colldata);
+//		 dd($colldata);
 		return view('Home/user/coll',compact('colldata'));
 	}
     public function coll($id)
     {
     	$data = Good::where('goods_id',$id)->get()->ToArray();
-    	// dd($data);
+//    	 dd($data);
     	$res = Coll::insert($data);
-    	// dd($res);
+//    	 dd($res);
     	if($res)
     	{
     		return redirect('home/coll')->with(['info'=>'收藏成功']);

@@ -14,15 +14,32 @@
 
 
 
-                    <tr>
-                        <td><label for="desc" class="layui-form-label">
+                <div class="layui-form-item">
+                        <label for="desc" class="layui-form-label">
+                                <span class="x-red">*</span>ID
+                            </label>
+
+                            <input type="text" name="id" readonly="readonly" value="{{ $data->id }}" style="width:200px" class="layui-input" />
+                            <span class="x-red" >*</span>
+                            {{--<img src="/uploads/{{ $data->img }}" width="100" />--}}
+
+                    </div>
+                <div class="layui-form-item">
+                        <label for="desc" class="layui-form-label">
                                 <span class="x-red">*</span>广告图
                             </label>
 
-                            <input type="file" name="img" value="{{ $data->img }}" style="width:200px" class="layui-input" />
+                            {{--<input type="file" name="img" value="{{ $data->img }}" style="width:200px" class="layui-input" />--}}
+                            <span class="x-red">*</span>
+                            <input id="file_upload" name="img"  type="file" multiple="true" >
+                            <br>
+                            {{--<input type="file" name="img" style="width:200px" class="layui-input" />--}}
                             {{--<img src="/uploads/{{ $data->img }}" width="100" />--}}
-                        </td>
 
+                            <img src=""/uploads/{{ $data->img }}"" alt="" id="file_upload_img" value="{{ $data->img }}" style="max-width: 350px; max-height:100px;">
+                            {{--<img src="/uploads/{{ $data->img }}" width="100" />--}}
+
+                </div>
 
                 <div class="layui-form-item">
                     <label for="desc" class="layui-form-label">
@@ -53,45 +70,54 @@
                     <label for="L_repass" class="layui-form-label">
                     </label>
                     <button  class="layui-btn" lay-filter="add" lay-submit="">
-                        增加
+                        更改
                     </button>
                 </div>
             </form>
         </div>
 
-        <script>
-//            layui.use(['form','layer','upload'], function(){
-//                $ = layui.jquery;
-//              var form = layui.form()
-//              ,layer = layui.layer;
-////
-////
-////              //图片上传接口
-////              layui.upload({
-////                url: './upload.json' //上传接口
-////                ,success: function(res){ //上传成功后的回调
-////                    console.log(res);
-////                  $('#LAY_demo_upload').attr('src',res.url);
-////                }
-////              });
-//
-//
-//              //监听提交
-//              form.on('submit(add)', function(data){
-//                console.log(data);
-//                //发异步，把数据提交给php
-//                layer.alert("增加成功", {icon: 6},function () {
-//                    // 获得frame索引
-//                    var index = parent.layer.getFrameIndex(window.name);
-//                    //关闭当前frame
-//                    parent.layer.close(index);
-//                });
-//                return false;
-//              });
-//
-//
-//            });
-        </script>
+    <script type="text/javascript">
+        $("#file_upload").change(function () {
+            uploadImage();
+        });
+        function uploadImage() {
+            // alert('')判断是否有选择上传文件
+            var imgPath = $("#file_upload").val();
+            if (imgPath == "") {
+                alert("请选择上传图片！");
+                return;
+            }
+            //判断上传文件的后缀名
+            var strExtension = imgPath.substr(imgPath.lastIndexOf('.') + 1);
+            if (strExtension != 'jpg' && strExtension != 'gif' && strExtension != 'png' && strExtension != 'bmp' && strExtension == '') {
+                alert("请选择图片文件");
+                return;
+            }
+
+            //只将文件上传表单项的内容放入formData对象
+            var formData = new FormData();
+            formData.append('file_upload', $('#file_upload')[0].files[0]);
+            formData.append('_token', '{{csrf_token()}}');
+
+            $.ajax({
+                type: "POST",
+                url: "/admin/file/upload",
+                data: formData,
+                async: true,
+                cache: false,
+                contentType: false,
+                processData: false,
+                success: function(data) {
+//                    console.log(data);
+                    $('#file_upload_img').attr('src',data);
+                },
+
+                error: function(XMLHttpRequest, textStatus, errorThrown) {
+                    alert("上传失败，请检查网络后重试");
+                }
+            });
+        }
+    </script>
 
     </body>
 
