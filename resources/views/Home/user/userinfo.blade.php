@@ -33,26 +33,6 @@
 				<!--个人信息 -->
 				<div class="info-main">
 					<form id="myform" class="am-form am-form-horizontal" action="{{ url('/home/center/userinfo_create') }}" method="POST" enctype="multipart/form-data">
-					<div class="user-infoPic">
-						<div class="filePic">
-							<!-- <input type="file" name="avatar" class="inputPic" allowexts="gif,jpeg,jpg,png,bmp" accept="image/*">-->
-							<input type="file" name="avatar">
-
-							<img class="am-circle am-img-thumbnail" src="{{url('home/usercenter/images/getAvatar.do.jpg') }}" alt="" />
-							<script type="text/javascript">
-								
-							</script>
-						</div>
-						
-						<p class="am-form-help">头像</p>
-
-						<div class="info-m">
-							<div><b>用户名：<i>{{ Session('home_user')->name }}</i></b></div>
-							<div class="vip">
-	                              <span></span><a href="#">会员专享</a>
-							</div>
-					</div>
-					</div>
 					{{ csrf_field() }}
 					    @if(count($errors) > 0)
 						    <div class="alert alert-danger">

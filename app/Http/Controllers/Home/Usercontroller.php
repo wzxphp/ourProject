@@ -24,8 +24,8 @@ class Usercontroller extends Controller
 
     public function userinfo_create(Request $request)
     {
-        $input = $request->all();
-        dd($input);
+        // $input = $request->all();
+        // dd($input);
         $this->validate($request,[
                 'name' => 'required',
                 'true_name' => 'required',

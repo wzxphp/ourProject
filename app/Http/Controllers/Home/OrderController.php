@@ -25,7 +25,7 @@ class OrderController extends Controller
 		//获取购物车和地址信息
 		$orders = Cart::get();
 		$data = Addr::get();
-        // dd($data);
+
 		// 遍历地址表和购物车表，获取订单信息数组
 		$reorders = [];
 		foreach($orders as $k=>$v)
@@ -48,7 +48,7 @@ class OrderController extends Controller
 			$reorders['cargo_message_address'] = $v->address;
 			$reorders['cargo_details_address'] = $v->detail_address;
 		}
-        // dd($reorders);
+
 		// 返回页面
 		return view('Home/order/reorder',compact('reorders','data'));
 
@@ -58,11 +58,11 @@ class OrderController extends Controller
     {    
     	//获取确认订单信息
     	$orderdata = $request -> except('_token');
-// dd($orderdata);
+
         // 判断订单商品是否重复，如果重复，则不执行添加
         $res = Order::where('cargo_message_id',$orderdata['cargo_message_id'])->get()->ToArray();
-        
-        if(!empty($res))
+        // dd($res);
+        if(!empty($res) && $res[0]['status']==0 || $res[0]['status']==3)
         {
             return redirect('home/center/order');
         }else{
@@ -101,7 +101,7 @@ class OrderController extends Controller
             $rev['goods_id'] = $v->cargo_message_id;
         }
         $review = Comm::where('goods_id',$rev['goods_id'])->get();
-// dd($review);
+
         return view('Home/order/orderinfo',compact('info','review'));
     }
 
