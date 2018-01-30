@@ -63,6 +63,7 @@
                                     </div>
                                     @if($data[$k]->goods_status == 1)
                                         <button class="add_to_cart_button" type="submit">加入购物车</button>
+                                        <a href="{{ url('/home/coll') }}/{{ $data[$k]->goods_id }}">收藏</a>
                                     @elseif($data[$k]->goods_status == 2)
                                         <button class="add_to_cart_button" disabled type="submit">商品已下架</button>
                                     @endif
@@ -85,15 +86,20 @@
                                         @endforeach
                                         <div role="tabpanel" class="tab-pane fade" id="profile">
                                             <h2>评论</h2>
+                                            @if(empty($review))
+                                                <span>评论空空如也！！</span>
+                                            @else
                                             @foreach($review as $m=>$n)
                                             <div class="submit-review">
                                                 <p>
-                                                    @if($n->comment_type == 0)
-                                                        <span>匿名评价</span>
-                                                    @elseif($n->comment_type == 1)
-                                                        <span>{{ Session('home_user')->name }}</span>
+                                                    @if($n['comment_type'] == 0)
+                                                        <span style="color:red;">匿名评价</span>
+                                                    @elseif($n['comment_type'] == 1)
+                                                        @foreach($revuser as $i=>$j)
+                                                        <span style="red">{{ $j->name }}</span>
+                                                        @endforeach
                                                     @endif
-                                                    @if($n->star == 1)
+                                                    @if($n['star'] == 1)
                                                         <span>
                                                             <i class="fa fa-star"></i>
                                                             <i class="fa fa-star"></i>
@@ -101,21 +107,22 @@
                                                             <i class="fa fa-star"></i>
                                                             <i class="fa fa-star"></i>
                                                         </span>
-                                                    @elseif($n->star == 2)
+                                                    @elseif($n['star'] == 2)
                                                         <span>
                                                             <i class="fa fa-star"></i>
                                                             <i class="fa fa-star"></i>
                                                             <i class="fa fa-star"></i>
                                                         </span>
-                                                    @elseif($n->star == 3)
+                                                    @elseif($n['star'] == 3)
                                                         <span>差评！！！</span>
                                                     @endif
                                                 </p>
                                                 <p>
-                                                <span>{{ $n->comment_info }}</span>
+                                                <span>{{ $n['comment_info'] }}</span>
                                                 </p>
                                             </div>
                                             @endforeach
+                                            @endif
                                         </div>
                                     </div>
                                 </div>

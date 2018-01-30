@@ -29,7 +29,7 @@
                               <span></span><a href="#">会员专享</a>
 						</div>
 					</div>
-				</div>
+				</div> -->
 
 				<!--个人信息 -->
 				<div class="info-main">
@@ -217,6 +217,7 @@
 		    	birthday.value = ""+birthday_y.value+"-"+birthday_m.value+"-"+birthday_d.value;
 		    }
 		</script>
+
 		<!--底部-->
 		<div class="footer">
 		</div>

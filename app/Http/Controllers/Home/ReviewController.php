@@ -40,11 +40,12 @@ class ReviewController extends Controller
     {
         //
         $review = $request -> except('_token');
-
+// dd($review);
         $res = Comm::insert($review);
         if($res)
         {
             $orders = Order::where('cargo_message_id',$review['goods_id'])->get();
+
             $ord = [];
             foreach($orders as $k=>$v)
             {
@@ -53,6 +54,7 @@ class ReviewController extends Controller
             Order::where('cargo_message_id',$review['goods_id'])->update($ord);
 
             return redirect('home/center/order')->with(['info'=>'评论成功']);
+            
         }else{
             return redirect('home/center/order')->with(['info'=>'评论失败']);
         }

@@ -4,12 +4,10 @@ namespace App\Model\Home;
 
 use Illuminate\Database\Eloquent\Model;
 
-class Comm extends Model
+class Recom extends Model
 {
-    //评论
-    public $table = 'data_goods_comment';
+    //推荐位
+    public $table = 'data_recommend';
 
     public $primarykey = 'id';
-
-    
 }

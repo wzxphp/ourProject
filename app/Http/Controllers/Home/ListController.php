@@ -7,16 +7,18 @@ use App\Http\Controllers\Controller;
 
 use App\Model\Home\Good;
 use App\Model\Home\Comm;
+use App\Model\Home\User;
+use App\Model\Home\Cate;
 
 
 class ListController extends Controller
 {
-    //商品列表页
+    //轻奢美妆
     public function list()
     {
         $listdata = Good::paginate(2);
         // dd($listdata);
-    	return view('Home/List/list',compact('listdata'));
+    	return view('Home/List/list',compact('listdata','catedata'));
     }
 // 休闲家居
     public function casual()
@@ -39,11 +41,27 @@ class ListController extends Controller
     }
 // 商品详情
     public function details($id)
-    {
+    {   //所有商品
         $data = Good::where('goods_id',$id)->get();
+        // dd($data);
+        // 商品的评论
+        $review = Comm::where('goods_id',$id)->get()->ToArray();
 
-        $review = Comm::where('goods_id',$id)->get();
-        // dd($review);
-    	return view('Home/details/details',compact('data','review'));
+        if(!$review)
+        {
+            return view('Home/details/details',compact('data'));
+            
+        }else{
+            $user = [];
+            foreach($review as $k=>$v)
+            {
+                $user['user_id'] = $v['user_id'];
+            }
+
+            $revuser = User::where('user_id',$user['user_id'])->get();
+
+            return view('Home/details/details',compact('data','review','revuser'));
+        }
+        
     }
 }

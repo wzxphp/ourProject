@@ -13,21 +13,21 @@
                 <thead>
                     <tr>
                         <th>统计</th>
-                        <th>资讯库</th>
-                        <th>图片库</th>
-                        <th>产品库</th>
-                        <th>用户</th>
-                        <th>管理员</th>
+                        <th>用户库</th>
+                        <th>商品库</th>
+                        <th>广告库</th>
+                        <th>订单库</th>
+                        <th>评论库</th>
                     </tr>
                 </thead>
                 <tbody>
                     <tr>
                         <td>总数</td>
-                        <td>92</td>
-                        <td>9</td>
-                        <td>0</td>
-                        <td>8</td>
-                        <td>20</td>
+                        <td>{{$allData}}</td>
+                        <td>{{$goods}}</td>
+                        <td>{{$rotation}}</td>
+                        <td>{{$orders}}</td>
+                        <td>{{$comment}}</td>
                     </tr>
 
                 </tbody>

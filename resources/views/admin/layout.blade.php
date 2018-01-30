@@ -240,17 +240,15 @@
                     </a>
                     <ul class="sub-menu">
                         <li>
-                            <a href="{{url('admin/recom/index')}}">
+                            <a href="{{ url('admin/xiugai/brow') }}">
                                 <i class="iconfont">&#xe6a7;</i>
                                 推荐浏览
-                            </a>
-                            <a href="{{url('admin/recom/add')}}">
-                                <i class="iconfont">&#xe6a7;</i>
-                                添加商品
                             </a>
                         </li>
                     </ul>
                 </li>
+
+
                 <li class="list">
                     <a href="javascript:;">
                         <i class="iconfont">&#xe6ae;</i>
