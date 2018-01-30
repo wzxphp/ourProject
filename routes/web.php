@@ -32,7 +32,7 @@ Route::get('/home/cate','Home\CateController@cate');
 // 详情表
 Route::get('/home/details/{id}','Home\ListController@details');
 // 推荐位促销
-// Route::get('/home/recom/{id}','Home\IndexController@recom');
+Route::get('/home/recom/{id}','Home\IndexController@recom');
 // 购物车
 Route::get('/home/cart','Home\CartController@index');
 	// 添加购物车

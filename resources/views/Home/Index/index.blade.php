@@ -133,7 +133,7 @@
 								<div class="product-hover">
 									<a href="" class="add-to-cart-link"><i class="fa fa-shopping-cart"></i> 加入购物车</a>
 
-									<a href="{{ url('/home/recom') }}/{{ $v->id }}" class="view-details-link"><i class="fa fa-link"></i> 查看详情</a>
+									<a href="{{ url('/home/details') }}/{{ $v->goods_id }}" class="view-details-link"><i class="fa fa-link"></i> 查看详情</a>
 								</div>
 							</div>
 							

@@ -193,7 +193,7 @@ class LoginController extends Controller
     			'repass.same' => '两次输入不一致'
     		]);
     	$pass = $request->except('_token','repass');
-    	$pass['password'] = encrypt($pass['password']);
+    	$pass['password'] = Hash::make($pass['password']);
 
     	$res = \DB::table('data_user_message')
     			->where('email',$pass['email'])

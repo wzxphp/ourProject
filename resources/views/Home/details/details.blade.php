@@ -93,10 +93,10 @@
                                             <div class="submit-review">
                                                 <p>
                                                     @if($n['comment_type'] == 0)
-                                                        <span>匿名评价</span>
+                                                        <span style="color:red;">匿名评价</span>
                                                     @elseif($n['comment_type'] == 1)
                                                         @foreach($revuser as $i=>$j)
-                                                        <span>{{ $j->name }}</span>
+                                                        <span style="red">{{ $j->name }}</span>
                                                         @endforeach
                                                     @endif
                                                     @if($n['star'] == 1)

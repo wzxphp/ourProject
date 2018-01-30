@@ -17,7 +17,7 @@
 					<li class="user-addresslist defaultAddr">
 						<span class="new-option-r"><i class="am-icon-check-circle"></i>默认地址</span>
 						<p class="new-tit new-p-re">
-							<span class="new-txt">{{ $n->name }}</span>
+							<span class="new-txt">{{ Session('home_user')->name }}</span>
 							<span class="new-txt-rd2">{{ $n->tel }}</span>
 						</p>
 						<div class="new-mu_l2a new-p-re">
@@ -177,22 +177,22 @@
 							<p class="buy-footer-address">
 								<span class="buy-line-title buy-line-title-type">寄送至：</span>
 								<span class="buy--address-detail">
-									<span class="province">{{ $reorders['cargo_message_address'] }}</span>
-									<input type="hidden" name="cargo_message_address" value="{{ $reorders['cargo_message_address'] }}">
-									<span class="street">{{ $reorders['cargo_details_address'] }}</span>
-									<input type="hidden" name="cargo_details_address" value="{{ $reorders['cargo_details_address'] }}">
+									<span class="province">{{ $n->address }}</span>
+									<input type="hidden" name="cargo_message_address" value="{{ $n->address }}">
+									<span class="street">{{ $n->detail_address }}</span>
+									<input type="hidden" name="cargo_details_address" value="{{ $n->detail_address }}">
 								</span>
 								</span>
 							</p>
 							<p class="buy-footer-address">
 								<span class="buy-line-title">收货人：</span>
 								<span class="buy-address-detail">   
-	                     		<span class="buy-user">{{ $reorders['name'] }}</span>
+	                     		<span class="buy-user">{{ Session('home_user')->name }}</span>
 
-	                     		<input type="hidden" name="name" value="{{ $reorders['name'] }}">
-								<span class="buy-phone">{{ $reorders['cargo_message_tel'] }}</span>
+	                     		<input type="hidden" name="name" value="{{ Session('home_user')->name }}">
+								<span class="buy-phone">{{ $n->tel }}</span>
 								</span>
-								<input type="hidden" name="cargo_message_tel" value="{{ $reorders['cargo_message_tel'] }}">
+								<input type="hidden" name="cargo_message_tel" value="{{ $n->tel }}">
 							</p>
 						</div>
 					</div>

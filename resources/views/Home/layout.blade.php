@@ -124,7 +124,16 @@
 			<div class="navbar-collapse collapse">
 				<ul class="nav navbar-nav">
 					<li><a href="{{ url('home/index') }}">首页</a></li>
-					<li><a href="{{ url('home/cate') }}">全部分类</a></li>
+					<li>
+						<a data-toggle="dropdown" data-hover="dropdown" class="dropdown-toggle" href="{{ url('home/cate') }}"><span class="key">全部分类</span><b class="caret"></b></a>
+						<ul class="dropdown-menu">
+							<li><a href="{{ url('home/list') }}">轻奢美妆</a></li>
+							<li><a href="{{ url('home/casual') }}">休闲家居</a></li>
+							<li><a href="{{ url('home/digital') }}">数码馆</a></li>
+							<li><a href="{{ url('home/outdoor') }}">户外</a></li>
+						</ul>
+					</li>
+					<!-- <li><a href="{{ url('home/cate') }}">全部分类</a></li> -->
 					<li><a href="{{ url('home/list') }}">轻奢美妆</a></li>
 					<li><a href="{{ url('home/casual') }}">休闲家居</a></li>
 					<li><a href="{{ url('home/digital') }}">数码馆</a></li>

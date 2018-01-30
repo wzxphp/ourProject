@@ -8,6 +8,7 @@ use App\Http\Controllers\Controller;
 use Intervention\Image\ImageManagerStatic as Image;
 use App\Model\Home\Pro;
 use Session;
+use Illuminate\Support\Facades\Hash;
 
 class Usercontroller extends Controller
 {
@@ -36,46 +37,7 @@ class Usercontroller extends Controller
                 'email.email' => '请正确填写邮箱'
             ]);
         $userdata = $request->except('_token');
-dd($userdata);
-        // 传值方法是否是post
-        if($request->isMethod('POST'))
-        {
-            // 是否有文件上传
-            if($request->hasFile('avatar'))
-            {
-                $myfile = $request0->file('avatar');
-                // 文件上传是否成功
-                if($myfile -> isValid())
-                {
-                  // 获取上传文件名称
-                  // $picname=$myfile->getClientOriginalName();
-                  // 获取上传文件后缀名
-                  $ext=$myfile->getClientOriginalExtension();
-                  // 设置随机文件名
-                  $filename=time().rand(1000,9999).'.'.$ext;
-                  // 移动
-                  $myfile->move('./myuploads',$filename);
 
-                  $img = Image::make("./myuploads/".$filename)->resize(100,100);
-                  $img->save("./myuploads/s_".$filename); //另存为
-                  // return $img->response("jpg"); //输出
-        
-                  //执行等比缩放
-                  $img->resize(null, 400, function ($constraint) {
-                            $constraint->aspectRatio();
-                            $constraint->upsize();
-                  });
-
-                  return redirect('home/center/userinfo')->with(['info'=>'上传成功']);
-                }else{
-                    return back()->with(['info'=>'头像上传失败']);
-                }
-
-            }else{
-                return back()->with(['info'=>'没有文件上传']);;
-            }
-        }
-        return '123';
         $res = \DB::table('data_user_message')->where('email',$userdata['email'])->update($userdata);
 
         if($res)
@@ -87,49 +49,6 @@ dd($userdata);
        
     }
 
-// 上传头像
-    public function file()
-    {
-        // 传值方法是否是post
-        if(Request::isMethod('POST'))
-        {
-            // 是否有文件上传
-            if(Request::hasFile('file'))
-            {
-                $myfile = Request::file('file');
-                // 文件上传是否成功
-                if($myfile -> isValid())
-                {
-                  // 获取上传文件名称
-                  // $picname=$myfile->getClientOriginalName();
-                  // 获取上传文件后缀名
-                  $ext=$myfile->getClientOriginalExtension();
-                  // 设置随机文件名
-                  $filename=time().rand(1000,9999).'.'.$ext;
-                  // 移动
-                  $myfile->move('./myuploads',$filename);
-
-                  $img = Image::make("./myuploads/".$filename)->resize(100,100);
-                  $img->save("./myuploads/s_".$filename); //另存为
-                  // return $img->response("jpg"); //输出
-        
-                  //执行等比缩放
-                  $img->resize(null, 400, function ($constraint) {
-                            $constraint->aspectRatio();
-                            $constraint->upsize();
-                  });
-
-                  return redirect('home/center/userinfo')->with(['info'=>'上传成功']);
-                }else{
-                    return back()->with(['info'=>'头像上传失败']);
-                }
-
-            }else{
-                return back()->with(['info'=>'没有文件上传']);;
-            }
-        }
-        return '123';
-    }
 
     public function safe()
     {
@@ -147,7 +66,7 @@ dd($userdata);
 
         $res = \DB::table('data_user_message')->where('email',$data['email'])->first();
 
-        if($data['password'] !== decrypt($res->password) )
+        if(!Hash::check($data['password'],$res->password) )
         {
             return back()->with(['info'=>'原密码输入有误']);
         }
@@ -165,7 +84,7 @@ dd($userdata);
 
             $data = $request->except('_token','repass','password','email');
 
-            $data['newpass'] = encrypt($data['newpass']);
+            $data['newpass'] = Hash::make($data['newpass']);
 
             $pass = \DB::table('data_user_message')
                     ->where('email',$res->email)
@@ -178,7 +97,7 @@ dd($userdata);
 
             if($pass && $pass1)
             {
-                return redirect('/home/loginout');
+                return redirect('/home/loginout')->with(['info'=>'密码修改成功,请登录']);
             }else{
                 return back()->with(['info'=>'密码修改失败']);
             }

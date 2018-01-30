@@ -25,7 +25,7 @@ class OrderController extends Controller
 		//获取购物车和地址信息
 		$orders = Cart::get();
 		$data = Addr::get();
-
+        // dd($data);
 		// 遍历地址表和购物车表，获取订单信息数组
 		$reorders = [];
 		foreach($orders as $k=>$v)

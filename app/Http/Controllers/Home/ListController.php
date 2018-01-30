@@ -8,6 +8,7 @@ use App\Http\Controllers\Controller;
 use App\Model\Home\Good;
 use App\Model\Home\Comm;
 use App\Model\Home\User;
+use App\Model\Home\Cate;
 
 
 class ListController extends Controller
@@ -17,7 +18,7 @@ class ListController extends Controller
     {
         $listdata = Good::paginate(2);
         // dd($listdata);
-    	return view('Home/List/list',compact('listdata'));
+    	return view('Home/List/list',compact('listdata','catedata'));
     }
 // 休闲家居
     public function casual()
