@@ -6,7 +6,7 @@
         <div class="page-content">
           <div class="content">
 
-              <form class="layui-form xbs" action="{{url('admin/recom/index')}}" method="get">
+              <form class="layui-form xbs" action="{{url('admin/xiugai/brow')}}" method="get">
                   <div class="layui-form-pane" style="text-align: center;">
                       <div class="layui-form-item" style="display: inline-block;">
                           <div class="layui-input-inline">
@@ -59,57 +59,53 @@
                     </tr>
                 </thead>
                 <tbody>
-                @foreach($date as $k=>$v)
+                 @foreach ($data as $v)
                     <tr>
-                        <td>
-                            {{$v->id}}
-                        </td>
-                        <td>
-                            <img src="{{$v->recommend_img}}" style="width: 150px; height: 150px;" />
-                        </td>
-                        <td>
-                            {{$v->recommend_name}}
-                        </td>
-                        <td>
-                            {{$v->recommend_price}}
-                        </td>
-                        <td>
-                            {{$v->recommend_discount}}
-                        </td>
-                        <td>
-                            {{$v->recommend_info}}
-                        </td>
-                        <td >
-                            {{$v->recommend_invent}}
-                        </td>
 
-                        <td >
-                            {{$v->recommend_volume}}
-                        </td>
-                        <td >
-                            {{$v->created_at}}
-                        </td>
-                        <td >
-                            {{$v->updated_at}}
-                        </td>
+                    <td>
+                       {{$v->id}} 
+                    </td>
+                    <td>
+                        
+                        <img src="{{$v->recommend_img}}" style="width: 250px; height: 150px;" />
+                    </td>
+                    <td>
+                        {{$v->recommend_name}}
+                    </td>
+                    <td>
+                        {{$v->recommend_price}}
+                    </td>
+                    <td>
+                        {{$v->recommend_discount}}
+                    </td>
+                    <td>
+                        {{$v->recommend_info}}
+                    </td>
+                    <td>
+                        {{$v->recommend_invent}}
+                    </td>
+                    <td>
+                        {{$v->recommend_volume}}
+                    </td>
+                    <td>
+                        {{$v->created_at}}
+                    </td>
+                    <td>
+                        {{$v->updated_at}}
+                    </td>
 
                         <td class="td-manage">
-
-                            <a title="修改" href="{{ url('admin/recom/'.$v->id.'/edit') }}"
-                               class="ml-5" style="text-decoration:none">
-                                <i class="layui-icon">&#xe642;</i>
-                            </a>
-                            <a title="删除" href="javascript:;" onclick="view_del(this,'{{$v->id}}')"
-                               style="text-decoration:none">
-                                <i class="layui-icon">&#xe640;</i>
+                            <a title="删除" href="javascript:;" onclick="vdel({{ $v->id }})"
+                                   style="text-decoration:none">
+                            <i class="layui-icon">&#xe640;</i>
                             </a>
                         </td>
                     </tr>
-                @endforeach
+                    @endforeach;
                 </tbody>
             </table>
           <div style="float: right;">
-              {!! $date->render() !!}
+                    {!! $data->render() !!}
           </div>
 
             <!-- 右侧内容框架，更改从这里结束 -->
@@ -118,21 +114,28 @@
         <!-- 右侧主体结束 -->
     </div>
 
-
         <script type="text/javascript">
             /*商品-删除*/
-            function view_del(obj,id){
-                layer.confirm('确认要删除吗？',function(index){
-                    //发异步删除数据
-                    $.get('{{ url('admin/recom/') }}/'+id,{'_method':'delete','_token':"{{csrf_token()}}"},function (data) {
-                        if(data.status == 0) {
-                            $(obj).parents("tr").remove();
-                            layer.msg(data.message, {icon: 1, time: 1000});
-                        }else{
-                            layer.msg(data.message, {icon: 1, time: 1000});}
-                    });
-                });
-            }
+            function vdel(id){
+            //询问框
+            layer.confirm('您确定要删除吗？', {
+                btn: ['确定','取消'] //按钮
+            }, function(){
+                $.get('{{ url('admin/xiugai/') }}/'+id,{'_method':'delete','_token':"{{csrf_token()}}"},function (data) {
+                     if(data.status == 0){
+                        layer.msg(data.message, {icon: 6});
+                        setTimeout(function(){
+                            window.location.href = location.href;
+                        },1000);
+                    }else{
+                        layer.msg(data.message, {icon: 5});
+                        window.location.href = location.href;
+                    }
+                })
+            }, function(){
+
+            });
+        }
         </script>
     <!-- 中部结束 -->
 @endsection

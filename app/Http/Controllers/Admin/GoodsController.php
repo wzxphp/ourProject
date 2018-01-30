@@ -17,10 +17,8 @@ class GoodsController extends Controller
 //        $ls = DB::table('data_goods')->leftJoin('data_category','data_goods.category_id','=','data_category.id')->orderBy('data_goods.goods_id','asc')->get();
 //      $cate =  Cate::get(['name','id']);
         $cate = (new Cate)->getCate();
-        $cates = array_column($cate,'name','pid');
-//      dd($cate);
-        // 搜索
-      $goods = DB::table('data_goods')
+        $cates = array_column($cate,'name','id');
+        $goods = DB::table('data_goods')
                 ->where(function($query) use($request){
                 //检测关键字
                 $goods_name = $request->input('goods_name');    // 名称
@@ -33,7 +31,7 @@ class GoodsController extends Controller
                 if(!empty($goods_price)) {
                     $query->where('goods_price','like','%'.$goods_price.'%');
                 }
-                })->paginate(2);
+                })->Simplepaginate(5);
 
 
         return view('admin.admin_goods.index',['goods'=>$goods,'cates'=>$cates]);
@@ -49,13 +47,13 @@ class GoodsController extends Controller
         return view('admin.admin_goods.create',['category'=>$category]);
     }
 
-    // 接收保存商品
+    // 添加商品
     public function upload(Request $request)
     {
 
         // 获取传过来的参数
         $data = $request->except('_token');
-        if(!$data['pid'] == "0"){
+        // if(!$data['pid'] == "0"){
           if($request->file('goods_original')){
 //            获取上传图片文件
            $file = $request->file('goods_original');
@@ -71,12 +69,13 @@ class GoodsController extends Controller
                // 把所保存的图片位置放入到字段中去
                $data['goods_original'] = $url;
                $data['create_at'] = date('Y-m-d H:i:s');
-               $data['category_id'] = $data['pid'];
-               unset($data['pid']);
+               $data['category_id'] = $data['id'];
+               unset($data['id']);
                if($data['category_id']){
                    $res = DB::table('data_goods')->insert($data);
                    if ($res)
                    {
+                       // $goodsinfo = DB::table('data_goodsinfo')->insert($data);
                        return redirect('admin/goods/index');
                    } else {
                        return back('admin/goods/edit')->with('error','添加失败');
@@ -87,11 +86,6 @@ class GoodsController extends Controller
 
             }
         }
-      }else {
-             // 请求中是否携带上传图片
-       
-        return back()->with('msg','修改失败');
-      }
 
     }
 
@@ -119,8 +113,6 @@ class GoodsController extends Controller
                // 返回上传文件图片  显示到浏览器上面
                $url ='/uploads/'.$newName;
                // 把所保存的图片位置放入到字段中去
-                
-               
         $input = $request->except('_token');
         $goods = Goods::find($id);
         $goods->goods_original = $url;
@@ -180,7 +172,5 @@ class GoodsController extends Controller
         }
         return $data;
     }
-
-
 
 }

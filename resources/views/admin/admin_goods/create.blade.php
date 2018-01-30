@@ -15,10 +15,10 @@
                                     <span class="x-red"></span>父级分类
                                 </label>
                                 <div class="layui-input-inline">
-                                    <select name="pid" id="catid" class="layui-input">
+                                    <select name="id" id="catid" class="layui-input">
                                         <option value="0">顶级分类</option>
                                         @foreach($category as $k=>$v)
-                                        <option value="{{ $v->pid }}">{{ $v->names }}</option>
+                                        <option value="{{ $v->id }}">{{ $v->names }}</option>
                                         @endforeach
                                      </select>
                                 </div>
