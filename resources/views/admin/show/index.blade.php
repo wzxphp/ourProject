@@ -45,7 +45,7 @@
 
                                 <tr>
                                     <td><b>排序</b>
-                                        <input type="text" name="sort value="" size="20" class="layui-input" />
+                                        <input type="text" name="sort" value="" size="20" class="layui-input" />
                                     </td>"
                                 </tr>
                                 <tr>
@@ -75,8 +75,8 @@
                                     <td><input type="text" class="layui-input" onchange="changeOrder(this,{{ $item->id }})" value="{{ $item->sort }}"></td>
 
                                     <td align="center">
-                                        <a href="{{url('admin/show/edit')}}/{{$item->id}}">编辑</a> ||
-                                                       <a href="{{url('admin/show/delete')}}/{{$item->id}}">删除</a>
+                                        <a href="{{url('admin/show/edit')}}/{{$item->id}}"><i class="layui-icon">&#xe642;</i> 修改</a>
+                                                       <a href="{{url('admin/show/delete')}}/{{$item->id}}"><i class="layui-icon">&#xe640;</i>删除</a>
                                     </td>
 
                             @endforeach

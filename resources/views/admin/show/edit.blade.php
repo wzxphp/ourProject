@@ -39,6 +39,12 @@
                                     </td>
 
                                 </tr>
+                                {{--<tr>--}}
+                                    {{--<td><b>排序</b>--}}
+
+                                        {{--<input type="text"  name="sort" value="{{ $data->sort }}" size="20" class="layui-input" />--}}
+                                    {{--</td>--}}
+                                {{--</tr>--}}
 
 
                                 <tr>
