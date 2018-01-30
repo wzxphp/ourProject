@@ -4,8 +4,6 @@ namespace App\Http\Controllers\Home;
 
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
-// use Request;
-use Intervention\Image\ImageManagerStatic as Image;
 use App\Model\Home\Pro;
 use Session;
 use Illuminate\Support\Facades\Hash;
@@ -25,7 +23,7 @@ class Usercontroller extends Controller
     public function userinfo_create(Request $request)
     {
         $input = $request->all();
-        dd($input);
+//        dd($input);
         $this->validate($request,[
                 'name' => 'required',
                 'true_name' => 'required',

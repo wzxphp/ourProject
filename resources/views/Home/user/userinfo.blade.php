@@ -4,33 +4,26 @@
 <div class="center">
 	<div class="col-main">
 		<div class="main-wrap">
-
 			<div class="user-info">
 				<!--标题 -->
 				<div class="am-cf am-padding">
 					<div class="am-fl am-cf"><strong class="am-text-danger am-text-lg">个人资料</strong> / <small>Personal&nbsp;information</small></div>
 				</div>
 				<hr/>
-
 				<!--头像 -->
 				<div class="user-infoPic">
-{{--				<form action="{{ url('/home/center/file') }}" method="POST" enctype="multipart/form-data">--}}
 					<div class="filePic">
-						{{--<input type="file" name="avatar" class="inputPic" allowexts="gif,jpeg,jpg,png,bmp" accept="image/*">--}}
-{{--						<img class="am-circle am-img-thumbnail" src="{{url('home/usercenter/images/getAvatar.do.jpg') }}" alt="" />--}}
-						<img class="am-circle am-img-thumbnail" src="{{url(Session('home_user')->avatar) }}" alt="" />
+						{{--<img class="am-circle am-img-thumbnail" src="{{Session('home_user')->avatar }}" alt="" />--}}
+						<img class="am-circle am-img-thumbnail" src="{{ Session('home_user')->avatar }}"/>
 					</div>
-				{{--</form>--}}
 					<p class="am-form-help">头像</p>
-
 					<div class="info-m">
 						<div><b>用户名：<i>{{ Session('home_user')->name }}</i></b></div>
 						<div class="vip">
                               <span></span><a href="#">会员专享</a>
 						</div>
 					</div>
-				</div> -->
-
+				</div>
 				<!--个人信息 -->
 				<div class="info-main">
 					<form class="am-form am-form-horizontal" action="{{ url('/home/center/userinfo_create') }}" method="POST" enctype="multipart/form-data">
@@ -56,7 +49,6 @@
                                   <small>昵称长度不能超过40个汉字</small>
 							</div>
 						</div>
-
 						<div class="am-form-group">
 							<label for="user-name" class="am-form-label">姓名</label>
 							<div class="am-form-content">
@@ -64,7 +56,6 @@
                                  
 							</div>
 						</div>
-
 						<div class="am-form-group">
 							<label class="am-form-label">性别</label>
 							<div class="am-form-content sex">
@@ -79,14 +70,12 @@
 								</label>
 							</div>
 						</div>
-
 						<div class="am-form-group">
 							<label class="am-form-label">头像</label>
 							<div class="am-form-content sex">
 								<input type="file" name="avatar" >
 							</div>
 						</div>
-
 						<div class="am-form-group">
 							<label for="user-birth" class="am-form-label">生日</label>
 							<div class="am-form-content birth">
@@ -196,11 +185,9 @@
 								<input id="user-email" name="email" placeholder="Email" type="email" value="{{ Session('home_user')->email }}">
 							</div>
 						</div>
-
 						<div class="info-btn">
 							<button id="submit" type="submit" >保存修改</button>
 						</div>
-
 					</form>
 				</div>
 
@@ -217,7 +204,6 @@
 		    	birthday.value = ""+birthday_y.value+"-"+birthday_m.value+"-"+birthday_d.value;
 		    }
 		</script>
-
 		<!--底部-->
 		<div class="footer">
 		</div>
