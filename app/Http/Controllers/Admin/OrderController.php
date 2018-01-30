@@ -121,6 +121,12 @@ class OrderController extends Controller
             order::where('id', $id)->update(['status' => $status]);
             return redirect('/admin/order/index');
         }
+    //代发货
+    public function lun($id,$status=4)
+    {
+        order::where('id', $id)->update(['status' => $status]);
+        return redirect('/admin/order/index');
+    }
 
 
 

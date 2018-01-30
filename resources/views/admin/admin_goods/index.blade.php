@@ -84,7 +84,7 @@
                             {{$cates[$v->category_id]}}
                         </td>
                         <td>
-                            <img src="{{$v->goods_original}}" style="width: 250px; height: 150px;" />
+                            <img src="{{$v->goods_original}}" style="width: 50px; height: 100px;" />
 
                         </td>
                         <td >
@@ -134,10 +134,8 @@
                                    style="text-decoration:none">
                                     <i class="layui-icon">&#xe640;</i>
                                 </a>
-
                                 <a href="{{url('admin/xiugai/'.$v->goods_id.'/index')}}">推荐</a>
                         </td>
-
                     </tr>
                     @endforeach
                 </tbody>

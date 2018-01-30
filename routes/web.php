@@ -42,7 +42,7 @@ Route::get('/home/cart/del/{id}','Home\CartController@del');
 // 收藏
 	// 添加收藏
 Route::get('/home/coll/{id}','Home\CollController@coll');
-	// 添加收藏
+	// 浏览收藏
 Route::get('/home/coll','Home\CollController@index');
 	// 取消收藏
 Route::get('/home/coll/del/{id}','Home\CollController@del');
@@ -188,6 +188,7 @@ Route::group(['prefix'=>'admin','namespace'=>'Admin','middleware'=>['admin_islog
     Route::get('order/down/{id}','OrderController@down'); //未发货
     Route::get('order/yes/{id}','OrderController@yes'); //已收货
     Route::get('order/dis/{id}','OrderController@dis'); //取消订单
+    Route::get('order/lun/{id}','OrderController@lun'); //取消订单
 
 //商品管理模块====================================================zhang
     Route::get('goods/index','GoodsController@index');

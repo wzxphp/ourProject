@@ -31,7 +31,7 @@
                             <th><input type="checkbox" onclick="checkBox($(this));" name="" value=""></th>
                             <th> ID </th>
                             <th> 用户名 </th>
-                            <th> 商品类名 </th>
+                            <th> 商品名称 </th>
                             <th> 内容 </th>
                             <th> 评论时间 </th>
                             <th>操作</th>
@@ -43,7 +43,7 @@
                             <td><input type="checkbox" class="mybox" value="1" name=""></td>
                             <td>{{ $v->id }}</td>
                             <td>{{ $v->user_id }}</td>
-                            <td>{{ $v->cargo_id }}</td>
+                            <td>{{ $v->good->goods_name }}</td>
                             <td>{{ $v->comment_info }}</td>
                             <td>{{ $v->created_at }}</td>
                             <td class="td-manage">

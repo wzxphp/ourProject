@@ -11,4 +11,8 @@ class Comment extends Model
 
     //定义关联表的主键
     public $primaryKey = 'id';
+
+    public function good(){
+        return $this->belongsTo('App\Model\Admin\Goods','goods_id','goods_id');
+    }
 }

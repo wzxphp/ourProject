@@ -62,7 +62,7 @@ class OrderController extends Controller
         // 判断订单商品是否重复，如果重复，则不执行添加
         $res = Order::where('cargo_message_id',$orderdata['cargo_message_id'])->get()->ToArray();
         // dd($res);
-        if(!empty($res) && $res[0]['status']==0 || $res[0]['status']==3)
+        if(!empty($res))
         {
             return redirect('home/center/order');
         }else{

@@ -3,6 +3,8 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Model\Admin\Comment;
+use App\Model\Admin\Goods;
+use App\Model\Cate;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 
@@ -15,9 +17,13 @@ class CommentController extends Controller
      */
     public function index()
     {
+
         $allData = Comment::get();   //获取总共有多少条评论
-        $data = Comment::get();   //获取总共有多少管理员
-        return view('admin.comment.list',compact('allData','data'));
+        $data = Comment::get();
+        $goods = Goods::get();
+        $cate = (new Cate)->getCate();
+        $cates = array_column($cate,'name','id');
+        return view('admin.comment.list',compact('allData','data','cates'));
     }
 
     /**

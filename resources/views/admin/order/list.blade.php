@@ -83,23 +83,30 @@
                             <span class="layui-btn layui-btn-normal layui-btn-mini">已发货</span>
                         @elseif($v->status==3)
                             <span class="layui-btn layui-btn-normal layui-btn-mini">成交！</span>
+                        @elseif($v->status==4)
+                            <span class="layui-btn layui-btn-normal layui-btn-mini">用户已评价！</span>
                         @endif
+
                     </td>
 
                     <td class=" ">
-                        <a href="{{url('admin/order/up').'/'.$v->id}}">
+{{--                        <a href="{{url('admin/order/up').'/'.$v->id}}">--}}
                             @if($v->status==0)
                                 <a href="{{url('admin/order/up').'/'.$v->id}}">
                                     点击开启订单
                                     @elseif($v->status==1)
                                         <a href="{{url('admin/order/yes').'/'.$v->id}}">
-                                            点击已收货
+                                            点击发货
                                             @elseif($v->status==2)
                                                 <a href="{{url('admin/order/dis').'/'.$v->id}}">
                                                     点击成交
                                                     @elseif($v->status==3)
-                                                        <a href="{{url('admin/order/down').'/'.$v->id}}">
-                                                            点击关闭订单
+                                                        <a href="{{url('admin/order/lun').'/'.$v->id}}">
+                                                            点击完成评论
+                                                            @elseif($v->status==4)
+                                                                <a href="{{url('admin/order/down').'/'.$v->id}}">
+                                                                    点击关闭订单
+
                                             @endif
 
                                         </a>
