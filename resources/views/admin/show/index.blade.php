@@ -69,7 +69,7 @@
                             </tr>
                             @foreach($data as $item)
                                 <tr>
-                                    <td><img src="/uploads/{{ $item->img }}" width="200px" height="100px" /></td>
+                                    <td><img src="/uploads/{{ $item->img }}"  width="200px" height="100px" /></td>
                                     <td>{{ $item->name }}</td>
                                     {{--<td><input type="text" class="layui-input"  value="{{ $item->name }}"></td>--}}
                                     <td><input type="text" class="layui-input" onchange="changeOrder(this,{{ $item->id }})" value="{{ $item->sort }}"></td>

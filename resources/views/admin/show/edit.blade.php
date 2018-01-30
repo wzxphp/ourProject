@@ -27,14 +27,14 @@
                                 <tr>
                                     <td><b>轮播图名称</b>
 
-                                        <input type="text" name="name" value="{{ $data->name }}" size="20" class="layui-input" />
+                                        <input type="text"  name="name" value="{{ $data->name }}" size="20" class="layui-input" />
                                     </td>
                                 </tr>
 
                                 <tr>
                                     <td><b>幻灯图片</b>
 
-                                        <input type="file" name="img" value="{{ $data->img }}" style="width:200px" class="layui-input" />
+                                        <input type="file" name="img"  value="{{ $data->img }}" style="width:200px" class="layui-input" />
                                         {{--<img src="/uploads/{{ $data->img }}" width="100" />--}}
                                     </td>
 

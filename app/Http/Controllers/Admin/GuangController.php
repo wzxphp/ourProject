@@ -5,7 +5,7 @@ namespace App\Http\Controllers\Admin;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use DB;
-use App\Model\Admin\Guang;
+use App\Model\Guang;
 
 class GuangController extends Controller
 {
@@ -76,11 +76,16 @@ class GuangController extends Controller
         $res1 = DB::table('data_rotation')->insert($data);
 
         if ($res1) {
-            return redirect('/admin/guang/')->with(['info' => '添加成功']);
+            $data = [
+
+                'message' => '删除成功'
+            ];
+            return redirect('/admin/guang/index')->with(['info' => '添加成功']);
         } else {
             return back()->with(['info' => '添加失败']);
         }
 //         dd($data);
+//        return view('');
     }
     public function delete($id)
     {
@@ -119,11 +124,9 @@ class GuangController extends Controller
 //       排序的业务逻辑
 
         $input = $request->except('_token');
-//    dd($input);
-        // 找到要修改排序的那条记录
-//        $cate = Guang::find($input['id']);
-        $cate = \DB::table('data_rotation')->find($input['id']);
 
+        // 找到要修改排序的那条记录
+        $cate = Guang::find($input['id']);
 //        $name = Show::find($input['name']);
 //        dd($name);
 
@@ -143,5 +146,67 @@ class GuangController extends Controller
             ];
         }
         return $data;
+    }
+    public function update(Request $request)
+    {
+
+        $data = $request->except('_token','token');
+//        dd($data);
+        if($request->hasFile('img'))
+        {
+            $file = $request->file('img');
+            if($file->isValid()){
+                //处理//获取图片扩展名
+                $ext =  $file->getClientOriginalExtension();
+
+                // dd($ext);}
+                $filename = time().mt_rand(1000,99999).'.'.$ext;
+                $res = $file->move('./uploads',$filename);
+                if($res)
+                {
+                    $data['img'] = $filename;
+                }else{
+                    $data['img'] = 'default.jpg';
+                }
+            }else{
+                $data['img'] = 'default.jpg';
+            }
+        }else{
+            unset($data['img']);
+        }
+        //处理状态
+        $data['status'] = 0;
+
+        //时间
+        $time = date('Y-m-d H:i:s',time());
+        $data['created_at'] = $time;
+        $data['updated_at'] = $time;
+//dd($data);
+        $id = $data['id'];
+
+        unset($data['id']);
+
+        $res1 = \DB::table('data_rotation')->where('id',$id)->update($data);
+
+        if($res1)
+        {
+            return redirect('/admin/guang/index')->with(['info'=>'更新成功']);
+        }else{
+            return back()->with(['info'=>'更新失败']);
+        }
+    }
+    //    上架
+    public function up($id,$status=0)
+    {
+        Guang::where('id',$id)->update(['status'=>$status]);
+        return redirect('/admin/guang/index');
+
+    }
+    //    下架
+    public function down($id,$status=1)
+    {
+        Guang::where('id',$id)->update(['status'=>$status]);
+        return redirect('/admin/guang/index');
+
     }
 }
