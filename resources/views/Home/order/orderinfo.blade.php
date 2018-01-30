@@ -70,6 +70,7 @@
                                 @elseif($n->comment_type == 1)
                                     <span style="color:red">{{ Session('home_user')->name }}</span>
                                 @endif
+
                                 @if($n->star == 1)
                                     <span>
                                         <i class="fa fa-star"></i>
@@ -91,6 +92,10 @@
                             <p>
                             <span>{{ $n->comment_info }}</span>
                             </p>
+							<div>
+								<span><a href="{{ url('/home/reviews') }}/{{ $n->id }}">撤销评论</a></span>
+							</div>
+                            
                         </div>
                         @endforeach
 					</div>

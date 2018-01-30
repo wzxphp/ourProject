@@ -42,7 +42,7 @@ Route::get('/home/cart/del/{id}','Home\CartController@del');
 // 收藏
 	// 添加收藏
 Route::get('/home/coll/{id}','Home\CollController@coll');
-	// 添加收藏
+	// 浏览收藏
 Route::get('/home/coll','Home\CollController@index');
 	// 取消收藏
 Route::get('/home/coll/del/{id}','Home\CollController@del');
