@@ -223,6 +223,12 @@ Route::post('admin/guang/delete/{id}','Admin\GuangController@delete');//删除
 Route::get('admin/guang/edit/{id}','Admin\GuangController@edit');  //修改页面
 Route::post('admin/guang/update','Admin\GuangController@update'); //修改
 Route::post('admin/guang/changeorder','Admin\GuangController@changeorder'); //排序
-Route::post('admin/guang/update','Admin\GuangController@update'); //修改轮播图
+Route::post('admin/guang/update','Admin\GuangController@update'); //修改广告位
+Route::get('admin/guang/up/{id}','Admin\GuangController@up');   //上架
+Route::get('admin/guang/down/{id}','Admin\GuangController@down'); //下架
+//图片上传公用方法
+Route::post('admin/file/upload','Admin\FileController@upload');
+
+
 
 

@@ -118,34 +118,34 @@ class CateController extends Controller
     public function del($id)
     {
 //        $a = DB::table('data_category')->where('id',$id)->first();
-        $a = Cate::find($id);
-        if($a->pid == 0){
+        $cate = Cate::find($id);
+        $count = Cate::where('pid', $id)->count();
+        if ($count) {
             $data = [
                 'status' => 1,
-                'message' => '顶级分类不能删除，请返回！'
+                'message' => '分类下有子类,不能删除'
             ];
-//            header(refresh:2;);
-//            return redirect(2);
+
+            return $data;
+        }
+            $res = $cate->delete();
+            if ($res) {
+                // return response()->json(['status'=>1]);
+                $data = [
+                    'status' => 1,
+                    'message' => '删除成功'
+                ];
+            } else {
+                // return response()->json(['stauts'=>0]);
+                $data = [
+                    'status' => 0,
+                    'message' => '删除失败'
+                ];
+            }
+
             return $data;
         }
 
-        $res = Cate::find($id)->delete();
-//         $a = Cate::find('pid');
-//        if ($a){
-//            return 1111123;
-//        }
-        if ($res) {
-            $data = [
-                'status' => 0,
-                'message' => '删除成功'
-            ];
-        } else {
-            $data = [
-                'status' => 1,
-                'message' => '删除失败'
-            ];
-        }
-        return $data;
-    }
+
 
 }

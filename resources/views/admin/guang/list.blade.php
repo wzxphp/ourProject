@@ -61,26 +61,32 @@
                             <input type="text" name="sort" onchange="changeOrder(this,{{ $item->id }})" value="{{ $item->sort }}" size="20" class="layui-input" />
                         </td>
                         <td class="td-status">
-                            <span class="layui-btn layui-btn-normal layui-btn-mini">
                                 @if($item->status==0)
-                                已下线
+                                <span class="layui-btn layui-btn-disabled layui-btn-mini">已下线</span>
                                 @elseif($item->status==1)
-                                    已上线
-
-                            @endif
-                            </span>
+                                <span class="layui-btn layui-btn-normal layui-btn-mini">已上线</span>
+                                @endif
                         </td>
                         <td class="td-manage">
-                            <a style="text-decoration:none" onclick="banner_stop(this,'10001')" href="javascript:;" title="不显示">
+                            {{--<a style="text-decoration:none" onclick="banner_stop(this,'10001')" href="{{url('admin/guang/down').'/'.$item->id}}" title="不显示">--}}
                                 <i class="layui-icon">&#xe601;</i>
                             </a>
+                            {{--<a href="{{url('admin/order/up').'/'.$v->id}}">--}}
+                                @if($item->status==0)
+                                    <a  href="{{url('admin/guang/down').'/'.$item->id}}">
+                                        点击上线
+                                        @elseif($item->status==1)
+                                            <a  href="{{url('admin/guang/up').'/'.$item->id}}">
+                                                点击下线
+                                                @endif
                             <a title="编辑" href="{{ url('admin/guang/edit/'.$item->id) }}"
                             class="ml-5" style="text-decoration:none">
-                                <i class="layui-icon">&#xe642;</i>
+
+                                <i class="layui-icon">&#xe642;</i> 修改
                             </a>
                             <a title="删除" href="javascript:;" onclick="banner_del({{ $item->id }})"
                             style="text-decoration:none">
-                                <i class="layui-icon">&#xe640;</i>
+                                <i class="layui-icon">&#xe640;</i>删除
                             </a>
 
                         </td>
@@ -139,26 +145,26 @@
                 x_admin_show(title,url,w,h);
             }
              /*停用*/
-            function banner_stop(obj,id){
-                layer.confirm('确认不显示吗？',function(index){
-                    //发异步把用户状态进行更改
-                    $(obj).parents("tr").find(".td-manage").prepend('<a style="text-decoration:none" onClick="banner_start(this,id)" href="javascript:;" title="显示"><i class="layui-icon">&#xe62f;</i></a>');
-                    $(obj).parents("tr").find(".td-status").html('<span class="layui-btn layui-btn-disabled layui-btn-mini">不显示</span>');
-                    $(obj).remove();
-                    layer.msg('不显示!',{icon: 5,time:1000});
-                });
-            }
-
-            /*启用*/
-            function banner_start(obj,id){
-                layer.confirm('确认要显示吗？',function(index){
-                    //发异步把用户状态进行更改
-                    $(obj).parents("tr").find(".td-manage").prepend('<a style="text-decoration:none" onClick="banner_stop(this,id)" href="javascript:;" title="不显示"><i class="layui-icon">&#xe601;</i></a>');
-                    $(obj).parents("tr").find(".td-status").html('<span class="layui-btn layui-btn-normal layui-btn-mini">已显示</span>');
-                    $(obj).remove();
-                    layer.msg('已显示!',{icon: 6,time:1000});
-                });
-            }
+//            function banner_stop(obj,id){
+//                layer.confirm('确认不显示吗？',function(index){
+//                    //发异步把用户状态进行更改
+//                    $(obj).parents("tr").find(".td-manage").prepend('<a style="text-decoration:none" onClick="banner_start(this,id)" href="javascript:;" title="显示"><i class="layui-icon">&#xe62f;</i></a>');
+//                    $(obj).parents("tr").find(".td-status").html('<span class="layui-btn layui-btn-disabled layui-btn-mini">不显示</span>');
+//                    $(obj).remove();
+//                    layer.msg('不显示!',{icon: 5,time:1000});
+//                });
+//            }
+//
+//            /*启用*/
+//            function banner_start(obj,id){
+//                layer.confirm('确认要显示吗？',function(index){
+//                    //发异步把用户状态进行更改
+//                    $(obj).parents("tr").find(".td-manage").prepend('<a style="text-decoration:none" onClick="banner_stop(this,id)" href="javascript:;" title="不显示"><i class="layui-icon">&#xe601;</i></a>');
+//                    $(obj).parents("tr").find(".td-status").html('<span class="layui-btn layui-btn-normal layui-btn-mini">已显示</span>');
+//                    $(obj).remove();
+//                    layer.msg('已显示!',{icon: 6,time:1000});
+//                });
+//            }
             // 编辑
 //            function banner_edit (title,url,id,w,h) {
 //                x_admin_show(title,url,w,h);

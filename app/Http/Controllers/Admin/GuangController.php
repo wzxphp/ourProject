@@ -76,11 +76,16 @@ class GuangController extends Controller
         $res1 = DB::table('data_rotation')->insert($data);
 
         if ($res1) {
-            return redirect('/admin/guang/')->with(['info' => '添加成功']);
+            $data = [
+
+                'message' => '删除成功'
+            ];
+            return redirect('/admin/guang/index')->with(['info' => '添加成功']);
         } else {
             return back()->with(['info' => '添加失败']);
         }
 //         dd($data);
+//        return view('');
     }
     public function delete($id)
     {
@@ -189,5 +194,19 @@ class GuangController extends Controller
         }else{
             return back()->with(['info'=>'更新失败']);
         }
+    }
+    //    上架
+    public function up($id,$status=0)
+    {
+        Guang::where('id',$id)->update(['status'=>$status]);
+        return redirect('/admin/guang/index');
+
+    }
+    //    下架
+    public function down($id,$status=1)
+    {
+        Guang::where('id',$id)->update(['status'=>$status]);
+        return redirect('/admin/guang/index');
+
     }
 }
