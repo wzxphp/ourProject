@@ -96,7 +96,7 @@
                                                         <span style="color:red;">匿名评价</span>
                                                     @elseif($n['comment_type'] == 1)
                                                         @foreach($revuser as $i=>$j)
-                                                        <span style="red">{{ $j->name }}</span>
+                                                        <span style="color:red;">{{ $j->name }}</span>
                                                         @endforeach
                                                     @endif
                                                     @if($n['star'] == 1)

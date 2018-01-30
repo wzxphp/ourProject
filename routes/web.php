@@ -167,6 +167,7 @@ Route::group(['prefix'=>'admin','namespace'=>'Admin','middleware'=>['admin_islog
     Route::resource('comment','CommentController');
 //网站配置模块
     Route::get('config/close','ConfigController@close');  //关闭网站
+    Route::post('config/change','ConfigController@change');  //修改状态
     Route::post('config/changecontent','ConfigController@changeContent');//批量修改网站配置信息
     Route::resource('config','ConfigController');
 
@@ -203,7 +204,6 @@ Route::group(['prefix'=>'admin','namespace'=>'Admin','middleware'=>['admin_islog
 //商品上下价
 Route::get('admin/goods/goods_sta','Admin\GoodsController@goods_sta');
 
-
 //==============================================================================推荐位
 //推荐位新出
 // 首页
@@ -212,9 +212,6 @@ Route::get('admin/xiugai/brow','Admin\XuigaiController@create');
 Route::get('admin/xiugai/{id}/index','Admin\XuigaiController@index');
 // 删除
 Route::get('admin/xiugai/{id}','Admin\XuigaiController@del');
-
-
-
 //轮播图======================================================================qin
 Route::get('admin/show/index','Admin\ShowController@index'); //页面
 Route::post('admin/show/insert','Admin\ShowController@insert');  //添加提交

@@ -66,9 +66,9 @@
                         <div class="submit-review">
                             <p>
                                 @if($n->comment_type == 0)
-                                    <span>匿名评价</span>
+                                    <span style="color:red;">匿名评价</span>
                                 @elseif($n->comment_type == 1)
-                                    <span>{{ Session('home_user')->name }}</span>
+                                    <span style="color:red">{{ Session('home_user')->name }}</span>
                                 @endif
                                 @if($n->star == 1)
                                     <span>

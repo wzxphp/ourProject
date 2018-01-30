@@ -191,10 +191,30 @@ class ConfigController extends Controller
         }
         return $data;
     }
-
+    //控制网站开启关闭功能的页面
     public function close()
     {
         return view('admin.config.close');
+    }
+    //开关改变状态
+    public function change(Request $request)
+    {
+        $id = $request -> id;
+        $st = $request -> st;
+        $con =  Config::find($id);
+        if($st == 'flase'){
+            $con -> status = '0';
+        }else{
+            $con -> status = '1';
+        }
+        $res = $con -> save();
+        //如果修改成功
+        if($res){
+            $data = ['status'=>0, 'message'=>'修改状态成功'];
+        }else{
+            $data = ['status'=>1, 'message'=>'修改状态失败'];
+        }
+        return $data;
     }
 
 

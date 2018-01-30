@@ -22,15 +22,10 @@
                                     <span class="x-red">*</span>是否开启
                                 </label>
                                 <div class="layui-input-block">
-                                    <input type="checkbox" checked="" name="open" lay-skin="switch" lay-filter="switchTest" title="开关"><div class="layui-unselect layui-form-switch layui-form-onswitch"><i></i></div>
+                                    {{--<input type="checkbox" onchange="change(this,'12')" name="open" lay-skin="switch" lay-filter="switchTest" title="开关">--}}
+                                    <input type="checkbox" onchange="change(this,'12')" name="open" title="开关">
+                                    {{--<div class="layui-unselect layui-form-switch layui-form-onswitch"><i></i></div>--}}
                                 </div>
-                            </div>
-                            <div class="layui-form-item">
-                                <label for="L_repass" class="layui-form-label">
-                                </label>
-                                <button class="layui-btn" lay-filter="*" lay-submit="">
-                                    保存
-                                </button>
                             </div>
                         </form>
                     </div>
@@ -42,18 +37,18 @@
     </div>
     <!-- 右侧主体结束 -->
     <script>
+            function change(obj,id) {
 
-        layui.use(['element','layer','form'], function(){
-            form = layui.form()
-
-            //监听提交
-            form.on('submit(*)', function(data){
-                console.log(data);
-                //发异步，把数据提交给php
-                layer.alert("保存成功", {icon: 6});
-                return false;
-            });
-
-        })
+                $st = $(obj).attr('checked');
+                console.log($st);
+                //发异步把用户状态进行更改
+                $.post('{{ url('admin/config/change') }}',{'_token':"{{csrf_token()}}",'id':id,'st':$st},function (data) {
+                    if(data.status == 0) {
+                        layer.msg('已关闭', {icon: 5, time: 1000});
+                        setTimeout(function(s){location.reload()},900);
+                    }else{
+                        layer.msg(data.message, {icon: 1, time: 1000});}
+                });
+            }
     </script>
 @endsection
