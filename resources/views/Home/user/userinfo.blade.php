@@ -32,7 +32,7 @@
 
 				<!--个人信息 -->
 				<div class="info-main">
-					<form class="am-form am-form-horizontal" action="{{ url('/home/center/userinfo_create') }}" method="POST" enctype="multipart/form-data">
+					<form id="myform" class="am-form am-form-horizontal" action="{{ url('/home/center/userinfo_create') }}" method="POST" enctype="multipart/form-data">
 					<div class="user-infoPic">
 						<div class="filePic">
 							<!-- <input type="file" name="avatar" class="inputPic" allowexts="gif,jpeg,jpg,png,bmp" accept="image/*">-->

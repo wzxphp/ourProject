@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Home;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Mail;
+use Illuminate\Support\Facades\Hash;
 
 // use App\Org\code\Code;
 // require_once app_path().'/Org/code/Code.class.php';
@@ -47,15 +48,24 @@ class LoginController extends Controller
     		return redirect('home/login/index')->with(['info'=>'账号或密码输入有误']);
     	}
 // 密码解密
-    	$password = decrypt($user->password);
+    	// $password = decrypt($user->password);
+
 // 验证密码
-    	if($data['password'] !== $password)
-    	{
-    		return redirect('home/login/index')->with(['info'=>'账号或密码输入有误']);
-    	}else{
-    		Session::put('home_user',$user);
+    	// if($data['password'] !== $password)
+    	// {
+    	// 	return redirect('home/login/index')->with(['info'=>'账号或密码输入有误']);
+    	// }else{
+    	// 	Session::put('home_user',$user);
+     //        return redirect('home/index');
+    	// }
+// 哈希验证密码
+        if(Hash::check($data['password'],$user->password))
+        {
+            Session::put('home_user',$user);
             return redirect('home/index');
-    	}
+        }else{
+            return redirect('home/login/index')->with(['info'=>'账号或密码输入有误']);
+        }
 
     	
 
@@ -99,7 +109,8 @@ class LoginController extends Controller
     		return back()->with(['info'=>'邮箱已被注册']);
     	}
 // 密码加密
-    	$data['password'] = encrypt($data['password']);
+    	// $data['password'] = encrypt($data['password']);
+        $data['password'] = Hash::make($data['password']);
 
 // 将用户注册信息加入用户注册信息表
     	$res = \DB::table('data_user_register')->insert($data);

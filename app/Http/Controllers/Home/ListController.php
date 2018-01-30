@@ -12,7 +12,7 @@ use App\Model\Home\User;
 
 class ListController extends Controller
 {
-    //商品列表页
+    //轻奢美妆
     public function list()
     {
         $listdata = Good::paginate(2);
@@ -40,19 +40,27 @@ class ListController extends Controller
     }
 // 商品详情
     public function details($id)
-    {
+    {   //所有商品
         $data = Good::where('goods_id',$id)->get();
+        // dd($data);
+        // 商品的评论
+        $review = Comm::where('goods_id',$id)->get()->ToArray();
 
-        $review = Comm::where('goods_id',$id)->get();
-
-        $user = [];
-        foreach($review as $k=>$v)
+        if(!$review)
         {
-            $user['user_id'] = $v->user_id;
-        }
+            return view('Home/details/details',compact('data'));
+            
+        }else{
+            $user = [];
+            foreach($review as $k=>$v)
+            {
+                $user['user_id'] = $v['user_id'];
+            }
 
-        $revuser = User::where('user_id',$user['user_id'])->get();
+            $revuser = User::where('user_id',$user['user_id'])->get();
+
+            return view('Home/details/details',compact('data','review','revuser'));
+        }
         
-    	return view('Home/details/details',compact('data','review','revuser'));
     }
 }

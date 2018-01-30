@@ -43,20 +43,20 @@
 				</div>
 				<div class="order-infoaside">
 					<div class="order-addresslist">
+					@foreach($info as $key=>$val)
+					@endforeach
 						<div class="order-address">
 							<div class="icon-add">
 							</div>
 							<p class="new-tit new-p-re">
-								<span class="new-txt">小叮当</span>
-								<span class="new-txt-rd2">159****1622</span>
+								<span class="new-txt">{{ $val->name }}</span>
+								<span class="new-txt-rd2">{{ $val->cargo_message_tel }}</span>
 							</p>
 							<div class="new-mu_l2a new-p-re">
 								<p class="new-mu_l2cw">
 									<span class="title">收货地址：</span>
-									<span class="province">湖北</span>省
-									<span class="city">武汉</span>市
-									<span class="dist">洪山</span>区
-									<span class="street">雄楚大道666号(中南财经政法大学)</span></p>
+									<span class="province">{{ $val->cargo_message_address }}</span>
+									<span class="street">{{ $val->cargo_details_address }}</span></p>
 							</div>
 						</div>
 					</div>

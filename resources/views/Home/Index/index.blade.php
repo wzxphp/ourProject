@@ -125,23 +125,26 @@
 				<div class="latest-product">
 					<h2 class="section-title">新品热销</h2>
 					<div class="product-carousel">
-					
+						@foreach($recom as $k=>$v)
+						<!-- <form action="{{ url('/home/cart') }}/{{ $v->id }}"> -->
 						<div class="single-product">
 							<div class="product-f-image">
-								<img src="/home/img/product-1.jpg" alt="">
+								<img src="{{ $v->recommend_img }}" style="width:200px; height:300px;">
 								<div class="product-hover">
-									<a href="#" class="add-to-cart-link"><i class="fa fa-shopping-cart"></i> 加入购物车</a>
-									<a href="single-product.html" class="view-details-link"><i class="fa fa-link"></i> 查看详情</a>
+									<a href="" class="add-to-cart-link"><i class="fa fa-shopping-cart"></i> 加入购物车</a>
+
+									<a href="{{ url('/home/recom') }}/{{ $v->id }}" class="view-details-link"><i class="fa fa-link"></i> 查看详情</a>
 								</div>
 							</div>
 							
-							<h2><a href="single-product.html">Sony Smart TV - 2015</a></h2>
+							<h2><a href="{{ url('/home/recom') }}/{{ $v->id }}">{{ $v->recommend_name }}</a></h2>
 							
 							<div class="product-carousel-price">
-								<ins>$700.00</ins> <del>$800.00</del>
+								<ins>{{ $v->recommend_price }}</ins> <del>{{ $v->recommend_discount }}</del>
 							</div> 
 						</div>
-
+						@endforeach
+						<!-- </form> -->
 					</div>
 				</div>
 			</div>

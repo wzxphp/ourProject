@@ -1,8 +1,5 @@
 @extends('admin.layout')
-
 @section('title','管理员添加')
-
-
 @section('content')
     <!-- 右侧主体开始 -->
     <div class="page-content">

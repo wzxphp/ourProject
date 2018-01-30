@@ -7,9 +7,9 @@
             <!-- 右侧内容框架，更改从这里开始 -->
 
             <blockquote class="layui-elem-quote">
-                <a href="">首页</a>/
-                <a href="">管理员用户</a>/
-                <a href="">增加管理员</a>
+                <a href="">后台首页</a>|
+                <a href="">增加分类</a>|
+                <a href="">管理分类列表</a>
             </blockquote>
             <!-- 中部开始 -->
             <div class="wrapper">

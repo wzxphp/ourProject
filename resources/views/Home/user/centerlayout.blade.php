@@ -29,7 +29,7 @@
 <link href="{{ asset('home/usercenter/css/vipstyle.css')}}" rel="stylesheet" type="text/css">
 <link href="{{ asset('home/usercenter/css/orstyle.css')}}" rel="stylesheet" type="text/css">
 <link href="{{ asset('home/usercenter/css/cartstyle.css')}}" rel="stylesheet" type="text/css" />
-
+<link href="{{ asset('home/usercenter/css/colstyle.css')}}" rel="stylesheet" type="text/css">
 <link href="{{ asset('home/usercenter/css/jsstyle.css')}}" rel="stylesheet" type="text/css" />
 <script src="{{ asset('home/usercenter/js/jquery.min.js') }}"></script>
 <script src="{{ asset('home/usercenter/js/amazeui.js') }}"></script>
@@ -67,7 +67,7 @@
 						<li><a href="{{ url('home/login/index') }}"><i class="fa fa-user"></i> 购物车</a></li>
 					@endif
 					@if( !empty(Session('home_user')))
-						<li><a href="{{ url('home/order') }}"><i class="fa fa-user"></i> 订单</a></li>
+						<li><a href="{{ url('home/center/order') }}"><i class="fa fa-user"></i> 订单</a></li>
 					@else
 						<li><a href="{{ url('home/login/index') }}"><i class="fa fa-user"></i> 订单</a></li>
 					@endif
@@ -187,7 +187,7 @@
 		<li class="person">
 			<p><i class="am-icon-tags"></i>我的收藏</p>
 			<ul>
-				<li> <a href="#">收藏</a></li>
+				<li> <a href="{{ url('home/coll') }}">收藏</a></li>
 				<li> <a href="#">足迹</a></li>														
 			</ul>
 		</li>

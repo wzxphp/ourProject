@@ -19,6 +19,7 @@
             </div>
             <div class="page-content">
                 <div class="content">
+                    <div style="width: 900px;"></div>
                     <!-- 右侧内容框架，更改从这里开始 -->
                     <form class="layui-form xbs" action="{{ url('admin/admin_user') }}" method="get">
                         <div class="layui-form-pane" style="text-align: center;">
@@ -62,11 +63,7 @@
                         <tr>
                             <td><input type="checkbox" class="mybox" value="1" name=""></td>
                             <td>{{ $v->id }}</td>
-                            <td>
-                                <u style="cursor:pointer" onclick="member_show('张三','member-show.html','10001','360','400')">
-                                    {{ $v->name }}
-                                </u>
-                            </td>
+                            <td>{{ $v->name }}</td>
                             <td>{{ $v->tel }}</td>
                             <td>{{ $v->email }}</td>
                             <td>{{ $v->created_at }}</td>
@@ -87,15 +84,17 @@
                                    style="text-decoration:none">
                                     <i class="layui-icon">&#xe640;</i>
                                 </a>
-                                <a href="">授权</a>
+                                <a title="授权" href="{{ url('admin/admin_user/auth/'.$v->id) }}"><i class="layui-icon">&#xe62e;</i></a>
+{{--                                <a title="授权" href="{{ url('admin/admin_user/auth/'.$v->id) }}"><i class="iconfont">&#xe707;</i></a>--}}
                             </td>
                         </tr>
                         @endforeach
                         </tbody>
                     </table>
                     <!-- 右侧内容框架，更改从这里结束 -->
-                    <div class="layui-show">
-                        {!! $data->render() !!}
+                    <div style="float:right" id="page" class="layui-page">
+                        {{--{!! $data->render() !!}--}}
+                        {!! $data->links() !!}
                     </div>
                 </div>
             </div>
@@ -104,7 +103,9 @@
         </div>
     </div>
     <script>
+        layui.use(['laypage'],function(){
 
+        });
         //日期插件
         layui.use(['laydate'], function(){
             laydate = layui.laydate;
@@ -188,9 +189,9 @@
                         $(obj).parents("tr").find(".td-manage").prepend('<a style="text-decoration:none" onClick="member_start(this,id)" href="javascript:;" title="启用"><i class="layui-icon">&#xe62f;</i></a>');
                         $(obj).parents("tr").find(".td-status").html('<span class="layui-btn layui-btn-disabled layui-btn-mini">已停用</span>');
                         $(obj).remove();
-                        layer.msg(data.message, {icon: 5, time: 1000});
+                        layer.msg('已停用', {icon: 5, time: 1000});
+                        setTimeout(function(){location.reload()},900);
                     }else{
-//                        alert('停用失败');
                         layer.msg(data.message, {icon: 1, time: 1000});}
                 });
 
@@ -206,9 +207,9 @@
                         $(obj).parents("tr").find(".td-manage").prepend('<a style="text-decoration:none" onClick="member_stop(obj,id)" href="javascript:;" title="停用"><i class="layui-icon">&#xe601;</i></a>');
                         $(obj).parents("tr").find(".td-status").html('<span class="layui-btn layui-btn-normal layui-btn-mini">已启用</span>');
                         $(obj).remove();
-                        layer.msg(data.message, {icon: 6, time: 1000});
+                        layer.msg('已启用', {icon: 6, time: 1000});
+                        setTimeout(function(){location.reload()},900);
                     }else{
-//                        alert('启用失败');
                         layer.msg(data.message, {icon: 1, time: 1000});}
                 });
 
@@ -228,17 +229,5 @@
                 });
             });
         }
-
-//        //分页
-//        layui.use('laypage', function(){
-//            var laypage = layui.laypage;
-//
-//            //执行一个laypage实例
-//            laypage.render({
-//                cont: 'page'
-//                ,pages: 100
-//                ,skip: true
-//            });
-//        });
     </script>
 @endsection

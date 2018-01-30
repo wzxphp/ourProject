@@ -1,5 +1,4 @@
 <?php
-
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -32,12 +31,21 @@ Route::get('/home/outdoor','Home\ListController@outdoor');
 Route::get('/home/cate','Home\CateController@cate');
 // 详情表
 Route::get('/home/details/{id}','Home\ListController@details');
+// 推荐位促销
+// Route::get('/home/recom/{id}','Home\IndexController@recom');
 // 购物车
 Route::get('/home/cart','Home\CartController@index');
 	// 添加购物车
 Route::post('/home/cart/{id}','Home\CartController@cart');
 	// 删除购物车中的商品
 Route::get('/home/cart/del/{id}','Home\CartController@del');
+// 收藏
+	// 添加收藏
+Route::get('/home/coll/{id}','Home\CollController@coll');
+	// 添加收藏
+Route::get('/home/coll','Home\CollController@index');
+	// 取消收藏
+Route::get('/home/coll/del/{id}','Home\CollController@del');
 // 订单
 	// 确认订单
 Route::post('/home/reorder','Home\OrderController@reorder');
@@ -112,55 +120,117 @@ Route::post('/home/forgot/update','Home\LoginController@update');
 
 
 //后台=============================================================
+//未授权页面
+Route::get('auth','Admin\LoginController@auth');
 //后台登录路由
 Route::get('admin/login','Admin\LoginController@login');
-//登录页面的验证码
-Route::get('admin/code','Admin\LoginController@code');
 //登录页面的逻辑验证
 Route::post('admin/dologin','Admin\LoginController@dologin');
+//忘记密码
+Route::get('admin/forget','Admin\LoginController@forget');
+//忘记密码处理
+Route::post('admin/doforget','Admin\LoginController@doforget');
+//重置密码
+Route::get('admin/reset','Admin\LoginController@reset');
+//重置密码处理
+Route::post('admin/doreset','Admin\LoginController@doreset');
+//退出登录
+Route::get('admin/logout','Admin\LoginController@logout');
+//登录页面的验证码
+Route::get('admin/code','Admin\LoginController@code');
+
 //路由组
-Route::group(['prefix'=>'admin','namespace'=>'Admin','middleware'=>'admin_islogin'],function(){
+//Route::group(['prefix'=>'admin','namespace'=>'Admin','middleware'=>['admin_islogin','hasRole']],function(){
+Route::group(['prefix'=>'admin','namespace'=>'Admin','middleware'=>['admin_islogin']],function(){
 //后台首页
     Route::get('index','LoginController@index');
-//退出登录
-    Route::get('logout','LoginController@logout');
 //管理员模块
     Route::post('admin_user_del','Admin_userController@delAll');  //删除多行
     Route::post('admin_user_statu','Admin_userController@statu');  //修改管理员状态
     Route::get('admin_user/auth/{id}','Admin_userController@auth');  //管理员授权
+    Route::post('admin_user/doauth','Admin_userController@doAuth'); //添加用户授权逻辑
     Route::resource('admin_user','Admin_userController');
 //会员管理模块
     Route::get('user/deleted','UserController@deleted');       //删除会员页面
+    Route::get('user/statu/{id}','UserController@statu');       //删除会员状态
+    Route::get('user/statu2/{id}','UserController@statu2');       //恢复会员状态
+    Route::post('user/showav','UserController@showav');       //查看会员头像
     Route::resource('user','UserController');
 
 //角色管理模块
+    Route::get('role/auth/{id}','RoleController@auth');  //角色授权
+    Route::post('role/doauth','RoleController@doAuth'); //角色授权执行
     Route::resource('role','RoleController');
 //权限管理模块
     Route::resource('permission','PermissionController');
-});
-
-//分类管理模块=====================================================
-Route::get('admin/cate/create','Admin\CateController@create');
-Route::post('admin/cate/store','Admin\CateController@store');
-Route::get('admin/cate/index','Admin\CateController@index');
-Route::post('admin/cate/changeorder','Admin\CateController@changeOrder');
-Route::get('admin/cate/{id}/edit','Admin\CateController@edit');
-Route::post('admin/cate/update','Admin\CateController@update');
-Route::get('admin/cate/{id}','Admin\CateController@del');
-//订单管理
-Route::get('admin/order/index','Admin\OrderController@index');
+//评论管理模块
+    Route::resource('comment','CommentController');
+//网站配置模块
+    Route::get('config/close','ConfigController@close');  //关闭网站
+    Route::post('config/changecontent','ConfigController@changeContent');//批量修改网站配置信息
+    Route::resource('config','ConfigController');
 
 
 
-//商品管理模块====================================================
-Route::get('admin/goods/index','Admin\GoodsController@index');
+//分类管理模块====================================================qin
+    Route::get('cate/create','CateController@create');
+    Route::post('cate/store','CateController@store');
+    Route::get('cate/index','CateController@index');
+    Route::post('cate/changeorder','CateController@changeOrder');
+    Route::get('cate/{id}/edit','CateController@edit');
+    Route::post('cate/update','CateController@update');
+    Route::get('cate/{id}','CateController@del');
+//订单管理模块=====================================================qin
+    Route::get('order/index','OrderController@index');
+    Route::get('order/{id}/edit','OrderController@edit');
+    Route::post('order/update','OrderController@update');
+//订单状态修改
+    Route::get('order/up/{id}','OrderController@up');   //发货
+    Route::get('order/down/{id}','OrderController@down'); //未发货
+    Route::get('order/yes/{id}','OrderController@yes'); //已收货
+    Route::get('order/dis/{id}','OrderController@dis'); //取消订单
+
+//商品管理模块====================================================zhang
+    Route::get('goods/index','GoodsController@index');
 // 商品添加页面
-Route::get('admin/goods/create','Admin\GoodsController@create');
+    Route::get('goods/create','GoodsController@create');
 //商品数据接收
-Route::post('admin/goods/upload','Admin\GoodsController@upload');
+    Route::post('goods/upload','GoodsController@upload');
 //商品修改页面
-Route::get('admin/goods/{id}/edit','Admin\GoodsController@edit');
-Route::post('admin/goods/{id}/xxoo','Admin\GoodsController@xxoo');
+    Route::get('goods/{id}/edit','GoodsController@edit');
+    Route::post('goods/{id}/xxoo','GoodsController@xxoo');
 //删除
-Route::get('admin/goods/{id}','Admin\GoodsController@del');
+    Route::get('goods/{id}','GoodsController@del');
+});
+//商品上下价
+Route::get('admin/goods/goods_sta','Admin\GoodsController@goods_sta');
+//商品推荐位==================================================================zhang
+Route::get('admin/recom/index','Admin\RecomController@index');
+//添加推荐位
+Route::get('admin/recom/add','Admin\RecomController@add');
+Route::post('admin/recom/upadd','Admin\RecomController@upadd');
+// 删除ID
+Route::get('admin/recom/{id}','Admin\RecomController@dels');
+//修改
+Route::get('admin/recom/{id}/edit','Admin\RecomController@edit');
+Route::post('admin/recom/{id}/doedit','Admin\RecomController@doedit');
+//浏览推荐位
+Route::get('admin/recom/{id}/create','Admin\RecomController@create');
+
+//轮播图======================================================================qin
+Route::get('admin/show/index','Admin\ShowController@index'); //页面
+Route::post('admin/show/insert','Admin\ShowController@insert');  //添加提交
+Route::post('admin/show/changeorder','Admin\ShowController@changeorder'); //排序
+Route::get('admin/show/delete/{id}','Admin\ShowController@delete');  //删除轮播图
+Route::get('admin/show/edit/{id}','Admin\ShowController@edit');  //轮播图页面
+Route::post('admin/show/update','Admin\ShowController@update'); //修改轮播图
+//广告位======================================================================qin
+Route::get('admin/guang/index','Admin\GuangController@index'); //页面
+Route::get('admin/guang/add','Admin\GuangController@add'); //添加页面
+Route::post('admin/guang/insert','Admin\GuangController@insert'); //添加
+Route::post('admin/guang/delete/{id}','Admin\GuangController@delete');//删除
+Route::get('admin/guang/edit/{id}','Admin\GuangController@edit');  //修改页面
+Route::post('admin/guang/update','Admin\GuangController@update'); //修改
+Route::post('admin/guang/changeorder','Admin\GuangController@changeorder'); //排序
+
 

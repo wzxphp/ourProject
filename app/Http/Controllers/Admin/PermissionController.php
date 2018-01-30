@@ -70,7 +70,8 @@ class PermissionController extends Controller
      */
     public function edit($id)
     {
-        //
+        $per = Permission::find($id);
+        return view('admin.role.edit',compact('per'));
     }
 
     /**
@@ -82,7 +83,18 @@ class PermissionController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $input = $request->all();
+
+        //使用模型修改表记录
+        $per = Permission::find($id);
+        $per->permission_name = $input['name'];
+        $per->permission_des = $input['des'];
+        $res = $role->save();
+        if($res){
+            return redirect('admin/permission')->with('msg','修改成功');
+        }else{
+            return back()->with('msg','修改失败');
+        }
     }
 
     /**
@@ -93,6 +105,14 @@ class PermissionController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $res = Permission::find($id)->delete();
+        //如果删除成功
+        if($res){
+            $data = ['status'=>0, 'message'=>'删除成功'];
+        }else{
+            $data = ['status'=>1, 'message'=>'删除失败'];
+        }
+
+        return $data;
     }
 }

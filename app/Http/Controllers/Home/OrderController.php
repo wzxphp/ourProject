@@ -25,7 +25,7 @@ class OrderController extends Controller
 		//获取购物车和地址信息
 		$orders = Cart::get();
 		$data = Addr::get();
-		// dd($data);
+
 		// 遍历地址表和购物车表，获取订单信息数组
 		$reorders = [];
 		foreach($orders as $k=>$v)
@@ -43,10 +43,12 @@ class OrderController extends Controller
 
 		foreach($data as $k=>$v)
 		{
-			$reorders['address_id'] = $v->id;
+            $reorders['name'] = $v->name;
+			$reorders['cargo_message_tel'] = $v->tel;
 			$reorders['cargo_message_address'] = $v->address;
 			$reorders['cargo_details_address'] = $v->detail_address;
 		}
+        // dd($reorders);
 		// 返回页面
 		return view('Home/order/reorder',compact('reorders','data'));
 
@@ -56,10 +58,10 @@ class OrderController extends Controller
     {    
     	//获取确认订单信息
     	$orderdata = $request -> except('_token');
-
+// dd($orderdata);
         // 判断订单商品是否重复，如果重复，则不执行添加
         $res = Order::where('cargo_message_id',$orderdata['cargo_message_id'])->get()->ToArray();
-        // dd($res);
+        
         if(!empty($res))
         {
             return redirect('home/center/order');
@@ -76,6 +78,7 @@ class OrderController extends Controller
     	{
     		$delcart = Cart::where('goods_id',$v->cargo_message_id)->delete();
     	}
+
     	// 将订单表信息返回到页面
     	return view('Home/order/order',compact('findorders'));
     }
@@ -83,7 +86,7 @@ class OrderController extends Controller
     public function show()
     {
     	// 查询订单表信息
-		$findorders = Order::where('user_id',Session('home_user')->user_id)->get();
+		$findorders = Order::where('user_id',Session('home_user')->user_id)->get()->ToArray();
 
     	return view('Home/order/order',compact('findorders'));
     }
@@ -91,6 +94,7 @@ class OrderController extends Controller
     public function orderinfo($id)
     {
         $info = Order::where('id',$id)->get();
+        
         $rev = [];
         foreach($info as $k=>$v)
         {

@@ -30,7 +30,9 @@
                 </ul>
             </div>
         @endif
-
+        @if(session('msg'))
+            <h6>{{session('msg')}}</h6>
+        @endif
         <form id="fid" class="layui-form layui-form-pane" action="{{ url('admin/dologin') }}" method="post">
             {{csrf_field()}}
             <h3>登录管理员帐号</h3>
@@ -68,7 +70,7 @@
             <div style="text-align:center;">
                 <button class="btn btn-warning pull-right" lay-submit lay-filter="login"  type="submit">登录</button>
             </div>
-            <div class="forgot"><a href="#" class="forgot">忘记帐号或者密码</a></div>
+            <div class="forgot"><a href="{{url('admin/forget')}}" class="forgot">忘记帐号或者密码</a></div>
 
         </form>
     </div>

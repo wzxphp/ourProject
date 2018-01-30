@@ -29,38 +29,7 @@
                         <td>8</td>
                         <td>20</td>
                     </tr>
-                    <tr>
-                        <td>今日</td>
-                        <td>0</td>
-                        <td>0</td>
-                        <td>0</td>
-                        <td>0</td>
-                        <td>0</td>
-                    </tr>
-                    <tr>
-                        <td>昨日</td>
-                        <td>0</td>
-                        <td>0</td>
-                        <td>0</td>
-                        <td>0</td>
-                        <td>0</td>
-                    </tr>
-                    <tr>
-                        <td>本周</td>
-                        <td>2</td>
-                        <td>0</td>
-                        <td>0</td>
-                        <td>0</td>
-                        <td>0</td>
-                    </tr>
-                    <tr>
-                        <td>本月</td>
-                        <td>2</td>
-                        <td>0</td>
-                        <td>0</td>
-                        <td>0</td>
-                        <td>0</td>
-                    </tr>
+
                 </tbody>
             </table>
             <table class="layui-table">
@@ -121,46 +90,6 @@
                     <tr>
                         <td>连接的数据库</td>
                         <td>{{ $_SERVER['DB_CONNECTION']}}</td>
-                    </tr>
-                    <tr>
-                        <td>服务器上次启动到现在已运行 </td>
-                        <td>7210分钟</td>
-                    </tr>
-                    <tr>
-                        <td>逻辑驱动器 </td>
-                        <td>C:\D:\</td>
-                    </tr>
-                    <tr>
-                        <td>CPU 总数 </td>
-                        <td>4</td>
-                    </tr>
-                    <tr>
-                        <td>CPU 类型 </td>
-                        <td>x86 Family 6 Model 42 Stepping 1, GenuineIntel</td>
-                    </tr>
-                    <tr>
-                        <td>虚拟内存 </td>
-                        <td>52480M</td>
-                    </tr>
-                    <tr>
-                        <td>当前程序占用内存 </td>
-                        <td>3.29M</td>
-                    </tr>
-                    <tr>
-                        <td>Asp.net所占内存 </td>
-                        <td>51.46M</td>
-                    </tr>
-                    <tr>
-                        <td>当前Session数量 </td>
-                        <td>8</td>
-                    </tr>
-                    <tr>
-                        <td>当前SessionID </td>
-                        <td>gznhpwmp34004345jz2q3l45</td>
-                    </tr>
-                    <tr>
-                        <td>当前系统用户名 </td>
-                        <td>NETWORK SERVICE</td>
                     </tr>
                 </tbody>
             </table>
