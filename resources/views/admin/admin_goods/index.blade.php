@@ -84,7 +84,7 @@
                             {{$cates[$v->category_id]}}
                         </td>
                         <td>
-                            <img src="{{$v->goods_original}}" style="width: 150px; height: 150px;" />
+                            <img src="{{$v->goods_original}}" style="width: 250px; height: 150px;" />
 
                         </td>
                         <td >
@@ -134,6 +134,8 @@
                                    style="text-decoration:none">
                                     <i class="layui-icon">&#xe640;</i>
                                 </a>
+
+                                <a href="{{url('admin/xiugai/'.$v->goods_id.'/index')}}">推荐</a>
                         </td>
 
                     </tr>
@@ -142,7 +144,7 @@
             </table>
             <!-- 右侧内容框架，更改从这里结束 -->
           </div>
-            <div class="layui-show">
+            <div style="float:right" id="page" class="layui-page">
                 {!! $goods->render() !!}
             </div>
         </div>

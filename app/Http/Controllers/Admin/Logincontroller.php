@@ -149,7 +149,13 @@ class Logincontroller extends Controller
     //后台首页
     public function index()
     {
-        return view('admin.index');
+        $allData = User::count();
+        $goods = DB::table('data_goods')->count();
+        $rotation = DB::table('data_rotation')->count();
+        $orders = DB::table('data_orders')->count();
+        $comment = DB::table('data_goods_comment')->count();
+        return view('admin.index',['allData'=>$allData,'goods'=>$goods,
+                    'rotation'=>$rotation,'orders'=>$orders,'comment'=>$comment]);
     }
 
     // 退出登录
