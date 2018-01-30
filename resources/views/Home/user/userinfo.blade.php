@@ -14,12 +14,13 @@
 
 				<!--头像 -->
 				<div class="user-infoPic">
-				<form action="{{ url('/home/center/file') }}" method="POST" enctype="multipart/form-data">
+{{--				<form action="{{ url('/home/center/file') }}" method="POST" enctype="multipart/form-data">--}}
 					<div class="filePic">
-						<input type="file" name="avatar" class="inputPic" allowexts="gif,jpeg,jpg,png,bmp" accept="image/*">
-						<img class="am-circle am-img-thumbnail" src="{{url('home/usercenter/images/getAvatar.do.jpg') }}" alt="" />
+						{{--<input type="file" name="avatar" class="inputPic" allowexts="gif,jpeg,jpg,png,bmp" accept="image/*">--}}
+{{--						<img class="am-circle am-img-thumbnail" src="{{url('home/usercenter/images/getAvatar.do.jpg') }}" alt="" />--}}
+						<img class="am-circle am-img-thumbnail" src="{{url(Session('home_user')->avatar) }}" alt="" />
 					</div>
-				</form>
+				{{--</form>--}}
 					<p class="am-form-help">头像</p>
 
 					<div class="info-m">
@@ -32,7 +33,7 @@
 
 				<!--个人信息 -->
 				<div class="info-main">
-					<form class="am-form am-form-horizontal" action="{{ url('/home/center/userinfo_create') }}" method="POST">
+					<form class="am-form am-form-horizontal" action="{{ url('/home/center/userinfo_create') }}" method="POST" enctype="multipart/form-data">
 					{{ csrf_field() }}
 					    @if(count($errors) > 0)
 						    <div class="alert alert-danger">
@@ -76,6 +77,13 @@
 								<label class="am-radio-inline">
 									<input type="radio" name="sex" value="0" data-am-ucheck> 保密
 								</label>
+							</div>
+						</div>
+
+						<div class="am-form-group">
+							<label class="am-form-label">头像</label>
+							<div class="am-form-content sex">
+								<input type="file" name="avatar" >
 							</div>
 						</div>
 
@@ -208,7 +216,6 @@
 		    submit.onclick = function(){
 		    	birthday.value = ""+birthday_y.value+"-"+birthday_m.value+"-"+birthday_d.value;
 		    }
-		    
 		</script>
 		<!--底部-->
 		<div class="footer">

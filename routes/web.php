@@ -161,8 +161,6 @@ Route::group(['prefix'=>'admin','namespace'=>'Admin','middleware'=>['admin_islog
     Route::post('config/changecontent','ConfigController@changeContent');//批量修改网站配置信息
     Route::resource('config','ConfigController');
 
-
-
 //分类管理模块====================================================qin
     Route::get('cate/create','CateController@create');
     Route::post('cate/store','CateController@store');

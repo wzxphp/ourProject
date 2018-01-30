@@ -63,7 +63,9 @@
                         @endforeach
                         </tbody>
                     </table>
-                        <button class="layui-btn layui-btn-normal" key="set-mine" lay-filter="save" lay-submit>保存</button>
+                        <div style="float: right;">
+                            <button class="layui-btn layui-btn-normal" key="set-mine" lay-filter="save" lay-submit>保存</button>
+                        </div>
                     </form>
                     <!-- 右侧内容框架，更改从这里结束 -->
                     {{--<div class="layui-show">--}}

@@ -33,16 +33,29 @@ class Usercontroller extends Controller
                 'email.email' => '请正确填写邮箱'
             ]);
         $userdata = $request->except('_token');
+        if($request->file('avatar')){
+//            获取上传图片文件
+            $file = $request->file('avatar');
+            // 判断上传文件的有效性
+            if ($file->isValid()) {
+                $entension = $file->getClientOriginalExtension();//上传文件的后缀名
+                // 生成新的文件名
+                $newName = date('YmdHis') . mt_rand(1000, 9999) . '.' . $entension;
+                // 将文件移动到指定位置
+                $path = $file->move(public_path() . '/myuploads', $newName);
+                // 返回上传文件图片  显示到浏览器上面
+                $url = '/myuploads/' . $newName;
+                // 把所保存的图片位置放入到字段中去
+                $userdata['avatar'] = $url;
+                $res = \DB::table('data_user_message')->where('email', $userdata['email'])->update($userdata);
 
-        $res = \DB::table('data_user_message')->where('email',$userdata['email'])->update($userdata);
-
-        if($res)
-        {
-            return view('home/user/userinfo')->with(['info'=>'更新成功']);
-        }else{
-            return back()->with(['info'=>'添加失败']);
+                if ($res) {
+                    return view('home/user/userinfo')->with(['info' => '更新成功']);
+                } else {
+                    return back()->with(['info' => '添加失败']);
+                }
+            }
         }
-       
     }
 
 // 上传头像

@@ -56,9 +56,6 @@ class LoginController extends Controller
     		Session::put('home_user',$user);
             return redirect('home/index');
     	}
-
-    	
-
     }
 
     public function loginout()

@@ -17,7 +17,7 @@ class RoleController extends Controller
         $role = Role::find($id);
 
         //获取所有的权限列表
-        $pers = Permiksssion::get();
+        $pers = Permission::get();
 
         //获取当前角色已经拥有的权限列表
         $own_pers = $role->permission;
