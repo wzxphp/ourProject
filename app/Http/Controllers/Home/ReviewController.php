@@ -17,7 +17,7 @@ class ReviewController extends Controller
      */
     public function index()
     {
-        //
+        // 
     }
 
     /**
@@ -106,6 +106,6 @@ class ReviewController extends Controller
      */
     public function destroy($id)
     {
-        //
+        // 
     }
 }

@@ -13,7 +13,7 @@
 				<!--头像 -->
 				<div class="user-infoPic">
 					<div class="filePic">
-						{{--<img class="am-circle am-img-thumbnail" src="{{Session('home_user')->avatar }}" alt="" />--}}
+					<!-- 	{{--<img class="am-circle am-img-thumbnail" src="{{Session('home_user')->avatar }}" alt="" />--}} -->
 						<img class="am-circle am-img-thumbnail" src="{{ Session('home_user')->avatar }}"/>
 					</div>
 					<p class="am-form-help">头像</p>

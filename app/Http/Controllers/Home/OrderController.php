@@ -59,34 +59,33 @@ class OrderController extends Controller
     	//获取确认订单信息
     	$orderdata = $request -> except('_token');
 
-        // 判断订单商品是否重复，如果重复，则不执行添加
-        $res = Order::where('cargo_message_id',$orderdata['cargo_message_id'])->get()->ToArray();
-        // dd($res);
-        if(!empty($res))
+        // 将用户订单信息加入订单表
+        $res = Order::insert($orderdata);
+        if($res)
         {
-            return redirect('home/center/order');
-        }else{
-            // 将用户订单信息加入订单表
-            Order::insert($orderdata);            
-        }
+            return redirect('home/order/success');
+        }  
 
-		// 查询订单表信息
-		$findorders = Order::where('user_id',Session('home_user')->user_id)->get();
-
-    	// 加入订单后清空购物车表
-    	foreach($findorders as $k=>$v)
-    	{
-    		$delcart = Cart::where('goods_id',$v->cargo_message_id)->delete();
-    	}
-
-    	// 将订单表信息返回到页面
-    	return view('Home/order/order',compact('findorders'));
+    }
+// 订单提交成功
+    public function success()
+    {
+        return view('Home/order/success');
     }
 // 浏览订单
     public function show()
     {
+        if(empty(Session('home_user')))
+        {
+            return redirect('home/login/index')->with(['info'=>'请登录']);
+        }
     	// 查询订单表信息
 		$findorders = Order::where('user_id',Session('home_user')->user_id)->get()->ToArray();
+        // 加入订单后清空购物车表
+         foreach($findorders as $k=>$v)
+         {
+             $delcart = Cart::where('goods_id',$v['cargo_message_id'])->delete();
+         }
 
     	return view('Home/order/order',compact('findorders'));
     }

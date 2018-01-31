@@ -58,7 +58,12 @@ class CartController extends Controller
     }
 
     public function index()
-    {   //查询购物车中的商品
+    {   
+        if(empty(Session('home_user')))
+        {
+            return redirect('home/login/index')->with(['info'=>'请登录']);
+        }
+        //查询购物车中的商品
     	$findcart = Cart::get();
     	// 将购物车中的商品返还到购物车页面
     	return view('Home.cart.cart',compact('findcart'));

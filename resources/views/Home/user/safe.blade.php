@@ -16,7 +16,7 @@
 				<div class="user-infoPic">
 
 					<div class="filePic">
-						<img class="am-circle am-img-thumbnail" src="{{url('home/usercenter/images/getAvatar.do.jpg')}}" alt="" />
+						<img class="am-circle am-img-thumbnail" src="{{ Session('home_user')->avatar }}" alt="" />
 					</div>
 
 					<p class="am-form-help">头像</p>

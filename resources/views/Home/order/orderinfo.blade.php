@@ -41,6 +41,11 @@
 						<div class="u-progress-bar-inner"></div>
 					</div>
 				</div>
+				@if(session('info'))
+                  <div class="alert alert-info">
+                    {{ session('info') }}
+                  </div>
+                @endif
 				<div class="order-infoaside">
 					<div class="order-addresslist">
 					@foreach($info as $key=>$val)
@@ -70,6 +75,7 @@
                                 @elseif($n->comment_type == 1)
                                     <span style="color:red">{{ Session('home_user')->name }}</span>
                                 @endif
+
                                 @if($n->star == 1)
                                     <span>
                                         <i class="fa fa-star"></i>
@@ -91,6 +97,10 @@
                             <p>
                             <span>{{ $n->comment_info }}</span>
                             </p>
+							<div>
+								<span><a href="{{ url('/home/review/del') }}/{{ $n->id }}">撤销评论</a></span>
+							</div>
+                            
                         </div>
                         @endforeach
 					</div>
