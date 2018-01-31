@@ -41,6 +41,7 @@ class ReviewController extends Controller
         //
         $review = $request -> except('_token');
 // dd($review);
+//        $res = Comm::create($review);
         $res = Comm::insert($review);
         if($res)
         {

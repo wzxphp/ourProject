@@ -22,8 +22,9 @@
                     <div style="width: 900px;"></div>
                     <!-- 右侧内容框架，更改从这里开始 -->
                     <xblock>
-                            <button class="layui-btn layui-btn-danger" onclick="delAll()"><i class="layui-icon">&#xe640;</i>批量删除</button>
-                            <span class="x-right" style="line-height:40px">总共有数据：{{count($allData)}}条</span>
+                            {{--<button class="layui-btn layui-btn-danger" onclick="delAll()"><i class="layui-icon">&#xe640;</i>批量删除</button>--}}
+                            <button class="layui-btn layui-btn-normal" onclick="delAll()">共有：{{count($allData)}}条</button>
+{{--                            <span class="x-right" style="line-height:40px">总共有数据：{{count($allData)}}条</span>--}}
                     </xblock>
                     <table id="tid" class="layui-table">
                         <thead>
@@ -115,37 +116,37 @@
             }
         }
 
-        //批量删除提交
-        function delAll () {
-            layer.confirm('确认要删除吗？',function(index){
+        {{--//批量删除提交--}}
+        {{--function delAll () {--}}
+            {{--layer.confirm('确认要删除吗？',function(index){--}}
 
-                //获取被选中用户的id
-                var id_array=new Array();//定义一个空数组
-                $("input[type='checkbox']:checked").each(function(){
-                    var id = $(this).parent().next().text();
-                    id_array.push(id);
-                });
+                {{--//获取被选中用户的id--}}
+                {{--var id_array=new Array();//定义一个空数组--}}
+                {{--$("input[type='checkbox']:checked").each(function(){--}}
+                    {{--var id = $(this).parent().next().text();--}}
+                    {{--id_array.push(id);--}}
+                {{--});--}}
 
-                var ids = JSON.stringify(id_array);
+                {{--var ids = JSON.stringify(id_array);--}}
 
-                //捉到所有被选中的，发异步进行删除
-                $.post('{{ url('admin/admin_user_del') }}',{'_token':"{{csrf_token()}}",'admin_ids':ids},function (data) {
-                        if(data.status == 0) {
-                            $("input[type='checkbox']:checked").parents("tr").remove();
-                            layer.msg(data.message, {icon: 1, time: 1000});
-                        }else{
-                            alert('删除失败');
-                            layer.msg(data.message, {icon: 1, time: 1000});}
-                    });
-            });
-        }
+                {{--//捉到所有被选中的，发异步进行删除--}}
+                {{--$.post('{{ url('admin/admin_user_del') }}',{'_token':"{{csrf_token()}}",'admin_ids':ids},function (data) {--}}
+                        {{--if(data.status == 0) {--}}
+                            {{--$("input[type='checkbox']:checked").parents("tr").remove();--}}
+                            {{--layer.msg(data.message, {icon: 1, time: 1000});--}}
+                        {{--}else{--}}
+                            {{--alert('删除失败');--}}
+                            {{--layer.msg(data.message, {icon: 1, time: 1000});}--}}
+                    {{--});--}}
+            {{--});--}}
+        {{--}--}}
 
 
         /*用户-删除*/
         function delUser(obj,id){
             layer.confirm('确认要删除吗？',function(index){
                 //发异步删除数据
-                $.post('{{ url('admin/admin_user/') }}/'+id,{'_method':'delete','_token':"{{csrf_token()}}"},function (data) {
+                $.post('{{ url('admin/comment/') }}/'+id,{'_method':'delete','_token':"{{csrf_token()}}"},function (data) {
                     if(data.status == 0) {
                         $(obj).parents("tr").remove();
                         layer.msg(data.message, {icon: 1, time: 1000});

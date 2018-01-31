@@ -26,7 +26,7 @@ class ConfigController extends Controller
             foreach ($input['conf_id'] as $k=>$v){
                 //找到要修改的网站配置表中的记录
                 $conf = Config::find($v);
-                $conf->update(['conf_content'=>$input['conf_content'][$k]]);
+                $res = $conf->update(['conf_content'=>$input['conf_content'][$k]]);
             }
         }catch (Exception $e){
             DB::rollBack();

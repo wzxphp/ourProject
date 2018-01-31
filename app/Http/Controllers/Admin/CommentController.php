@@ -89,6 +89,15 @@ class CommentController extends Controller
      */
     public function destroy($id)
     {
-        //
+        //删除一行
+        $res = Comment::find($id)->delete();
+        //如果删除成功
+        if($res){
+            $data = ['status'=>0, 'message'=>'删除成功'];
+        }else{
+            $data = ['status'=>1, 'message'=>'删除失败'];
+        }
+
+        return $data;
     }
 }

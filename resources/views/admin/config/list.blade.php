@@ -78,7 +78,6 @@
         </div>
     </div>
     <script>
-
         /*用户-删除*/
         function delUser(obj,id){
             layer.confirm('确认要删除吗？',function(index){
@@ -92,6 +91,5 @@
                 });
             });
         }
-
     </script>
 @endsection

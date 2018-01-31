@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Home;
 
+use App\Model\Admin\Config;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\DB;
@@ -16,8 +17,11 @@ class IndexController extends Controller
     public function index()
     {
     	$recom = Recom::get();
+    	$con1 = Config::find(1);
+    	$con2 = Config::find(2);
+    	$con3 = Config::find(3);
 
-    	return view('Home/Index/index',compact('recom','catedata'));
+    	return view('Home/Index/index',compact('recom','catedata','con1','con2','con3'));
     }
 
 

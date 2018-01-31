@@ -82,10 +82,8 @@ class GoodsController extends Controller
                } else {
                    return back('admin/goods/create')->with('error','请添加分类');
                }
-
             }
         }
-
     }
 
     // 修改
@@ -122,18 +120,14 @@ class GoodsController extends Controller
         $goods->goods_info = $input['goods_info'];
         $data = $goods->save();
         if($data)
-        { 
-            
+        {
             return redirect('admin/goods/index');
         }
             }
         }
-        
     }
 
     // 上架下架状态
-
-
     public function goods_sta(Request $request)
     {
       $id = $request -> close;

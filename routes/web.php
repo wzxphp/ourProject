@@ -139,9 +139,11 @@ Route::get('admin/logout','Admin\LoginController@logout');
 //登录页面的验证码
 Route::get('admin/code','Admin\LoginController@code');
 
+//商品上下架
+Route::get('admin/goods/goods_sta','Admin\GoodsController@goods_sta');
 //路由组
-//Route::group(['prefix'=>'admin','namespace'=>'Admin','middleware'=>['admin_islogin','hasRole']],function(){
-Route::group(['prefix'=>'admin','namespace'=>'Admin','middleware'=>['admin_islogin']],function(){
+Route::group(['prefix'=>'admin','namespace'=>'Admin','middleware'=>['admin_islogin','hasRole']],function(){
+//Route::group(['prefix'=>'admin','namespace'=>'Admin','middleware'=>['admin_islogin']],function(){
 //后台首页
     Route::get('index','LoginController@index');
 //管理员模块
@@ -201,9 +203,9 @@ Route::group(['prefix'=>'admin','namespace'=>'Admin','middleware'=>['admin_islog
     Route::post('goods/{id}/xxoo','GoodsController@xxoo');
 //删除
     Route::get('goods/{id}','GoodsController@del');
-});
 //商品上下价
-Route::get('admin/goods/goods_sta','Admin\GoodsController@goods_sta');
+//    Route::get('goods/goods_sta','GoodsController@goods_sta');
+});
 
 //==============================================================================推荐位
 //推荐位新出

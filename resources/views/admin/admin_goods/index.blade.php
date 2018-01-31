@@ -64,9 +64,6 @@
                             上架时间
                         </th>
                         <th>
-                            更新时间
-                        </th>
-                        <th>
                             商品状态
                         </th>
                         <th>
@@ -84,7 +81,7 @@
                             {{$cates[$v->category_id]}}
                         </td>
                         <td>
-                            <img src="{{$v->goods_original}}" style="width: 50px; height: 100px;" />
+                            <img src="{{$v->goods_original}}" style="width: 60px; height: 50px;" />
 
                         </td>
                         <td >
@@ -109,9 +106,6 @@
                         </td>
                         <td>
                             {{  $v->create_at  }}
-                        </td>
-                        <td>
-                            {{ $v->update_at  }}
                         </td>
                         <td class="td-status">
                             @if( $v->goods_status == '1' )
@@ -155,6 +149,7 @@
         /*上架*/
         function goods_start(obj,id){
             layer.confirm('确认要上架吗？',
+
                 function(index){
                 //发异步把用户状态进行更改
                 $.get('{{ url('admin/goods/goods_sta') }}',

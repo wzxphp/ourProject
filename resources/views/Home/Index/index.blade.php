@@ -29,8 +29,8 @@
 								<div class="row">
 									<div class="col-md-6 col-md-offset-6">
 										<div class="slide-content">
-											<h2>今晚24点开抢</h2>
-											<p>前一个小时折上有折</p>
+											<h2>{{$con1->conf_name}}</h2>
+											<p>{{$con1->conf_content}}</p>
 											<a href="{{ url('/home/cate') }}" class="readmore">点击开抢</a>
 										</div>
 									</div>
@@ -49,8 +49,8 @@
 								<div class="row">
 									<div class="col-md-6 col-md-offset-6">
 										<div class="slide-content">
-											<h2>数码特惠</h2>
-											<p>更多折扣  更多优惠</p>
+											<h2>{{$con2->conf_name}}</h2>
+											<p>{{$con2->conf_content}}</p>
 											<a href="{{ url('/home/digital') }}" class="readmore">了解更多</a>
 										</div>
 									</div>
@@ -69,8 +69,8 @@
 								<div class="row">
 									<div class="col-md-6 col-md-offset-6">
 										<div class="slide-content">
-											<h2>下一个剁手节</h2>
-											<p><h1>美丽动人 买一送一  优惠券提前发放</h1></p>
+											<h2>{{$con3->conf_name}}</h2>
+											<p>{{$con3->conf_content}}</p>
 											<a href="{{ url('/home/list') }}" class="readmore">点击抢券</a>
 										</div>
 									</div>
