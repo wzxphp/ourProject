@@ -8,6 +8,15 @@
     <div class="tab-content">
 	    <div role="tabpanel" class="tab-pane fade in active" id="home">
 	        <h2>评论</h2>
+			@if(count($errors) > 0)
+				<div class="alert alert-danger">
+					<ul>
+						@foreach ($errors->all() as $error)
+							<li style="color:red;">{{ $error }}</li>
+						@endforeach
+					</ul>
+				</div>
+			@endif
 	        <form action="{{ url('/home/reviews') }}" method="POST">
 	        {{ csrf_field() }}
 		        <div class="submit-review">

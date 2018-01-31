@@ -43,7 +43,7 @@ class ListController extends Controller
     public function details($id)
     {   //所有商品
         $data = Good::where('goods_id',$id)->get();
-        // dd($data);
+//         dd($data);
         // 商品的评论
         $review = Comm::where('goods_id',$id)->get()->ToArray();
 

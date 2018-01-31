@@ -38,7 +38,15 @@ class ReviewController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $this -> validate($request, [
+            'star' => 'required',
+            'comment_type' => 'required',
+            'comment_info' => 'required'
+        ],[
+            'star.required' => '请评价星级',
+            'comment_type.required' => '请选择是否匿名',
+            'comment_info.required' => '请写评价'
+        ]);
         $review = $request -> except('_token');
 // dd($review);
 //        $res = Comm::create($review);
