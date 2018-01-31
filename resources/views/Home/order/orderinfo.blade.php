@@ -41,6 +41,11 @@
 						<div class="u-progress-bar-inner"></div>
 					</div>
 				</div>
+				@if(session('info'))
+                  <div class="alert alert-info">
+                    {{ session('info') }}
+                  </div>
+                @endif
 				<div class="order-infoaside">
 					<div class="order-addresslist">
 					@foreach($info as $key=>$val)
@@ -93,7 +98,7 @@
                             <span>{{ $n->comment_info }}</span>
                             </p>
 							<div>
-								<span><a href="{{ url('/home/reviews') }}/{{ $n->id }}">撤销评论</a></span>
+								<span><a href="{{ url('/home/review/del') }}/{{ $n->id }}">撤销评论</a></span>
 							</div>
                             
                         </div>

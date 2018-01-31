@@ -51,6 +51,8 @@ Route::get('/home/coll/del/{id}','Home\CollController@del');
 Route::post('/home/reorder','Home\OrderController@reorder');
 	// 提交订单
 Route::post('/home/order','Home\OrderController@index');
+	// 订单提交成功
+Route::get('/home/order/success','Home\OrderController@success');
 	// 浏览订单
 Route::get('/home/center/order','Home\OrderController@show');
 	// 订单详情
@@ -66,6 +68,8 @@ Route::get('/home/order/remind/{id}','Home\OrderController@remind');
 Route::get('/home/order/confirm/{id}','Home\OrderController@confirm');
 // 评论
 Route::resource('/home/reviews','Home\ReviewController');
+// 撤销评论
+Route::get('home/review/del/{id}','Home\RevController@del');
 
 
 // 用户============================================================
@@ -76,7 +80,7 @@ Route::get('/home/center/userinfo','Home\UserController@userinfo');
 // 完善用户信息
 Route::post('/home/center/userinfo_create','Home\UserController@userinfo_create');
 // 上传头像
-Route::post('/home/center/upload','Home\UserController@upload');
+// Route::post('/home/center/upload','Home\UserController@upload');
 // 用户安全设置页面
 Route::get('/home/center/safe','Home\UserController@safe');
 // 用户自主修改密码页面

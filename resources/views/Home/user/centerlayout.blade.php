@@ -31,6 +31,7 @@
 <link href="{{ asset('home/usercenter/css/cartstyle.css')}}" rel="stylesheet" type="text/css" />
 <link href="{{ asset('home/usercenter/css/colstyle.css')}}" rel="stylesheet" type="text/css">
 <link href="{{ asset('home/usercenter/css/jsstyle.css')}}" rel="stylesheet" type="text/css" />
+<link href="{{ asset('home/usercenter/css/sustyle.css')}}" rel="stylesheet" type="text/css" />
 <script src="{{ asset('home/usercenter/js/jquery.min.js') }}"></script>
 <script src="{{ asset('home/usercenter/js/amazeui.js') }}"></script>
 <script type="text/javascript" src="{{ asset('home/usercenter/js/address.js') }}"></script>
